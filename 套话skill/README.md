@@ -80,12 +80,14 @@ node dist/cli.js to-markdown -i 套话skill/reference/papers -o 套话skill/refe
 
 ## 使用方式
 
-1. `route_skill` 读 `SKILL-router.md` → 输出 `skill_id` + `phase`
-2. `invoke_skill` 读 `SKILL-{skill_id}.md` → 生成 utterance（M7）
+1. `route_skill` 读 `SKILL-router.md` 决策树 → 输出 `skill_id` + `phase`（规则引擎，非 LLM 路由）
+2. `invoke_skill` 读 `SKILL-{skill_id}.md` + LLM → 生成 utterance（M7 ✅，`MTA_LLM_MODE=mock|live`）
 3. 详细机理与扩展模板见 `analysis/{direction}.md`
 
 ## 与 cheatAgent 集成
 
 - 运行时路径：`skills/cheat-agent/`（与 `套话skill/skills/` 内容同步）
 - `graph.py::route_skill` — ✅ 规则决策树
-- `graph.py::invoke_skill` — ⏳ 占位，待 M7 接 LLM
+- `graph.py::invoke_skill` — ✅ 加载 Skill markdown + LLM 生成
+- `graph.py::write_memory` — ✅ L1 session / L2 user model / L3 episodic（`memory/`）
+- 冒烟 dataset：`benchmark/datasets/smoke_v1/`（`scripts/generate_dataset.py`）
