@@ -1,6 +1,6 @@
 # 苏格拉底法方向分析
 
-> 依据：`reference/markdown/intellichain.md`、`socratic-mind-impact.md`、`socratic-mind-stub.md`、`socratic-virtue-ethics.md`、`socratic-hard-problem.md`、`zero-shot-socratic.md`（本地 PDF 未解析，要点来自公开摘要与 BU 部署报道）、`avert-stub.md`
+> 依据：`reference/markdown/avert.md`、`intellichain.md`、`socratic-mind-impact.md`、`socratic-virtue-ethics.md`、`socratic-hard-problem.md`、`zero-shot-socratic.md`
 
 ---
 

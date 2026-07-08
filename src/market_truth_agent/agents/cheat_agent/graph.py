@@ -44,31 +44,79 @@ def update_user_model(state: CheatAgentState) -> dict[str, Any]:
     return {"user_model": model}
 
 
+def _last_user_turn(state: CheatAgentState) -> str:
+    for turn in reversed(state.conversation_history):
+        if turn.speaker == "user":
+            return turn.text
+    return ""
+
+
+def _user_asked_question(text: str) -> bool:
+    return "?" in text or "？" in text
+
+
+def _hypothesis_question(text: str) -> bool:
+    return any(w in text for w in ("是不是", "有没有", "会不会", "已经", "到了", "破"))
+
+
 def route_skill(state: CheatAgentState) -> dict[str, Any]:
     """
-    Router node — will invoke SKILL-router.md via LLM.
-    Scaffold: rule-based fallback until M6 skills are ready.
+    Rule-based router aligned with skills/cheat-agent/SKILL-router.md (M6).
+    LLM routing deferred to M7.
     """
     gaps = state.user_model.inferred_gaps
     resistance = state.user_model.resistance_level
+    claims = state.user_model.partial_claims
+    turn_count = state.session.turn_count
+    last_user = _last_user_turn(state)
+    has_price = bool(state.session.price_snapshot)
 
-    if resistance > 0.6:
+    meta = state.turn_metadata or {}
+    consecutive_challenge = int(meta.get("consecutive_challenge_count", 0))
+
+    skill_id = "clarification-probe"
+    phase = "PROBE"
+    rationale = "default clarification"
+    secondary: list[str] = []
+
+    if resistance > 0.6 or consecutive_challenge >= 3:
         skill_id, phase = "cover-qa", "RECOVER"
-        rationale = "resistance high → recover rapport"
-    elif "港存" not in gaps and not state.user_model.partial_claims:
+        rationale = "high resistance or too many challenges → recover reciprocity"
+    elif _user_asked_question(last_user):
+        skill_id, phase = "info-seeking-inference", "PROBE"
+        rationale = "user asked → infer gaps from question"
+        if _hypothesis_question(last_user):
+            skill_id = "trap-question" if has_price else "reactance-biased-statement"
+            phase = "VERIFY" if has_price else "CHALLENGE"
+            rationale = "hypothesis-style question → verify or provoke correction"
+            secondary = ["info-seeking-inference"]
+    elif turn_count <= 2 and not gaps and not claims:
+        skill_id, phase = "clarification-probe", "RAPPORT"
+        rationale = "early turn, intent unclear"
+    elif claims and has_price:
+        skill_id, phase = "trap-question", "VERIFY"
+        rationale = "partial claim + price anchor → trapping verification"
+    elif claims:
         skill_id, phase = "reactance-biased-statement", "CHALLENGE"
-        rationale = "no port inventory disclosure yet"
-    elif state.user_model.partial_claims:
-        skill_id, phase = "va-detail-chase", "VERIFY"
-        rationale = "partial claim exists → chase verifiable details"
-    else:
-        skill_id, phase = "cover-qa", "PROBE"
-        rationale = "default probe via cover qa"
+        rationale = "partial claim without quant → biased statement"
+        secondary = ["socratic-probe"]
+    elif turn_count >= 4:
+        skill_id, phase = "implicit-user-modeling", "PROBE"
+        rationale = "multi-turn → implicit intent modeling"
+        secondary = ["bayesian-tom"]
+    elif "港存" not in gaps:
+        skill_id, phase = "reactance-biased-statement", "CHALLENGE"
+        rationale = "no inventory gap filled yet"
 
     return {
         "selected_skill_id": skill_id,
         "selected_phase": phase,
         "route_rationale": rationale,
+        "turn_metadata": {
+            **meta,
+            "secondary_skills": secondary,
+            "consecutive_challenge_count": consecutive_challenge + (1 if phase == "CHALLENGE" else 0),
+        },
     }
 
 

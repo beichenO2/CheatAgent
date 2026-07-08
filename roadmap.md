@@ -11,34 +11,28 @@
 | M2 旧 Tier B | ❌ 已删 | 规则 dialogue_simulator / 30 scenario |
 | M3 旧交互链路 | ❌ 已删 | 7 模板 + FSM |
 | M5 演示 UI | 暂缓 | 用户确认先不做 |
-| **M6 套话 Skills** | **📋 待做（用户主导）** | 1 路由 + N 专项，见 `skills/cheat-agent/` |
-| **M7 cheatAgent 智能体** | **🔧 脚手架已搭** | LangGraph 双 Agent，待接 LLM |
+| **M6 套话 Skills** | **✅ 完成** | 1 路由 + 11 专项；15 篇论文；`套话skill/` + `skills/cheat-agent/` |
+| **M7 cheatAgent 智能体** | **🔧 进行中（P0）** | LangGraph 脚手架 + `route_skill` 已接；待 `invoke_skill` 接 LLM |
 | **M8 Dataset + 冒烟评测** | **🔧 进行中** | 3 用户 × 20 轮 → 扩至 5×20×5 月 |
 
 ---
 
-## M6 — 套话 Skills（用户专门做）
+## M6 — 套话 Skills ✅（2026-07-08 完成）
 
-**目标**：从 `Readme.md` §90–197 心理学/对话策略研究凝练 **1 + N** Skills。
+**目标**：从 `Readme.md` §90–197 凝练 **1 路由 + N 专项** Skills。
 
-| 交付物 | 路径 |
-|--------|------|
-| 路由 Skill | `skills/cheat-agent/SKILL-router.md` |
-| 专项 Skills | `skills/cheat-agent/SKILL-*.md` |
-| Skill 注册表 | `skills/cheat-agent/README.md` |
+| 交付物 | 路径 | 状态 |
+|--------|------|------|
+| 论文 PDF × 15 | `套话skill/reference/papers/` | ✅ |
+| 论文 md × 15 | `套话skill/reference/markdown/` | ✅ |
+| 10 方向分析 | `套话skill/analysis/*.md` | ✅ |
+| 路由 Skill | `skills/cheat-agent/SKILL-router.md` | ✅ |
+| 专项 Skills × 11 | `skills/cheat-agent/SKILL-*.md` | ✅ |
+| 路由规则接入 | `graph.py::route_skill` | ✅ |
 
-**映射方向**（非穷举）：
+**11 个 skill_id**：`clarification-probe` · `info-seeking-inference` · `bayesian-tom` · `implicit-user-modeling` · `reactance-biased-statement` · `socratic-probe` · `trap-question` · `info-design-disclosure` · `info-manipulation-bias` · `cognitive-conflict-probe` · `cover-qa`
 
-- 心理反抗 / 有偏陈述 → `reactance-biased-statement`
-- 陷阱问题 → `trap-question`
-- 苏格拉底 / AVERT → `socratic-probe`
-- SUE + 价格证据 → `sue-price-confront`
-- VA 可验证性 → `va-detail-chase`
-- 认知负荷 CCA → `cognitive-load-split`
-- 正常问答掩护 → `cover-qa`
-- 信息设计 / Bayesian 说服 → 待凝练
-
-**验收**：router 能根据 persona/阶段输出合法 `skill_id`；每个专项 skill 有完整 prompt 与触发/禁用条件。
+**验收**：✅ router 输出合法 `skill_id`；✅ 每个专项有触发/禁用/模板；⏳ LLM utterance 生成留 M7。
 
 ---
 

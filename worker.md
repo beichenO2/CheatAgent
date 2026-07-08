@@ -20,7 +20,7 @@
 - 不扩展至铁矿石以外的品类（除非用户明确要求）
 - 不假设 Agent 伪装人类
 - **禁止**规则模板冒充 LLM 对话（旧 `interaction/tactics/` 已删）
-- 套话 Skills：**M6 用户主导**，Agent 只搭脚手架
+- 套话 Skills：**M6 ✅ 已完成**（`套话skill/` + `skills/cheat-agent/`）；M7 接 LLM
 - cheatAgent：**LangGraph**（ADR-008），待用户审阅修改
 - LLM 密钥走 PolarPrivate，不入库
 - 欺骗检测：ReCon（无 GT 泄漏）→ 后续 LLM 按论文复刻
@@ -29,8 +29,7 @@
 
 | 优先级 | 任务 | 负责 |
 |--------|------|------|
-| P0 | M6 套话 Skills（1+N） | **用户** |
-| P0 | M7 LangGraph 接 LLM | Agent |
+| P0 | M7 LangGraph 接 LLM（invoke_skill + CustomerAgent） | Agent |
 | P0 | M8 冒烟 3×20 dataset | Agent |
 | P3 | M5 UI | 暂缓 |
 
@@ -40,7 +39,7 @@
 |------|--------|
 | 源码、测试、scripts | Benchmark 策略（007） |
 | polaris.json / roadmap.md | LangGraph 架构（008） |
-| skills/cheat-agent/ 占位 | 套话 Skill 内容由用户写 |
+| skills/cheat-agent/ | M6 已完成；修改需同步 `套话skill/skills/` |
 
 ## 协作关系
 

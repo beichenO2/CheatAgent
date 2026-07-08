@@ -1,33 +1,28 @@
-# cheatAgent Skills（M6 — 用户主导）
+# cheatAgent Skills（M6 ✅）
 
-基于 `Readme.md` §90–197 心理学与对话策略研究，凝练 **1 + N** Skills：
+**1 路由 + 11 专项**（10 研究线 + `cover-qa`），来源 Readme §90–197 + `套话skill/analysis/*`。
 
-| 类型 | 文件 | 职责 |
+完整材料与论文清单见 [`套话skill/README.md`](../../套话skill/README.md)。
+
+| 类型 | 文件 | 状态 |
 |------|------|------|
-| **1 路由** | `SKILL-router.md` | 根据 user model、对话阶段、抵抗程度，选择专项 skill |
-| **N 专项** | `SKILL-*.md` | 针对不同 persona / 情境 / 策略（心理反抗、苏格拉底、陷阱问题、SUE、VA…） |
+| 路由 | `SKILL-router.md` | ✅ 规则引擎已接入 `graph.py::route_skill` |
+| 专项 | `SKILL-*.md` × 11 | ✅ |
 
-## 状态
+## 调用链
 
-- [ ] `SKILL-router.md` — 占位，待用户编写
-- [ ] 专项 skills — 待从 Readme 研究线映射
-
-## 调用约定
-
-cheatAgent `route_skill` 节点读取 router skill → 输出 JSON：
-
-```json
-{
-  "skill_id": "reactance-biased-statement",
-  "phase": "CHALLENGE",
-  "rationale": "用户 resistance 低且尚未披露港存"
-}
+```
+load_context → update_user_model → route_skill → invoke_skill → write_memory
 ```
 
-`invoke_skill` 节点加载 `skills/cheat-agent/SKILL-{skill_id}.md` 生成 utterance。
+| 节点 | 状态 | 说明 |
+|------|------|------|
+| `load_context` | ✅ | 注入 session / identity / history |
+| `update_user_model` | 🟡 | 规则版 gap/resistance/claims 推断 |
+| `route_skill` | ✅ | 读 SKILL-router 决策树，输出 `selected_skill_id` + `phase` |
+| `invoke_skill` | ⏳ M7 | 加载 `SKILL-{id}.md`，LLM 生成 utterance |
+| `write_memory` | 🟡 | 脚手架已有，L1–L3 持久化待完善 |
 
-## 参考
+## 论文材料
 
-- `decisions/007-agent-rebuild.md`
-- `decisions/008-cheat-agent-langgraph.md`
-- `Readme.md` lines 90–197
+15 篇 PDF → `套话skill/reference/papers/`（2026-07-08 已整理，含 AVERT）

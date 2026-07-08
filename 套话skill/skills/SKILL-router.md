@@ -1,118 +1,69 @@
 ---
 name: taohua-router
-description: 套话策略路由——根据用户模型、对话阶段、抵抗程度，从10个专项话术skill中选择最合适策略。铁矿石电话客服场景。
+description: 套话策略路由——根据 user_model、对话阶段、resistance，从 11 个专项 skill 中选最合适策略（含 cover-qa）。铁矿石电话客服。
 ---
 
 # SKILL-router — 套话策略路由
 
-> **1 路由 + 10 专项**：凝练自 Readme §90–197 研究线 + `套话skill/analysis/*`
+> 实现：`graph.py::route_skill` 规则引擎；LLM 路由待 M7 接入。
 
 ## 输入
 
-```json
-{
-  "user_model": {
-    "inferred_gaps": ["port","inventory"],
-    "partial_claims": [{"indicator":"港存","value":"偏高"}],
-    "resistance_level": "low|medium|high",
-    "intent_layers": {"explicit":"","implicit":"","latent":""},
-    "expertise_estimate": 0.0,
-    "user_questions": []
-  },
-  "session": { "turn_count": 3, "phase": "RAPPORT|PROBE|CHALLENGE|VERIFY|RECOVER", "price_snapshot": {} },
-  "known_identity": { "role": "厂长", "region": "青岛", "position_direction": "long" }
-}
-```
+- `user_model`: inferred_gaps, partial_claims, resistance_level, last_user_had_question
+- `session`: turn_count, price_snapshot, consecutive_challenge_count
+- `known_identity`: role, region, position_direction
 
-## 输出
+## 输出 JSON
 
 ```json
 {
-  "skill_id": "<专项 skill>",
-  "phase": "RAPPORT|PROBE|CHALLENGE|VERIFY|RECOVER",
-  "rationale": "一句话",
-  "secondary_skills": ["可选组合"]
+  "skill_id": "reactance-biased-statement",
+  "phase": "CHALLENGE",
+  "rationale": "resistance 低且无港存量化 claim",
+  "secondary_skills": ["socratic-probe"]
 }
 ```
 
-## 专项 Skill 注册表（M=10）
+## 注册表（11 skills）
 
-| skill_id | 研究方向 | 一句话 |
-|----------|---------|--------|
-| `clarification-probe` | 澄清提问 | 意图模糊→迭代追问收敛 |
-| `info-seeking-inference` | 信息寻求推断 | 用户问什么→推断缺什么 |
-| `bayesian-tom` | 贝叶斯心智理论 | 行为序列→后验更新 |
-| `implicit-user-modeling` | 隐式用户建模 | 显/隐/潜在意图融合 |
-| `reactance-biased-statement` | 心理反抗 | 有偏陈述→激发反驳 |
-| `socratic-probe` | 苏格拉底法 | 引导自证，不直接质疑 |
-| `trap-question` | 陷阱问题 | 嵌入 gold 错误验真 |
-| `info-design-disclosure` | 信息设计 | 分批/选择性披露 |
-| `info-manipulation-bias` | 信息操纵(IMT) | 真实但片面诱发纠正 |
-| `cognitive-conflict-probe` | 认知冲突 | 部分冲突陈述暴露认知 |
+| skill_id | 来源 | 用途 |
+|----------|------|------|
+| `cover-qa` | 互惠掩护 | RECOVER / 问2答1 |
+| `clarification-probe` | ProductAgent | 意图模糊澄清 |
+| `info-seeking-inference` | Nelson+Rothe | 从用户提问反推缺口 |
+| `bayesian-tom` | Rothe 2018 | 多轮行为后验 |
+| `implicit-user-modeling` | Farshidi SLR | 显/隐/潜在意图 |
+| `reactance-biased-statement` | PRT | 有偏陈述引反驳 |
+| `socratic-probe` | AVERT/IntelliChain | 引导自证 |
+| `trap-question` | WWW 2018 + Interspeech 2015 | gold 错误验真 |
+| `info-design-disclosure` | Kolotilin 2018 | 分批披露 |
+| `info-manipulation-bias` | IMT/Clementson | 片面真实陈述 |
+| `cognitive-conflict-probe` | Safety Gap | 认知冲突深挖 |
 
-## 路由决策树
+## 决策优先级（高→低）
 
-```
-turn_count ≤ 2 且意图模糊?
-  YES → clarification-probe
+1. **resistance > 0.6** → `cover-qa` + phase `RECOVER`
+2. **consecutive_challenge ≥ 3** → `cover-qa` + phase `RECOVER`（互惠降温）
+3. **用户本轮有提问** → `info-seeking-inference` + phase `PROBE`
+   - 含假设数字/「是不是」→ 叠加 `trap-question` 或 `reactance-biased-statement`
+4. **turn_count ≤ 2 且 gaps 空** → `clarification-probe` + phase `RAPPORT`
+5. **partial_claims 非空 + price_snapshot 可核验** → `trap-question` + phase `VERIFY`
+6. **partial_claims 非空但笼统/无量化** → `reactance-biased-statement` 或 `info-manipulation-bias` + phase `CHALLENGE`
+7. **turn_count ≥ 4 且仍缺关键 gap** → `bayesian-tom` 或 `implicit-user-modeling`
+8. **默认** → `clarification-probe` + phase `PROBE`
 
-用户主动提问?
-  YES → info-seeking-inference (+ 更新 user_model)
-       → 若假设检验型问题 → trap-question 或 reactance-biased-statement
+## Phase 约束
 
-resistance_level = high?
-  YES → phase=RECOVER; 禁用 reactance/trap/cognitive-conflict
-       → implicit-user-modeling 或 clarification-probe
-
-resistance low/medium 且 partial_claim 缺量化?
-  → reactance-biased-statement 或 info-manipulation-bias
-
-有 price_snapshot 且 claim 可客观核验?
-  → trap-question (VERIFY)
-
-回答笼统/专业度待验?
-  → socratic-probe
-
-socratic 浅层无效 + 需深层的因果/逻辑?
-  → cognitive-conflict-probe
-
-需控制披露节奏、引用户补全?
-  → info-design-disclosure
-
-多轮行为需概率化选 tactic?
-  → bayesian-tom (meta，可与其他 skill 组合)
-
-行为信号丰富但不宜直问?
-  → implicit-user-modeling
-```
-
-## 阶段与 Skill 亲和
-
-| Phase | 优先 Skill |
+| Phase | 允许 skill |
 |-------|-----------|
-| RAPPORT | clarification-probe, info-seeking-inference |
-| PROBE | clarification-probe, implicit-user-modeling, socratic-probe |
-| CHALLENGE | reactance-biased-statement, info-manipulation-bias, info-design-disclosure, cognitive-conflict-probe |
+| RAPPORT | clarification-probe, info-seeking-inference, cover-qa |
+| PROBE | clarification-probe, info-seeking-inference, implicit-user-modeling, socratic-probe |
+| CHALLENGE | reactance, info-manipulation, info-design, cognitive-conflict |
 | VERIFY | trap-question, bayesian-tom |
-| RECOVER | clarification-probe（轻）, cover-qa（互惠） |
+| RECOVER | cover-qa, clarification-probe（轻） |
 
-## 组合策略（常见链）
+## 硬约束
 
-1. **澄清→反抗**：`clarification-probe` → `reactance-biased-statement`
-2. **推断→陷阱**：`info-seeking-inference` → `trap-question`
-3. **反抗→苏格拉底**：`reactance-biased-statement` → `socratic-probe`（深化细节）
-4. **操纵→信息设计**：`info-manipulation-bias` → `info-design-disclosure`（分批补全）
-5. **全链路 meta**：`bayesian-tom` 每轮更新 posterior 后重路由
-
-## 硬约束（项目假设）
-
-- 用户知道对方是 Agent；多问少答 → 优先 info-seeking-inference
-- 互惠：问 2 答 1；路由不得连续 3 轮纯 CHALLENGE
-- 已知身份作先验，随轮次衰减（bayesian-tom）
-- 铁矿石单品种；话术锚定 `price_snapshot`
-
-## 加载路径
-
-```
-invoke_skill 加载: 套话skill/skills/SKILL-{skill_id}.md
-```
+- 问 2 答 1；RECOVER 禁用 trap/reactance/cognitive-conflict
+- 话术锚定 `price_snapshot` 与 `known_identity.region`
+- skill 文件：`skills/cheat-agent/SKILL-{skill_id}.md`
