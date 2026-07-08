@@ -31,3 +31,14 @@ def test_rebuttal_channel_detected():
     )
     claims = extractor.extract_from_turn(turn, source_id="U1", conversation_id="c1")
     assert claims[0].provenance.elicitation_channel == "bias_triggered"
+
+
+def test_extract_multiple_indicators_per_turn():
+    from market_truth_agent.models import ConversationTurn
+
+    extractor = ClaimExtractor()
+    turn = ConversationTurn(1, "user", "青岛港港存中等，采购积极性一般，报价还没松动。", "ts")
+    claims = extractor.extract_from_turn(turn, source_id="U1", conversation_id="S1")
+    indicators = {c.indicator for c in claims}
+    assert "港存" in indicators
+    assert len(claims) >= 2

@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 
 from market_truth_agent.analysis.ontology import (
     canonicalize,
-    detect_indicator,
+    detect_all_indicators,
     detect_region,
     infer_claim_type,
     normalize_value,
@@ -28,38 +28,39 @@ class ClaimExtractor:
         if turn.speaker != "user":
             return []
         text = turn.text
-        indicator = detect_indicator(text)
-        if not indicator:
-            return []
-        value = normalize_value(text, indicator)
-        if not value:
-            return []
         region = detect_region(text, default_region)
         market_object = "铁矿石"
-        canonical_key, bucket_key = canonicalize(region, market_object, indicator, week)
         is_rebuttal = any(w in text for w in ("谁说的", "不对", "不是", "其实", "纠正"))
         channel = "bias_triggered" if is_rebuttal else elicitation_channel
-        claim = Claim(
-            claim_id=str(uuid.uuid4()),
-            source_id=source_id,
-            conversation_id=conversation_id,
-            time=turn.timestamp or datetime.now(timezone.utc).isoformat(),
-            region=region,
-            market_object=market_object,
-            indicator=indicator,
-            value=value,
-            claim_type=infer_claim_type(indicator, value),
-            canonical_key=canonical_key,
-            bucket_key=bucket_key,
-            provenance=ClaimProvenance(
-                utterance=text,
-                turn_index=turn.turn_index,
-                elicitation_channel=channel,
-                is_rebuttal=is_rebuttal,
-            ),
-            extractor_confidence=0.85,
-        )
-        return [claim]
+        claims: list[Claim] = []
+        for indicator in detect_all_indicators(text):
+            value = normalize_value(text, indicator)
+            if not value:
+                continue
+            canonical_key, bucket_key = canonicalize(region, market_object, indicator, week)
+            claims.append(
+                Claim(
+                    claim_id=str(uuid.uuid4()),
+                    source_id=source_id,
+                    conversation_id=conversation_id,
+                    time=turn.timestamp or datetime.now(timezone.utc).isoformat(),
+                    region=region,
+                    market_object=market_object,
+                    indicator=indicator,
+                    value=value,
+                    claim_type=infer_claim_type(indicator, value),
+                    canonical_key=canonical_key,
+                    bucket_key=bucket_key,
+                    provenance=ClaimProvenance(
+                        utterance=text,
+                        turn_index=turn.turn_index,
+                        elicitation_channel=channel,
+                        is_rebuttal=is_rebuttal,
+                    ),
+                    extractor_confidence=0.85,
+                )
+            )
+        return claims
 
     def extract_from_conversation(
         self, conversation: Conversation, week: str = "2026-W27", default_region: str = "青岛港"

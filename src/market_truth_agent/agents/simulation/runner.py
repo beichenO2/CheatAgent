@@ -17,7 +17,7 @@ from market_truth_agent.agents.cheat_agent.skills_registry import list_registere
 from market_truth_agent.agents.customer_agent.graph import CustomerAgentState, CustomerPersona
 from market_truth_agent.agents.customer_agent.graph import run_customer_agent_turn
 from market_truth_agent.benchmark.tier_b.price_data import PRICE_TRAJECTORY, TRUTH_VARIANTS
-from market_truth_agent.llm.client import llm_mode
+from market_truth_agent.llm.client import llm_backend_label, llm_mode
 
 
 def price_at_session_index(session_index: int) -> dict[str, Any]:
@@ -141,6 +141,7 @@ class SimulationRunner:
             "users": [],
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "llm_mode": llm_mode(),
+            "llm_backend": llm_backend_label(),
             "registered_skills": list_registered_skills(),
             "min_turns": min_turns,
         }

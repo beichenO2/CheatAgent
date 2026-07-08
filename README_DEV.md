@@ -13,19 +13,21 @@ python scripts/generate_dataset.py    # 冒烟 3 用户 × 20 轮（含 smoke ga
 python scripts/evaluate_dataset.py    # 评测（GT 仅此处，未过 gate 则 exit 1)
 ```
 
-### LLM 配置（M7）
+### LLM 配置（PolarPrivate 优先）
+
+PolarPrivate 本地代理：`http://127.0.0.1:12790/v1`（vault 须 unlocked）。未设 `MTA_LLM_MODE` 且 health 正常时 **自动 live**。
 
 | 变量 | 说明 |
 |------|------|
-| `MTA_LLM_MODE` | `mock`（默认，pytest/离线）或 `live` |
-| `OPENAI_API_KEY` / `POLARPRIVATE_API_KEY` | live 模式密钥 |
-| `OPENAI_BASE_URL` / `POLARPRIVATE_BASE_URL` | PolarPrivate 等兼容端点 |
-| `MTA_LLM_MODEL` | 默认 `gpt-4o-mini` |
+| `MTA_LLM_MODE` | `mock`（CI）或 `live`；留空则探测 PolarPrivate |
+| `POLARPRIVATE_URL` | 默认 `http://127.0.0.1:12790` |
+| `MTA_LLM_MODEL` | PolarPrivate QCSA 码，默认 `0001`（Agent） |
+| `OPENAI_API_KEY` | PolarPrivate 下可填 `local`（占位） |
 
 ```bash
-export MTA_LLM_MODE=live
-export OPENAI_API_KEY=...
-python scripts/generate_dataset.py
+# PolarPrivate 已运行时（推荐）
+MTA_LLM_MODE=live MTA_LLM_MODEL=0001 python scripts/generate_dataset.py
+python scripts/evaluate_dataset.py   # 输出 claim_f1 / pearson / em_error
 ```
 
 ## 文档（SSoT）

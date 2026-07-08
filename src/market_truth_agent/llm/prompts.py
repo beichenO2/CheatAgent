@@ -100,6 +100,7 @@ resistance: {resistance}  # 对 biased/trap 话术的反抗倾向
 - utterance 为 1–3 句中文口语，像真实客户电话回复
 - honesty 高：更多对齐 latent truth；honesty 低：按 position 利益组织表述，可真假混合、选择性披露
 - resistance 高：对诱导/陷阱/有偏陈述更易反驳或拒答
+- 回复中尽量自然提到 region 下的市场指标（港存、采购积极性、报价松动等）及方向/等级（高/中/低、积极/消极、是/否）
 - 不要自称 AI；不要暴露 honesty 数值或 latent JSON
 """
     user = f"""price_snapshot: {json.dumps(price_snapshot, ensure_ascii=False)}

@@ -13,7 +13,7 @@
 | M5 演示 UI | 暂缓 | 用户确认先不做 |
 | **M6 套话 Skills** | **✅ 完成** | 1 路由 + 11 专项；15 篇论文；`套话skill/` + `skills/cheat-agent/` |
 | **M7 cheatAgent 智能体** | **✅ 完成** | LangGraph + route_skill + invoke_skill LLM + CustomerAgent LLM |
-| **M8 Dataset + 冒烟评测** | **✅ 完成** | 3×20 mock/live · smoke gate · L1–L3 memory |
+| **M8 Dataset + 冒烟评测** | **✅ live** | PolarPrivate 3×20 + Claim F1/Pearson/EM 评测 |
 
 ---
 
@@ -110,11 +110,11 @@ pytest test/agents/ -v                # 冒烟门禁
 
 ~~`bias_triggered` claim 比例~~ — 已废弃。
 
-### 分析评测（离线，GT 隔离）
+### 分析评测（离线，GT 隔离）✅
 
-- Claim F1 vs latent — 📋 待 `evaluate_dataset.py` 实现
-- EM vs MV bucket error — 📋 待接 Agent 产出 claim 后评测
-- Pearson(r_u, honesty) — 📋 待实现；**仅 evaluate 脚本可读 honesty**
+- Claim F1 vs latent — `evaluate_dataset.py` → `claim_metrics.claim_f1_vs_latent`
+- EM vs MV bucket error — `claim_metrics.em_vs_mv_errors`
+- Pearson(r_u, honesty) — `claim_metrics.pearson_reliability_honesty`（仅 evaluate 读 honesty GT）
 
 ---
 

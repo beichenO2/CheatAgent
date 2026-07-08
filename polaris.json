@@ -2,16 +2,16 @@
   "name": "MarketTruthAgent",
   "_meta": {
     "schema_version": "1.1",
-    "last_synced_at": "2026-07-08T16:43:00+08:00"
+    "last_synced_at": "2026-07-08T18:20:00+08:00"
   },
   "description": "铁矿石智能客服：Agent 套话采集 + claim 真伪推断 + 用户信用评估",
   "tier": "research-prototype",
-  "status": "smoke-complete",
+  "status": "tier-b-smoke-live",
   "version": "0.3.0",
   "health": {
-    "phase": "smoke-complete",
-    "note": "M6–M8 完成；Alpha dataset + Claim F1/Pearson 待扩",
-    "last_verified": "2026-07-08T16:43:00+08:00"
+    "phase": "tier-b-smoke-live",
+    "note": "PolarPrivate live dataset + Claim F1/Pearson/EM 评测已接入",
+    "last_verified": "2026-07-08T18:20:00+08:00"
   },
   "active_work": [
     {
@@ -53,12 +53,16 @@
       "id": "NU-010",
       "title": "evaluate_dataset：Claim F1 + Pearson(r_u, honesty)",
       "priority": "P1",
+      "status": "done",
+      "completed_at": "2026-07-08",
       "depends_on": ["AW-003"]
     },
     {
       "id": "NU-011",
       "title": "live LLM 端到端验证（PolarPrivate/OpenAI）",
       "priority": "P1",
+      "status": "done",
+      "completed_at": "2026-07-08",
       "depends_on": ["AW-002"]
     },
     {
@@ -99,6 +103,7 @@
         {"name": "LangGraph cheatAgent", "status": "done", "path": "src/.../agents/cheat_agent/"},
         {"name": "CustomerAgent 模拟器", "status": "done", "path": "src/.../agents/customer_agent/"},
         {"name": "记忆 L1–L3", "status": "done", "path": "agents/cheat_agent/memory.py"},
+        {"name": "PolarPrivate LLM", "status": "done", "path": "llm/client.py"},
         {"name": "对话存储", "status": "done", "path": "storage/conversation_store.py"}
       ]
     },
@@ -119,7 +124,7 @@
         {"name": "Tier A 组件", "status": "done"},
         {"name": "Tier B Agent dataset", "status": "done", "note": "冒烟 3×20 + smoke gate"},
         {"name": "套话指标 skill_kind/invoke/richness/coverage", "status": "done"},
-        {"name": "Claim F1 / Pearson 离线评测", "status": "pending", "note": "roadmap Alpha"},
+        {"name": "Claim F1 / Pearson 离线评测", "status": "done", "note": "evaluate_dataset.py + claim_metrics.py"},
         {"name": "旧规则 Tier B", "status": "removed", "see": "wrongway.md"}
       ]
     }
