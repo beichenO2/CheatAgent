@@ -10,8 +10,8 @@
   "version": "0.3.0",
   "health": {
     "phase": "agent-rebuild",
-    "note": "M7 invoke_skill + CustomerAgent 已接 LLM（mock/live）",
-    "last_verified": "2026-07-08T16:45:00+08:00"
+    "note": "M8 冒烟 dataset + smoke gate 完成；Alpha/Beta 规模待扩",
+    "last_verified": "2026-07-08T16:55:00+08:00"
   },
   "active_work": [
     {
@@ -36,7 +36,8 @@
       "id": "AW-003",
       "title": "M8 冒烟 dataset 3×20 + 评测分离",
       "priority": "P0",
-      "status": "in_progress",
+      "status": "done",
+      "completed_at": "2026-07-08",
       "path": "scripts/generate_dataset.py",
       "depends_on": ["AW-002"]
     }
@@ -97,8 +98,8 @@
       "need": "Agent Benchmark",
       "features": [
         {"name": "Tier A 组件", "status": "done"},
-        {"name": "Tier B Agent dataset", "status": "scaffold", "note": "冒烟 3×20，依赖 M7"},
-        {"name": "套话指标 skill_kind/invoke/richness", "status": "scaffold"},
+        {"name": "Tier B Agent dataset", "status": "done", "note": "冒烟 3×20 + smoke gate"},
+        {"name": "套话指标 skill_kind/invoke/richness", "status": "done"},
         {"name": "旧规则 Tier B", "status": "removed", "see": "wrongway.md"}
       ]
     }

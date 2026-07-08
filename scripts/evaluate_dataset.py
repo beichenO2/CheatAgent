@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Evaluate generated dataset — analysis + tactic metrics. GT only used here."""
 import json
+import sys
 from pathlib import Path
 
+from market_truth_agent.agents.cheat_agent.skills_registry import list_registered_skills
+from market_truth_agent.agents.eval.smoke_runner import validate_smoke_dataset
 from market_truth_agent.agents.eval.tactic_metrics import summarize_session
 from market_truth_agent.models import Conversation, ConversationTurn, Persona
 from market_truth_agent.analysis.pipeline import AnalysisPipeline
@@ -36,9 +39,15 @@ def meta_to_conversation(meta: dict, session: dict) -> Conversation:
 
 def main() -> None:
     dataset_dir = Path("benchmark/datasets/smoke_v1")
+    registered = list_registered_skills()
+    smoke = validate_smoke_dataset(dataset_dir)
     manifest = json.loads((dataset_dir / "manifest.json").read_text(encoding="utf-8"))
     pipeline = AnalysisPipeline()
-    report = {"users": [], "tactic_summary": []}
+    report = {
+        "smoke_gate": smoke,
+        "users": [],
+        "tactic_summary": [],
+    }
 
     for entry in manifest["users"]:
         meta_path = dataset_dir / entry["path"]
@@ -57,7 +66,7 @@ def main() -> None:
         conv = meta_to_conversation(meta, session)
         result = pipeline.run(conv, persona, week=session.get("week", "2026-W27"))
 
-        tactic = summarize_session(session.get("agent_metadata", []))
+        tactic = summarize_session(session.get("agent_metadata", []), registered)
         report["users"].append({
             "user_id": persona.user_id,
             "honesty_gt": persona.honesty,
@@ -68,6 +77,8 @@ def main() -> None:
         report["tactic_summary"].append(tactic)
 
     print(json.dumps(report, ensure_ascii=False, indent=2))
+    if not smoke.get("passed"):
+        sys.exit(1)
 
 
 if __name__ == "__main__":

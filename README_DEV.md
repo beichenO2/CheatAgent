@@ -9,8 +9,8 @@
 ```bash
 pip install -e ".[dev,agent]"
 pytest test/ -v
-python scripts/generate_dataset.py    # 冒烟 3 用户 × 20 轮
-python scripts/evaluate_dataset.py    # 评测（GT 仅此处）
+python scripts/generate_dataset.py    # 冒烟 3 用户 × 20 轮（含 smoke gate）
+python scripts/evaluate_dataset.py    # 评测（GT 仅此处，未过 gate 则 exit 1)
 ```
 
 ### LLM 配置（M7）

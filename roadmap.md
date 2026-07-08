@@ -13,7 +13,7 @@
 | M5 演示 UI | 暂缓 | 用户确认先不做 |
 | **M6 套话 Skills** | **✅ 完成** | 1 路由 + 11 专项；15 篇论文；`套话skill/` + `skills/cheat-agent/` |
 | **M7 cheatAgent 智能体** | **✅ 完成** | LangGraph + route_skill + invoke_skill LLM + CustomerAgent LLM |
-| **M8 Dataset + 冒烟评测** | **🔧 进行中（P0）** | 3 用户 × 20 轮 → 扩至 5×20×5 月 |
+| **M8 Dataset + 冒烟评测** | **✅ 完成** | 3×20 mock/live · smoke gate · L1–L3 memory |
 
 ---
 

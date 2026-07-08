@@ -29,8 +29,7 @@
 
 | 优先级 | 任务 | 负责 |
 |--------|------|------|
-| P0 | M8 冒烟 3×20 dataset（live LLM 可选） | Agent |
-| P1 | M7 记忆 L1–L3 持久化 | Agent |
+| P1 | Alpha dataset 10×5 session | Agent |
 | P3 | M5 UI | 暂缓 |
 
 ## 工作范围

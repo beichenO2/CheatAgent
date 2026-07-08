@@ -17,7 +17,7 @@ def test_recon_does_not_read_honesty_gt():
 
 def test_smoke_dataset_generation(tmp_path):
     """T-060/T-061: 3 users × 20 turns."""
-    runner = SimulationRunner(tmp_path / "smoke_v1")
+    runner = SimulationRunner(tmp_path / "smoke_v1", memory_root=tmp_path / "memory")
     out = runner.write_smoke_dataset(SMOKE_PERSONAS, min_turns=20)
     manifest = (out / "manifest.json").read_text(encoding="utf-8")
     assert "U001" in manifest
@@ -33,7 +33,7 @@ def test_smoke_dataset_generation(tmp_path):
 
 
 def test_agent_metadata_has_skill_ids(tmp_path):
-    runner = SimulationRunner(tmp_path / "smoke_v1")
+    runner = SimulationRunner(tmp_path / "smoke_v1", memory_root=tmp_path / "memory")
     runner.write_smoke_dataset(SMOKE_PERSONAS[:1], min_turns=20)
     import json
     meta = json.loads((tmp_path / "smoke_v1/users/U001/meta.json").read_text(encoding="utf-8"))
@@ -43,11 +43,11 @@ def test_agent_metadata_has_skill_ids(tmp_path):
 
 
 def test_tactic_metrics(tmp_path):
-    runner = SimulationRunner(tmp_path / "smoke_v1")
+    runner = SimulationRunner(tmp_path / "smoke_v1", memory_root=tmp_path / "memory")
     runner.write_smoke_dataset(SMOKE_PERSONAS[:1], min_turns=20)
     import json
     meta = json.loads((tmp_path / "smoke_v1/users/U001/meta.json").read_text(encoding="utf-8"))
-    summary = summarize_session(meta["sessions"][0]["agent_metadata"])
+    summary = summarize_session(meta["sessions"][0]["agent_metadata"], ["cover-qa", "clarification-probe"])
     assert summary["skill_kind_count"] >= 1
     assert summary["skill_invoke_count"] >= 10
     assert summary["skill_richness"] >= -1e-9

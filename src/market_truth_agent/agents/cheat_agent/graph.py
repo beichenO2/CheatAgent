@@ -12,8 +12,10 @@ from market_truth_agent.agents.cheat_agent.state import (
 )
 from market_truth_agent.llm.client import chat_completion, parse_utterance
 from market_truth_agent.llm.prompts import build_cheat_agent_prompt, load_skill_markdown
+from market_truth_agent.agents.cheat_agent.memory import persist_turn_memory
 
-SKILLS_DIR = Path(__file__).resolve().parents[4] / "skills" / "cheat-agent"
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+SKILLS_DIR = PROJECT_ROOT / "skills" / "cheat-agent"
 
 
 def load_context(state: CheatAgentState) -> dict[str, Any]:
@@ -158,19 +160,26 @@ def invoke_skill(state: CheatAgentState) -> dict[str, Any]:
     raw = chat_completion(system, user, temperature=0.7)
     utterance = parse_utterance(raw)
 
+    rel_skill = skill_path.relative_to(PROJECT_ROOT) if skill_path.exists() else skill_path.name
+
     metadata = {
         "skill_id": skill_id,
         "phase": phase,
         "route_rationale": state.route_rationale,
-        "skill_file": str(skill_path),
+        "skill_file": str(rel_skill),
         "llm_mode": "mock" if "[mock-llm]" in utterance else "live",
     }
     return {"agent_utterance": utterance, "turn_metadata": metadata}
 
 
 def write_memory(state: CheatAgentState) -> dict[str, Any]:
-    """Persist L1 session metadata counters (scaffold)."""
-    return {"memory_updated": True}
+    """Persist L1 session, L2 user model, L3 episodic turns."""
+    root = Path(state.turn_metadata.get("memory_root", "memory"))
+    return persist_turn_memory(
+        state,
+        root=root,
+        last_user_text=_last_user_turn(state),
+    )
 
 
 def build_cheat_agent_graph():
@@ -212,14 +221,18 @@ def run_cheat_agent_turn(
     session: SessionContext,
     user_model: UserModelSnapshot,
     conversation_history: list[TurnRecord],
-) -> tuple[str, dict[str, Any]]:
-    """Single-turn convenience wrapper (scaffold)."""
+    memory_root: Path | str | None = None,
+) -> tuple[str, dict[str, Any], UserModelSnapshot]:
+    """Single-turn convenience wrapper."""
     state = CheatAgentState(
         known_identity=known_identity,
         session=session,
         user_model=user_model,
         conversation_history=conversation_history,
     )
+    if memory_root is not None:
+        state.turn_metadata["memory_root"] = str(memory_root)
+
     for step in (
         update_user_model,
         route_skill,
@@ -228,5 +241,8 @@ def run_cheat_agent_turn(
     ):
         updates = step(state)
         for k, v in updates.items():
-            setattr(state, k, v)
-    return state.agent_utterance, state.turn_metadata
+            if k == "turn_metadata" and isinstance(v, dict):
+                state.turn_metadata.update(v)
+            else:
+                setattr(state, k, v)
+    return state.agent_utterance, state.turn_metadata, state.user_model

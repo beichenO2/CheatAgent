@@ -14,7 +14,7 @@
 | ⑥ cheatAgent 集成 | ✅ | `route_skill` 规则路由 + `invoke_skill` LLM（M7） |
 | ⑦ 同步到 cheat-agent | ✅ | `skills/cheat-agent/` 已同步全部 12 个 SKILL 文件 |
 
-**下一步（M8）**：live LLM 生成 3×20 冒烟 dataset + 评测分离验证。
+**下一步（Alpha）**：live LLM 扩至 10 用户 × 5 session；claim F1 / Pearson 离线对照。
 
 ## 目录结构
 

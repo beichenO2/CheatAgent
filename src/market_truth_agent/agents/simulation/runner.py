@@ -1,22 +1,23 @@
 from __future__ import annotations
 
 import json
-import uuid
 from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from market_truth_agent.agents.cheat_agent.memory import load_or_create_l2
 from market_truth_agent.agents.cheat_agent.graph import run_cheat_agent_turn
 from market_truth_agent.agents.cheat_agent.state import (
     KnownIdentity,
     SessionContext,
     TurnRecord,
-    UserModelSnapshot,
 )
+from market_truth_agent.agents.cheat_agent.skills_registry import list_registered_skills
 from market_truth_agent.agents.customer_agent.graph import CustomerAgentState, CustomerPersona
 from market_truth_agent.agents.customer_agent.graph import run_customer_agent_turn
 from market_truth_agent.benchmark.tier_b.price_data import PRICE_TRAJECTORY, TRUTH_VARIANTS
+from market_truth_agent.llm.client import llm_mode
 
 
 def price_at_session_index(session_index: int) -> dict[str, Any]:
@@ -32,8 +33,13 @@ class SimulationRunner:
     Generation only — evaluation is separate (scripts/evaluate_dataset.py).
     """
 
-    def __init__(self, output_dir: Path | None = None) -> None:
+    def __init__(
+        self,
+        output_dir: Path | None = None,
+        memory_root: Path | None = None,
+    ) -> None:
         self.output_dir = output_dir or Path("benchmark/datasets/smoke_v1")
+        self.memory_root = memory_root or Path("memory")
 
     def run_session(
         self,
@@ -63,7 +69,7 @@ class SimulationRunner:
             week=f"2026-W{9 + session_index * 4:02d}",
             price_snapshot=price_snapshot,
         )
-        user_model = UserModelSnapshot(user_id=persona.user_id)
+        user_model = load_or_create_l2(persona.user_id, self.memory_root)
         history: list[TurnRecord] = []
         agent_metadata: list[dict[str, Any]] = []
 
@@ -72,12 +78,12 @@ class SimulationRunner:
             ts = datetime.now(timezone.utc).isoformat()
 
             if turn_idx % 2 == 0:
-                # Agent turn
-                utterance, meta = run_cheat_agent_turn(
+                utterance, meta, user_model = run_cheat_agent_turn(
                     known_identity=known,
                     session=session_ctx,
                     user_model=user_model,
                     conversation_history=history,
+                    memory_root=self.memory_root,
                 )
                 session_ctx.turn_count += 1
                 history.append(
@@ -93,7 +99,6 @@ class SimulationRunner:
                 agent_metadata.append(meta)
                 cheat_utterance = utterance
             else:
-                # Customer turn
                 cust_state = CustomerAgentState(
                     persona=persona,
                     latent_claims_truth=latent_claims,
@@ -116,10 +121,14 @@ class SimulationRunner:
 
     def build_user_dataset(self, persona: CustomerPersona, *, min_turns: int = 20) -> dict[str, Any]:
         session = self.run_session(persona, min_turns=min_turns)
+        variant = TRUTH_VARIANTS[hash(persona.user_id) % len(TRUTH_VARIANTS)]
         return {
             "persona": asdict(persona),
             "latent": {
-                "claims_truth": session.get("latent_claims", []),
+                "claims_truth": [
+                    {"region": persona.region, "indicator": ind, "value": val, "market_object": "铁矿石"}
+                    for ind, val in variant
+                ],
                 "price_trajectory": PRICE_TRAJECTORY,
             },
             "sessions": [session],
@@ -127,7 +136,14 @@ class SimulationRunner:
 
     def write_smoke_dataset(self, personas: list[CustomerPersona], *, min_turns: int = 20) -> Path:
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        manifest = {"version": "smoke_v1", "users": [], "generated_at": datetime.now(timezone.utc).isoformat()}
+        manifest = {
+            "version": "smoke_v1",
+            "users": [],
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "llm_mode": llm_mode(),
+            "registered_skills": list_registered_skills(),
+            "min_turns": min_turns,
+        }
 
         for persona in personas:
             user_dir = self.output_dir / "users" / persona.user_id

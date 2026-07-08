@@ -1,0 +1,423 @@
+{
+  "persona": {
+    "user_id": "U003",
+    "role": "仓库负责人",
+    "region": "唐山",
+    "position": "long",
+    "personality": "防御型",
+    "honesty": 0.25,
+    "resistance": 0.6,
+    "knowledge_depth": 0.8
+  },
+  "latent": {
+    "claims_truth": [
+      {
+        "region": "唐山",
+        "indicator": "港存",
+        "value": "低",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "唐山",
+        "indicator": "采购积极性",
+        "value": "积极",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "唐山",
+        "indicator": "报价松动",
+        "value": "是",
+        "market_object": "铁矿石"
+      }
+    ],
+    "price_trajectory": [
+      {
+        "day": 1,
+        "price": 820,
+        "trend": "平"
+      },
+      {
+        "day": 3,
+        "price": 835,
+        "trend": "涨"
+      },
+      {
+        "day": 5,
+        "price": 842,
+        "trend": "涨"
+      },
+      {
+        "day": 7,
+        "price": 848,
+        "trend": "涨"
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "session_id": "S001",
+      "session_date": "2026-03-01",
+      "week": "2026-W09",
+      "price_snapshot": {
+        "day": 1,
+        "price": 820,
+        "trend": "平"
+      },
+      "turns": [
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.450279+00:00",
+          "skill_id": "clarification-probe",
+          "phase": "RAPPORT",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "clarification-probe",
+            "phase": "RAPPORT",
+            "route_rationale": "early turn, intent unclear",
+            "skill_file": "skills/cheat-agent/SKILL-clarification-probe.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.450797+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.450824+00:00",
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "info-seeking-inference",
+            "phase": "PROBE",
+            "route_rationale": "user asked → infer gaps from question",
+            "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.451260+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.451287+00:00",
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "info-seeking-inference",
+            "phase": "PROBE",
+            "route_rationale": "user asked → infer gaps from question",
+            "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.451726+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.451750+00:00",
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "info-seeking-inference",
+            "phase": "PROBE",
+            "route_rationale": "user asked → infer gaps from question",
+            "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.452151+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.452174+00:00",
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "info-seeking-inference",
+            "phase": "PROBE",
+            "route_rationale": "user asked → infer gaps from question",
+            "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.452563+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.452587+00:00",
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "info-seeking-inference",
+            "phase": "PROBE",
+            "route_rationale": "user asked → infer gaps from question",
+            "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.452990+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.453015+00:00",
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "info-seeking-inference",
+            "phase": "PROBE",
+            "route_rationale": "user asked → infer gaps from question",
+            "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.453469+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.453493+00:00",
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "info-seeking-inference",
+            "phase": "PROBE",
+            "route_rationale": "user asked → infer gaps from question",
+            "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.453982+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.454010+00:00",
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "info-seeking-inference",
+            "phase": "PROBE",
+            "route_rationale": "user asked → infer gaps from question",
+            "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.454512+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.454538+00:00",
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "info-seeking-inference",
+            "phase": "PROBE",
+            "route_rationale": "user asked → infer gaps from question",
+            "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T08:36:53.454970+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        }
+      ],
+      "agent_metadata": [
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "clarification-probe",
+          "phase": "RAPPORT",
+          "route_rationale": "early turn, intent unclear",
+          "skill_file": "skills/cheat-agent/SKILL-clarification-probe.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "route_rationale": "user asked → infer gaps from question",
+          "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "route_rationale": "user asked → infer gaps from question",
+          "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "route_rationale": "user asked → infer gaps from question",
+          "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "route_rationale": "user asked → infer gaps from question",
+          "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "route_rationale": "user asked → infer gaps from question",
+          "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "route_rationale": "user asked → infer gaps from question",
+          "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "route_rationale": "user asked → infer gaps from question",
+          "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "route_rationale": "user asked → infer gaps from question",
+          "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "info-seeking-inference",
+          "phase": "PROBE",
+          "route_rationale": "user asked → infer gaps from question",
+          "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
+          "llm_mode": "mock"
+        }
+      ],
+      "turn_count": 20
+    }
+  ]
+}

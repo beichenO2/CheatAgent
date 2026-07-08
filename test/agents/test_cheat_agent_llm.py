@@ -61,7 +61,7 @@ def test_single_turn_dialogue_mock_llm():
     session = SessionContext("S001", "2026-03-01", "2026-W09", {"price": 820, "trend": "平"})
     user_model = UserModelSnapshot("U001")
 
-    utterance, meta = run_cheat_agent_turn(
+    utterance, meta, _ = run_cheat_agent_turn(
         known_identity=known,
         session=session,
         user_model=user_model,
