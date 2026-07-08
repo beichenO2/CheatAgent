@@ -13,6 +13,21 @@ python scripts/generate_dataset.py    # 冒烟 3 用户 × 20 轮
 python scripts/evaluate_dataset.py    # 评测（GT 仅此处）
 ```
 
+### LLM 配置（M7）
+
+| 变量 | 说明 |
+|------|------|
+| `MTA_LLM_MODE` | `mock`（默认，pytest/离线）或 `live` |
+| `OPENAI_API_KEY` / `POLARPRIVATE_API_KEY` | live 模式密钥 |
+| `OPENAI_BASE_URL` / `POLARPRIVATE_BASE_URL` | PolarPrivate 等兼容端点 |
+| `MTA_LLM_MODEL` | 默认 `gpt-4o-mini` |
+
+```bash
+export MTA_LLM_MODE=live
+export OPENAI_API_KEY=...
+python scripts/generate_dataset.py
+```
+
 ## 文档（SSoT）
 
 | 文件 | 内容 |
