@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>MarketTruthAgent 演示</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; margin: 0; background: #0f1419; color: #e7ecf1; }
+    header { padding: 16px 24px; background: #1a2332; border-bottom: 1px solid #2d3a4d; }
+    main { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px; height: calc(100vh - 64px); }
+    panel { display: block; background: #1a2332; border-radius: 8px; padding: 16px; overflow: auto; }
+    h2 { margin: 0 0 12px; font-size: 16px; color: #8ab4f8; }
+    #chat { height: 360px; overflow-y: auto; border: 1px solid #2d3a4d; border-radius: 6px; padding: 8px; margin-bottom: 8px; }
+    .msg { margin: 6px 0; padding: 8px; border-radius: 6px; max-width: 90%; }
+    .user { background: #2d4a3e; margin-left: auto; }
+    .agent { background: #2d3a4d; }
+    input, button, select { padding: 8px; border-radius: 6px; border: 1px solid #2d3a4d; background: #0f1419; color: #e7ecf1; }
+    button { background: #3b82f6; border: none; cursor: pointer; }
+    pre { white-space: pre-wrap; font-size: 12px; background: #0f1419; padding: 8px; border-radius: 6px; }
+    .row { display: flex; gap: 8px; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>MarketTruthAgent</strong> — 铁矿石智能客服 · 套话采集 + 真伪分析
+  </header>
+  <main>
+    <panel id="dialog-panel">
+      <h2>对话面板</h2>
+      <div class="row">
+        <select id="role"><option>厂长</option><option>贸易员</option><option>仓库负责人</option></select>
+        <select id="region"><option>青岛港</option><option>日照港</option><option>唐山</option></select>
+        <button id="start">新建对话</button>
+        <button id="analyze">分析</button>
+      </div>
+      <div id="chat"></div>
+      <div class="row">
+        <input id="input" style="flex:1" placeholder="输入消息..." />
+        <button id="send">发送</button>
+      </div>
+    </panel>
+    <panel id="analysis-panel">
+      <h2>分析面板</h2>
+      <pre id="output">点击「新建对话」开始，对话后点「分析」查看 claims / 可信度 / 真值推断。</pre>
+    </panel>
+  </main>
+  <script>
+    let cid = null;
+    const chat = document.getElementById('chat');
+    const output = document.getElementById('output');
+
+    function addMsg(speaker, text) {
+      const d = document.createElement('div');
+      d.className = 'msg ' + (speaker === 'user' ? 'user' : 'agent');
+      d.textContent = (speaker === 'user' ? '用户: ' : 'Agent: ') + text;
+      chat.appendChild(d);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    document.getElementById('start').onclick = async () => {
+      chat.innerHTML = '';
+      const res = await fetch('/api/conversations', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          role: document.getElementById('role').value,
+          region: document.getElementById('region').value,
+        }),
+      });
+      const data = await res.json();
+      cid = data.conversation_id;
+      output.textContent = '对话已创建: ' + cid;
+    };
+
+    document.getElementById('send').onclick = async () => {
+      const text = document.getElementById('input').value.trim();
+      if (!cid || !text) return;
+      addMsg('user', text);
+      document.getElementById('input').value = '';
+      const res = await fetch('/api/conversations/' + cid + '/message', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({text}),
+      });
+      const data = await res.json();
+      addMsg('agent', data.agent_text + ' [' + data.tactic + '/' + data.phase + ']');
+    };
+
+    document.getElementById('analyze').onclick = async () => {
+      if (!cid) return;
+      const res = await fetch('/api/analyze/' + cid, {method: 'POST'});
+      const data = await res.json();
+      output.textContent = JSON.stringify(data, null, 2);
+    };
+  </script>
+</body>
+</html>

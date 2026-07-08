@@ -1,0 +1,99 @@
+{
+  "name": "MarketTruthAgent",
+  "_meta": {
+    "schema_version": "1.1",
+    "last_synced_at": "2026-07-08T10:30:00+08:00"
+  },
+  "description": "铁矿石智能客服：Agent 套话采集 + claim 真伪推断 + 用户信用评估",
+  "tier": "research-prototype",
+  "status": "rebuilding",
+  "version": "0.3.0",
+  "health": {
+    "phase": "agent-rebuild",
+    "note": "YOLO 规则实现已废弃，见 wrongway.md",
+    "last_verified": "2026-07-08T10:30:00+08:00"
+  },
+  "active_work": [
+    {
+      "id": "AW-001",
+      "title": "M6 套话 Skills（1 路由 + N 专项）",
+      "owner": "user",
+      "priority": "P0",
+      "status": "pending",
+      "path": "skills/cheat-agent/"
+    },
+    {
+      "id": "AW-002",
+      "title": "M7 LangGraph cheatAgent 接 LLM",
+      "priority": "P0",
+      "status": "scaffold",
+      "path": "src/market_truth_agent/agents/"
+    },
+    {
+      "id": "AW-003",
+      "title": "M8 冒烟 dataset 3×20 + 评测分离",
+      "priority": "P0",
+      "status": "scaffold",
+      "path": "scripts/generate_dataset.py"
+    }
+  ],
+  "next_up": [
+    {
+      "id": "NU-007",
+      "title": "CustomerAgent LLM 接入",
+      "priority": "P1",
+      "depends_on": ["AW-002"]
+    },
+    {
+      "id": "NU-008",
+      "title": "完整 dataset：30 用户 × 5 session × 5 月",
+      "priority": "P1",
+      "depends_on": ["AW-003", "NU-007"]
+    },
+    {
+      "id": "NU-005",
+      "title": "演示 UI",
+      "priority": "P3",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "R1",
+      "need": "交互链路：Agent 套话采集",
+      "features": [
+        {"name": "1+N 套话 Skills", "status": "pending", "owner": "user", "path": "skills/cheat-agent/"},
+        {"name": "LangGraph cheatAgent", "status": "scaffold", "path": "src/.../agents/cheat_agent/"},
+        {"name": "CustomerAgent 模拟器", "status": "scaffold", "path": "src/.../agents/customer_agent/"},
+        {"name": "对话存储", "status": "done", "path": "storage/conversation_store.py"}
+      ]
+    },
+    {
+      "id": "R2",
+      "need": "分析链路：claim + 真伪 + 信用（GT 隔离）",
+      "features": [
+        {"name": "Claim 抽取", "status": "partial", "note": "规则版保留，待 LLM 升级"},
+        {"name": "ReCon 欺骗检测", "status": "partial", "note": "已去 honesty GT 泄漏，待 LLM 复刻"},
+        {"name": "Truth Discovery EM", "status": "done"},
+        {"name": "价格走线校验", "status": "partial", "note": "待按 session 时间索引"}
+      ]
+    },
+    {
+      "id": "R3",
+      "need": "Agent Benchmark",
+      "features": [
+        {"name": "Tier A 组件", "status": "done"},
+        {"name": "Tier B Agent dataset", "status": "scaffold", "note": "冒烟 3×20"},
+        {"name": "套话指标 skill_kind/invoke/richness", "status": "scaffold"},
+        {"name": "旧规则 Tier B", "status": "removed", "see": "wrongway.md"}
+      ]
+    }
+  ],
+  "verification": {
+    "commands": [
+      "pytest test/ -v",
+      "python scripts/generate_dataset.py",
+      "python scripts/evaluate_dataset.py"
+    ]
+  }
+}
