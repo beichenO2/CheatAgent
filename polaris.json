@@ -47,6 +47,8 @@
       "id": "NU-009",
       "title": "Alpha dataset 10×5 session",
       "priority": "P1",
+      "status": "in_progress",
+      "note": "管线+personas 就绪；全量 live 生成待跑",
       "depends_on": ["AW-003"]
     },
     {
@@ -122,7 +124,7 @@
       "need": "Agent Benchmark",
       "features": [
         {"name": "Tier A 组件", "status": "done"},
-        {"name": "Tier B Agent dataset", "status": "done", "note": "冒烟 3×20 + smoke gate"},
+        {"name": "Tier B Agent dataset", "status": "done", "note": "smoke_v1 live + alpha_v1 管线"},
         {"name": "套话指标 skill_kind/invoke/richness/coverage", "status": "done"},
         {"name": "Claim F1 / Pearson 离线评测", "status": "done", "note": "evaluate_dataset.py + claim_metrics.py"},
         {"name": "旧规则 Tier B", "status": "removed", "see": "wrongway.md"}
@@ -132,8 +134,8 @@
   "verification": {
     "commands": [
       "MTA_LLM_MODE=mock pytest test/ -v",
-      "MTA_LLM_MODE=mock python scripts/generate_dataset.py",
-      "MTA_LLM_MODE=mock python scripts/evaluate_dataset.py"
+      "python scripts/generate_dataset.py --preset smoke_v1",
+      "python scripts/evaluate_dataset.py --dataset-dir benchmark/datasets/smoke_v1"
     ]
   }
 }

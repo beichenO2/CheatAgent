@@ -29,8 +29,7 @@
 
 | 优先级 | 任务 | 负责 |
 |--------|------|------|
-| P1 | Alpha dataset 10×5 session + live LLM 验证 | Agent |
-| P1 | evaluate_dataset：Claim F1 + Pearson | Agent |
+| P1 | Alpha dataset 10×5（`--preset alpha_v1`） | Agent |
 | P3 | M5 UI | 暂缓 |
 
 ## 工作范围

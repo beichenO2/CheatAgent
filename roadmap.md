@@ -96,10 +96,22 @@ src/market_truth_agent/agents/
 
 ```bash
 pip install -e ".[dev,agent]"
-python scripts/generate_dataset.py    # 生成
-python scripts/evaluate_dataset.py    # 评测（GT 仅此处）
-pytest test/agents/ -v                # 冒烟门禁
+python scripts/generate_dataset.py --preset smoke_v1
+python scripts/generate_dataset.py --preset alpha_v1   # 10×5×20
+python scripts/evaluate_dataset.py --dataset-dir benchmark/datasets/smoke_v1
+pytest test/agents/ -v
 ```
+
+---
+
+## Alpha — 10×5 dataset 🔧（管线就绪）
+
+| 项 | 状态 |
+|----|------|
+| `ALPHA_PERSONAS` ×10 | ✅ `personas.py` |
+| 多 session + 跨 session 记忆 | ✅ `runner.write_dataset` |
+| 价格走线 7 周 | ✅ `price_data.PRICE_TRAJECTORY` |
+| 全量 mock/live 生成 | 待跑 `benchmark/datasets/alpha_v1/` |
 
 ### 套话性能指标（ADR-007）
 

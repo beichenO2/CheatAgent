@@ -9,8 +9,9 @@
 ```bash
 pip install -e ".[dev,agent]"
 pytest test/ -v
-python scripts/generate_dataset.py    # 冒烟 3 用户 × 20 轮（含 smoke gate）
-python scripts/evaluate_dataset.py    # 评测（GT 仅此处，未过 gate 则 exit 1)
+python scripts/generate_dataset.py --preset smoke_v1
+python scripts/generate_dataset.py --preset alpha_v1
+python scripts/evaluate_dataset.py --dataset-dir benchmark/datasets/smoke_v1
 ```
 
 ### LLM 配置（PolarPrivate 优先）

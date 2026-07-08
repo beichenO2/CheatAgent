@@ -3,20 +3,23 @@
   "users": [
     {
       "user_id": "U001",
-      "path": "users/U001/meta.json"
+      "path": "users/U001/meta.json",
+      "session_count": 1
     },
     {
       "user_id": "U002",
-      "path": "users/U002/meta.json"
+      "path": "users/U002/meta.json",
+      "session_count": 1
     },
     {
       "user_id": "U003",
-      "path": "users/U003/meta.json"
+      "path": "users/U003/meta.json",
+      "session_count": 1
     }
   ],
-  "generated_at": "2026-07-08T10:19:52.085089+00:00",
-  "llm_mode": "live",
-  "llm_backend": "polarprivate",
+  "generated_at": "2026-07-08T10:29:39.875617+00:00",
+  "llm_mode": "mock",
+  "llm_backend": "mock",
   "registered_skills": [
     "bayesian-tom",
     "clarification-probe",
@@ -30,5 +33,6 @@
     "socratic-probe",
     "trap-question"
   ],
-  "min_turns": 20
+  "min_turns": 20,
+  "sessions_per_user": 1
 }

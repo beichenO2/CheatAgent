@@ -1,0 +1,1910 @@
+{
+  "persona": {
+    "user_id": "U002",
+    "role": "贸易员",
+    "region": "日照港",
+    "position": "long",
+    "personality": "健谈型",
+    "honesty": 0.55,
+    "resistance": 0.4,
+    "knowledge_depth": 0.8
+  },
+  "latent": {
+    "claims_truth": [
+      {
+        "region": "日照港",
+        "indicator": "港存",
+        "value": "高",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "日照港",
+        "indicator": "采购积极性",
+        "value": "消极",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "日照港",
+        "indicator": "报价松动",
+        "value": "是",
+        "market_object": "铁矿石"
+      }
+    ],
+    "price_trajectory": [
+      {
+        "day": 1,
+        "price": 820,
+        "trend": "平",
+        "week": "2026-W09"
+      },
+      {
+        "day": 28,
+        "price": 835,
+        "trend": "涨",
+        "week": "2026-W13"
+      },
+      {
+        "day": 56,
+        "price": 842,
+        "trend": "涨",
+        "week": "2026-W17"
+      },
+      {
+        "day": 84,
+        "price": 848,
+        "trend": "涨",
+        "week": "2026-W21"
+      },
+      {
+        "day": 112,
+        "price": 855,
+        "trend": "涨",
+        "week": "2026-W25"
+      },
+      {
+        "day": 140,
+        "price": 850,
+        "trend": "平",
+        "week": "2026-W29"
+      },
+      {
+        "day": 168,
+        "price": 838,
+        "trend": "跌",
+        "week": "2026-W33"
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "session_id": "S001",
+      "session_date": "2026-03-01",
+      "week": "2026-W09",
+      "price_snapshot": {
+        "day": 1,
+        "price": 820,
+        "trend": "平",
+        "week": "2026-W09"
+      },
+      "turns": [
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.128626+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.130608+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.130837+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.131889+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.131932+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.132526+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.132555+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.133178+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.133218+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.134324+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.134387+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.135356+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.135409+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.136329+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.136368+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.136959+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.136987+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.137493+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.137520+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.138000+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        }
+      ],
+      "agent_metadata": [
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        }
+      ],
+      "turn_count": 20
+    },
+    {
+      "session_id": "S002",
+      "session_date": "2026-04-01",
+      "week": "2026-W13",
+      "price_snapshot": {
+        "day": 28,
+        "price": 835,
+        "trend": "涨",
+        "week": "2026-W13"
+      },
+      "turns": [
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.138104+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.138638+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.138666+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.139174+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.139198+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.139973+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.140001+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.140772+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.140871+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.142629+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.142692+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.143537+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.143575+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.144466+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.144538+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.145838+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.145928+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.146926+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.146979+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.147956+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        }
+      ],
+      "agent_metadata": [
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        }
+      ],
+      "turn_count": 20
+    },
+    {
+      "session_id": "S003",
+      "session_date": "2026-05-01",
+      "week": "2026-W17",
+      "price_snapshot": {
+        "day": 56,
+        "price": 842,
+        "trend": "涨",
+        "week": "2026-W17"
+      },
+      "turns": [
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.148082+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.148692+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.148718+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.149306+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.149331+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.149840+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.149862+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.150885+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.150934+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.151797+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.151847+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.153046+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.153103+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.154573+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.154621+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.155713+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.155770+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.156404+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.156434+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.156992+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        }
+      ],
+      "agent_metadata": [
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        }
+      ],
+      "turn_count": 20
+    },
+    {
+      "session_id": "S004",
+      "session_date": "2026-06-01",
+      "week": "2026-W21",
+      "price_snapshot": {
+        "day": 84,
+        "price": 848,
+        "trend": "涨",
+        "week": "2026-W21"
+      },
+      "turns": [
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.157101+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.157631+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.157660+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.158253+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.158279+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.158819+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.158845+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.159436+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.159465+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.160047+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.160073+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.161080+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.161128+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.162705+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.162755+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.163683+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.163724+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.164910+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.164954+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.166512+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        }
+      ],
+      "agent_metadata": [
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        }
+      ],
+      "turn_count": 20
+    },
+    {
+      "session_id": "S005",
+      "session_date": "2026-07-01",
+      "week": "2026-W25",
+      "price_snapshot": {
+        "day": 112,
+        "price": 855,
+        "trend": "涨",
+        "week": "2026-W25"
+      },
+      "turns": [
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.166655+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.168937+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.169060+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.170479+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.170523+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.173324+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.173443+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.175255+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.175305+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.176734+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.176785+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.177545+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.177611+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.178211+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.178240+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.178903+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.178933+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.179575+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [cover-qa] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:40.179604+00:00",
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "cover-qa",
+            "phase": "RECOVER",
+            "route_rationale": "high resistance or too many challenges → recover reciprocity",
+            "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:40.180241+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        }
+      ],
+      "agent_metadata": [
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "cover-qa",
+          "phase": "RECOVER",
+          "route_rationale": "high resistance or too many challenges → recover reciprocity",
+          "skill_file": "skills/cheat-agent/SKILL-cover-qa.md",
+          "llm_mode": "mock"
+        }
+      ],
+      "turn_count": 20
+    }
+  ]
+}

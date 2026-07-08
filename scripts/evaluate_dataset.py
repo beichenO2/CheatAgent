@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Evaluate generated dataset — analysis + tactic metrics. GT only used here."""
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -45,17 +46,31 @@ def meta_to_conversation(meta: dict, session: dict) -> Conversation:
 
 
 def main() -> None:
-    dataset_dir = Path("benchmark/datasets/smoke_v1")
+    parser = argparse.ArgumentParser(description="Evaluate Tier B agent dataset")
+    parser.add_argument(
+        "--dataset-dir",
+        type=Path,
+        default=Path("benchmark/datasets/smoke_v1"),
+        help="Dataset directory containing manifest.json",
+    )
+    args = parser.parse_args()
+
+    dataset_dir = args.dataset_dir
     registered = list_registered_skills()
     smoke = validate_smoke_dataset(dataset_dir)
     manifest = json.loads((dataset_dir / "manifest.json").read_text(encoding="utf-8"))
     pipeline = AnalysisPipeline(price_trajectory=PRICE_TRAJECTORY)
     report = {
+        "dataset_dir": str(dataset_dir),
         "smoke_gate": smoke,
         "users": [],
         "tactic_summary": [],
         "analysis_aggregate": {},
     }
+
+    all_claim_f1: list[float] = []
+    all_claim_counts: list[int] = []
+    user_rows: list[dict] = []
 
     for entry in manifest["users"]:
         meta_path = dataset_dir / entry["path"]
@@ -70,45 +85,64 @@ def main() -> None:
             region=persona_data["region"],
             knowledge_depth=persona_data.get("knowledge_depth", 0.8),
         )
-        session = meta["sessions"][0]
-        week = session.get("week", "2026-W27")
-        conv = meta_to_conversation(meta, session)
-        result = pipeline.run(conv, persona, week=week)
         latent_claims = meta.get("latent", {}).get("claims_truth", [])
 
-        ext_fn = lambda c, traj=pipeline.price_trajectory: external_consistency(c, traj)
-        claim_metrics = claim_f1_vs_latent(result.claims, latent_claims)
-        bucket_metrics = em_vs_mv_errors(result.claims, latent_claims, week, ext_fn)
-        tactic = summarize_session(session.get("agent_metadata", []), registered)
-        reliability = result.user_reliability.get(persona.user_id)
+        session_results = []
+        reliability_est = None
+        total_claims = 0
 
-        report["users"].append({
+        for session in meta["sessions"]:
+            week = session.get("week", "2026-W27")
+            conv = meta_to_conversation(meta, session)
+            result = pipeline.run(conv, persona, week=week)
+            ext_fn = lambda c, traj=pipeline.price_trajectory: external_consistency(c, traj)
+            claim_metrics = claim_f1_vs_latent(result.claims, latent_claims)
+            bucket_metrics = em_vs_mv_errors(result.claims, latent_claims, week, ext_fn)
+            tactic = summarize_session(session.get("agent_metadata", []), registered)
+            total_claims += len(result.claims)
+            all_claim_f1.append(claim_metrics["f1"])
+            report["tactic_summary"].append(tactic)
+            session_results.append({
+                "session_id": session["session_id"],
+                "claim_count": len(result.claims),
+                "claim_f1": claim_metrics,
+                "bucket_error": bucket_metrics,
+                "tactic": tactic,
+            })
+            rel = result.user_reliability.get(persona.user_id)
+            if rel is not None:
+                reliability_est = rel
+
+        all_claim_counts.append(total_claims)
+        user_row = {
             "user_id": persona.user_id,
             "honesty_gt": persona.honesty,
-            "reliability_est": reliability,
-            "claim_count": len(result.claims),
-            "claim_f1": claim_metrics,
-            "bucket_error": bucket_metrics,
-            "tactic": tactic,
-        })
-        report["tactic_summary"].append(tactic)
+            "reliability_est": reliability_est,
+            "claim_count": total_claims,
+            "claim_f1_mean": (
+                sum(s["claim_f1"]["f1"] for s in session_results) / len(session_results)
+                if session_results
+                else 0.0
+            ),
+            "sessions": session_results,
+        }
+        user_rows.append(user_row)
+        report["users"].append(user_row)
 
     report["analysis_aggregate"] = {
-        "claim_f1_mean": (
-            sum(u["claim_f1"]["f1"] for u in report["users"]) / len(report["users"])
-            if report["users"]
-            else 0.0
-        ),
-        "claim_count_total": sum(u["claim_count"] for u in report["users"]),
-        "pearson_reliability_honesty": pearson_reliability_honesty(report["users"]),
+        "claim_f1_mean": sum(all_claim_f1) / len(all_claim_f1) if all_claim_f1 else 0.0,
+        "claim_count_total": sum(all_claim_counts),
+        "pearson_reliability_honesty": pearson_reliability_honesty(user_rows),
         "em_error_mean": (
-            sum(u["bucket_error"]["em_error"] for u in report["users"]) / len(report["users"])
-            if report["users"]
+            sum(s["bucket_error"]["em_error"] for u in user_rows for s in u["sessions"])
+            / sum(len(u["sessions"]) for u in user_rows)
+            if user_rows
             else 0.0
         ),
         "mv_error_mean": (
-            sum(u["bucket_error"]["mv_error"] for u in report["users"]) / len(report["users"])
-            if report["users"]
+            sum(s["bucket_error"]["mv_error"] for u in user_rows for s in u["sessions"])
+            / sum(len(u["sessions"]) for u in user_rows)
+            if user_rows
             else 0.0
         ),
     }

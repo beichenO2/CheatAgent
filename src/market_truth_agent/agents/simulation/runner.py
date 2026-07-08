@@ -21,9 +21,24 @@ from market_truth_agent.llm.client import llm_backend_label, llm_mode
 
 
 def price_at_session_index(session_index: int) -> dict[str, Any]:
-    """Map session index to price snapshot (scaffold — expand to 5-month trajectory)."""
     idx = min(session_index, len(PRICE_TRAJECTORY) - 1)
     return dict(PRICE_TRAJECTORY[idx])
+
+
+def session_schedule(session_index: int) -> tuple[str, str, dict[str, Any]]:
+    snap = price_at_session_index(session_index)
+    month = 3 + session_index
+    session_date = f"2026-{month:02d}-01"
+    week = snap.get("week", f"2026-W{9 + session_index * 4:02d}")
+    return session_date, week, snap
+
+
+def latent_for_persona(persona: CustomerPersona) -> list[dict[str, Any]]:
+    variant = TRUTH_VARIANTS[hash(persona.user_id) % len(TRUTH_VARIANTS)]
+    return [
+        {"region": persona.region, "indicator": ind, "value": val, "market_object": "铁矿石"}
+        for ind, val in variant
+    ]
 
 
 class SimulationRunner:
@@ -47,14 +62,11 @@ class SimulationRunner:
         *,
         min_turns: int = 20,
         session_index: int = 0,
-    ) -> dict[str, Any]:
+        user_model=None,
+    ) -> tuple[dict[str, Any], Any]:
         session_id = f"S{session_index + 1:03d}"
-        price_snapshot = price_at_session_index(session_index)
-        variant = TRUTH_VARIANTS[hash(persona.user_id) % len(TRUTH_VARIANTS)]
-        latent_claims = [
-            {"region": persona.region, "indicator": ind, "value": val, "market_object": "铁矿石"}
-            for ind, val in variant
-        ]
+        session_date, week, price_snapshot = session_schedule(session_index)
+        latent_claims = latent_for_persona(persona)
 
         known = KnownIdentity(
             user_id=persona.user_id,
@@ -65,11 +77,12 @@ class SimulationRunner:
         )
         session_ctx = SessionContext(
             session_id=session_id,
-            session_date=f"2026-0{3 + session_index}-01",
-            week=f"2026-W{9 + session_index * 4:02d}",
+            session_date=session_date,
+            week=week,
             price_snapshot=price_snapshot,
         )
-        user_model = load_or_create_l2(persona.user_id, self.memory_root)
+        if user_model is None:
+            user_model = load_or_create_l2(persona.user_id, self.memory_root)
         history: list[TurnRecord] = []
         agent_metadata: list[dict[str, Any]] = []
 
@@ -109,64 +122,116 @@ class SimulationRunner:
                 reply = run_customer_agent_turn(cust_state)
                 history.append(TurnRecord(speaker="user", text=reply, timestamp=ts))
 
-        return {
+        session = {
             "session_id": session_id,
-            "session_date": session_ctx.session_date,
-            "week": session_ctx.week,
+            "session_date": session_date,
+            "week": week,
             "price_snapshot": price_snapshot,
             "turns": [asdict(t) for t in history],
             "agent_metadata": agent_metadata,
             "turn_count": len(history),
         }
+        return session, user_model
 
-    def build_user_dataset(self, persona: CustomerPersona, *, min_turns: int = 20) -> dict[str, Any]:
-        session = self.run_session(persona, min_turns=min_turns)
-        variant = TRUTH_VARIANTS[hash(persona.user_id) % len(TRUTH_VARIANTS)]
+    def run_user_sessions(
+        self,
+        persona: CustomerPersona,
+        *,
+        sessions_per_user: int = 1,
+        min_turns: int = 20,
+    ) -> list[dict[str, Any]]:
+        user_model = load_or_create_l2(persona.user_id, self.memory_root)
+        sessions: list[dict[str, Any]] = []
+        for session_index in range(sessions_per_user):
+            session, user_model = self.run_session(
+                persona,
+                min_turns=min_turns,
+                session_index=session_index,
+                user_model=user_model,
+            )
+            sessions.append(session)
+        return sessions
+
+    def build_user_dataset(
+        self,
+        persona: CustomerPersona,
+        *,
+        min_turns: int = 20,
+        sessions_per_user: int = 1,
+    ) -> dict[str, Any]:
+        sessions = self.run_user_sessions(
+            persona, sessions_per_user=sessions_per_user, min_turns=min_turns
+        )
         return {
             "persona": asdict(persona),
             "latent": {
-                "claims_truth": [
-                    {"region": persona.region, "indicator": ind, "value": val, "market_object": "铁矿石"}
-                    for ind, val in variant
-                ],
+                "claims_truth": latent_for_persona(persona),
                 "price_trajectory": PRICE_TRAJECTORY,
             },
-            "sessions": [session],
+            "sessions": sessions,
         }
 
-    def write_smoke_dataset(self, personas: list[CustomerPersona], *, min_turns: int = 20) -> Path:
+    def write_dataset(
+        self,
+        personas: list[CustomerPersona],
+        *,
+        version: str = "smoke_v1",
+        min_turns: int = 20,
+        sessions_per_user: int = 1,
+    ) -> Path:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         manifest = {
-            "version": "smoke_v1",
+            "version": version,
             "users": [],
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "llm_mode": llm_mode(),
             "llm_backend": llm_backend_label(),
             "registered_skills": list_registered_skills(),
             "min_turns": min_turns,
+            "sessions_per_user": sessions_per_user,
         }
 
         for persona in personas:
             user_dir = self.output_dir / "users" / persona.user_id
             user_dir.mkdir(parents=True, exist_ok=True)
 
-            session = self.run_session(persona, min_turns=min_turns)
-            variant = TRUTH_VARIANTS[hash(persona.user_id) % len(TRUTH_VARIANTS)]
+            sessions = self.run_user_sessions(
+                persona,
+                sessions_per_user=sessions_per_user,
+                min_turns=min_turns,
+            )
             meta = {
                 "persona": asdict(persona),
                 "latent": {
-                    "claims_truth": [
-                        {"region": persona.region, "indicator": ind, "value": val, "market_object": "铁矿石"}
-                        for ind, val in variant
-                    ],
+                    "claims_truth": latent_for_persona(persona),
                     "price_trajectory": PRICE_TRAJECTORY,
                 },
-                "sessions": [session],
+                "sessions": sessions,
             }
             meta_path = user_dir / "meta.json"
             meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
-            manifest["users"].append({"user_id": persona.user_id, "path": str(meta_path.relative_to(self.output_dir))})
+            manifest["users"].append({
+                "user_id": persona.user_id,
+                "path": str(meta_path.relative_to(self.output_dir)),
+                "session_count": len(sessions),
+            })
 
         manifest_path = self.output_dir / "manifest.json"
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
         return self.output_dir
+
+    def write_smoke_dataset(self, personas: list[CustomerPersona], *, min_turns: int = 20) -> Path:
+        return self.write_dataset(
+            personas,
+            version="smoke_v1",
+            min_turns=min_turns,
+            sessions_per_user=1,
+        )
+
+    def write_alpha_dataset(self, personas: list[CustomerPersona], *, min_turns: int = 20) -> Path:
+        return self.write_dataset(
+            personas,
+            version="alpha_v1",
+            min_turns=min_turns,
+            sessions_per_user=5,
+        )

@@ -24,7 +24,19 @@ def _check_gt_isolation() -> dict[str, bool]:
     }
 
 
-def validate_smoke_dataset(dataset_dir: Path, *, min_turns: int = 20) -> dict[str, Any]:
+def _expected_users(version: str | None) -> int:
+    if version == "alpha_v1":
+        return 10
+    return 3
+
+
+def validate_smoke_dataset(
+    dataset_dir: Path,
+    *,
+    min_turns: int = 20,
+    min_users: int | None = None,
+    sessions_per_user: int | None = None,
+) -> dict[str, Any]:
     dataset_dir = Path(dataset_dir)
     manifest_path = dataset_dir / "manifest.json"
     checks: dict[str, Any] = {"dataset_dir": str(dataset_dir)}
@@ -37,12 +49,20 @@ def validate_smoke_dataset(dataset_dir: Path, *, min_turns: int = 20) -> dict[st
         return checks
 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    checks["version"] = manifest.get("version")
+    version = manifest.get("version")
+    checks["version"] = version
     checks["llm_mode"] = manifest.get("llm_mode")
+    checks["llm_backend"] = manifest.get("llm_backend")
     checks["user_count"] = len(manifest.get("users", []))
+    expected_users = min_users if min_users is not None else _expected_users(version)
+    expected_sessions = sessions_per_user if sessions_per_user is not None else int(
+        manifest.get("sessions_per_user", 1)
+    )
+    checks["expected_users"] = expected_users
+    checks["expected_sessions_per_user"] = expected_sessions
 
-    if checks["user_count"] < 3:
-        failures.append(f"expected >=3 users, got {checks['user_count']}")
+    if checks["user_count"] < expected_users:
+        failures.append(f"expected >={expected_users} users, got {checks['user_count']}")
 
     registered = list_registered_skills()
     session_summaries: list[dict[str, float]] = []
@@ -53,22 +73,31 @@ def validate_smoke_dataset(dataset_dir: Path, *, min_turns: int = 20) -> dict[st
             failures.append(f"missing meta: {entry['path']}")
             continue
         meta = json.loads(meta_path.read_text(encoding="utf-8"))
-        session = meta["sessions"][0]
-        turns = session.get("turns", [])
-        if len(turns) < min_turns:
-            failures.append(f"{entry['user_id']}: turn_count {len(turns)} < {min_turns}")
-        if not any(t.get("text", "").strip() for t in turns):
-            failures.append(f"{entry['user_id']}: empty transcript")
-        metadata = session.get("agent_metadata", [])
-        if not metadata or not all(m.get("skill_id") for m in metadata):
-            failures.append(f"{entry['user_id']}: agent_metadata missing skill_id")
-        summary = summarize_session(metadata, registered)
-        for key, val in summary.items():
-            if isinstance(val, float) and math.isnan(val):
-                failures.append(f"{entry['user_id']}: {key} is NaN")
-        if summary["skill_kind_count"] < 1:
-            failures.append(f"{entry['user_id']}: skill_kind_count < 1")
-        session_summaries.append(summary)
+        sessions = meta.get("sessions", [])
+        if len(sessions) < expected_sessions:
+            failures.append(
+                f"{entry['user_id']}: sessions {len(sessions)} < {expected_sessions}"
+            )
+        for sess_idx, session in enumerate(sessions):
+            turns = session.get("turns", [])
+            if len(turns) < min_turns:
+                failures.append(
+                    f"{entry['user_id']}:{session.get('session_id')}: turns {len(turns)} < {min_turns}"
+                )
+            if not any(t.get("text", "").strip() for t in turns):
+                failures.append(f"{entry['user_id']}:{session.get('session_id')}: empty transcript")
+            metadata = session.get("agent_metadata", [])
+            if not metadata or not all(m.get("skill_id") for m in metadata):
+                failures.append(
+                    f"{entry['user_id']}:{session.get('session_id')}: agent_metadata missing skill_id"
+                )
+            summary = summarize_session(metadata, registered)
+            for key, val in summary.items():
+                if isinstance(val, float) and math.isnan(val):
+                    failures.append(f"{entry['user_id']}: {key} is NaN")
+            if summary["skill_kind_count"] < 1:
+                failures.append(f"{entry['user_id']}: skill_kind_count < 1")
+            session_summaries.append(summary)
 
     gt_checks = _check_gt_isolation()
     checks["gt_isolation"] = gt_checks

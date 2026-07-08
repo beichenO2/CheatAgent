@@ -14,13 +14,13 @@
       {
         "region": "青岛港",
         "indicator": "港存",
-        "value": "中",
+        "value": "高",
         "market_object": "铁矿石"
       },
       {
         "region": "青岛港",
         "indicator": "采购积极性",
-        "value": "中性",
+        "value": "积极",
         "market_object": "铁矿石"
       },
       {
@@ -34,22 +34,44 @@
       {
         "day": 1,
         "price": 820,
-        "trend": "平"
+        "trend": "平",
+        "week": "2026-W09"
       },
       {
-        "day": 3,
+        "day": 28,
         "price": 835,
-        "trend": "涨"
+        "trend": "涨",
+        "week": "2026-W13"
       },
       {
-        "day": 5,
+        "day": 56,
         "price": 842,
-        "trend": "涨"
+        "trend": "涨",
+        "week": "2026-W17"
       },
       {
-        "day": 7,
+        "day": 84,
         "price": 848,
-        "trend": "涨"
+        "trend": "涨",
+        "week": "2026-W21"
+      },
+      {
+        "day": 112,
+        "price": 855,
+        "trend": "涨",
+        "week": "2026-W25"
+      },
+      {
+        "day": 140,
+        "price": 850,
+        "trend": "平",
+        "week": "2026-W29"
+      },
+      {
+        "day": 168,
+        "price": 838,
+        "trend": "跌",
+        "week": "2026-W33"
       }
     ]
   },
@@ -61,13 +83,39 @@
       "price_snapshot": {
         "day": 1,
         "price": 820,
-        "trend": "平"
+        "trend": "平",
+        "week": "2026-W09"
       },
       "turns": [
         {
           "speaker": "agent",
-          "text": "对了，最近普氏62%指数听说已经到150美元了，您那边怎么看这个价格？",
-          "timestamp": "2026-07-08T10:19:52.106530+00:00",
+          "text": "[mock-llm] [clarification-probe] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:39.876728+00:00",
+          "skill_id": "clarification-probe",
+          "phase": "RAPPORT",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "clarification-probe",
+            "phase": "RAPPORT",
+            "route_rationale": "early turn, intent unclear",
+            "skill_file": "skills/cheat-agent/SKILL-clarification-probe.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:39.880386+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [trap-question] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:39.880466+00:00",
           "skill_id": "trap-question",
           "phase": "VERIFY",
           "metadata": {
@@ -78,46 +126,21 @@
             "phase": "VERIFY",
             "route_rationale": "partial claim + price anchor → trapping verification",
             "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-            "llm_mode": "live"
+            "llm_mode": "mock"
           }
         },
         {
           "speaker": "user",
-          "text": "150美元？我没听说啊，最近青岛港这边报价基本持平，820左右，没觉得有大幅上涨的动静。你那边消息可靠吗？",
-          "timestamp": "2026-07-08T10:19:56.129460+00:00",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:39.884447+00:00",
           "skill_id": null,
           "phase": null,
           "metadata": {}
         },
         {
           "speaker": "agent",
-          "text": "哈哈您说得对，外盘那是炒预期，咱们国内现货确实稳，青岛港这边820左右成交挺扎实的。既然现货没怎么动，您这边最近补库节奏有加快吗，还是说打算再观望观望等价格松动点？",
-          "timestamp": "2026-07-08T10:20:01.803038+00:00",
-          "skill_id": "info-seeking-inference",
-          "phase": "PROBE",
-          "metadata": {
-            "memory_root": "memory",
-            "secondary_skills": [],
-            "consecutive_challenge_count": 0,
-            "skill_id": "info-seeking-inference",
-            "phase": "PROBE",
-            "route_rationale": "user asked → infer gaps from question",
-            "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
-            "llm_mode": "live"
-          }
-        },
-        {
-          "speaker": "user",
-          "text": "补库谈不上加快，最近采购积极性一般吧，厂里就按需拿货，港存中等水平不算紧，也没到要囤的时候。价格这块现在挺稳的，报价也没什么松动的迹象，再看看吧，后面再看下游订单情况再说。",
-          "timestamp": "2026-07-08T10:20:31.302910+00:00",
-          "skill_id": null,
-          "phase": null,
-          "metadata": {}
-        },
-        {
-          "speaker": "agent",
-          "text": "明白，按需拿货确实稳妥。对了，我这边看到上周青岛港疏港量都创年内新高了，您那边到港和疏港情况怎么样？",
-          "timestamp": "2026-07-08T10:20:33.164736+00:00",
+          "text": "[mock-llm] [trap-question] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:39.884501+00:00",
           "skill_id": "trap-question",
           "phase": "VERIFY",
           "metadata": {
@@ -128,21 +151,21 @@
             "phase": "VERIFY",
             "route_rationale": "partial claim + price anchor → trapping verification",
             "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-            "llm_mode": "live"
+            "llm_mode": "mock"
           }
         },
         {
           "speaker": "user",
-          "text": "疏港创新高我倒没太关注，我们厂里最近的疏港也就是正常水平。青岛港这边整体港存还是中等，大家采购积极性都一般，按需拉货为主，没觉得有特别夸张的消耗。",
-          "timestamp": "2026-07-08T10:20:34.522518+00:00",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:39.888215+00:00",
           "skill_id": null,
           "phase": null,
           "metadata": {}
         },
         {
           "speaker": "agent",
-          "text": "嗯，那看来港存确实不算紧张。对了，最近卡粉和PB粉的价差收得很窄，听说都快一个价了，您那边实际成交也是这个情况吗？",
-          "timestamp": "2026-07-08T10:20:51.283464+00:00",
+          "text": "[mock-llm] [trap-question] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:39.888368+00:00",
           "skill_id": "trap-question",
           "phase": "VERIFY",
           "metadata": {
@@ -153,21 +176,21 @@
             "phase": "VERIFY",
             "route_rationale": "partial claim + price anchor → trapping verification",
             "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-            "llm_mode": "live"
+            "llm_mode": "mock"
           }
         },
         {
           "speaker": "user",
-          "text": "卡粉和PB粉价差确实比前阵子窄了些，但说快一个价就太夸张了，高品还是有溢价的。我们青岛港这边报价挺稳的，没见什么松动，大家采购积极性也就中性水平，还是按需拿货为主。",
-          "timestamp": "2026-07-08T10:20:53.427848+00:00",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:39.891023+00:00",
           "skill_id": null,
           "phase": null,
           "metadata": {}
         },
         {
           "speaker": "agent",
-          "text": "嗯，价差确实还在。对了，您说港存中等，我这边看数据青岛港都快2亿吨了，您觉得这个库存水平算正常吗？",
-          "timestamp": "2026-07-08T10:21:08.999079+00:00",
+          "text": "[mock-llm] [trap-question] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:39.891078+00:00",
           "skill_id": "trap-question",
           "phase": "VERIFY",
           "metadata": {
@@ -178,48 +201,21 @@
             "phase": "VERIFY",
             "route_rationale": "partial claim + price anchor → trapping verification",
             "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-            "llm_mode": "live"
+            "llm_mode": "mock"
           }
         },
         {
           "speaker": "user",
-          "text": "2亿吨？那不可能，青岛港库容没那么夸张。我这边看到的数据港存就是中等水平，不算高也不紧缺。您那个数据来源是不是搞错了？",
-          "timestamp": "2026-07-08T10:21:10.443611+00:00",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:39.895288+00:00",
           "skill_id": null,
           "phase": null,
           "metadata": {}
         },
         {
           "speaker": "agent",
-          "text": "您说得对，2亿吨确实太夸张了，是我记错了数据。那按您说的港存中等偏紧，您觉得后面价格要是真松动了，会不会考虑多拿点货补库？",
-          "timestamp": "2026-07-08T10:21:11.690017+00:00",
-          "skill_id": "trap-question",
-          "phase": "VERIFY",
-          "metadata": {
-            "memory_root": "memory",
-            "secondary_skills": [
-              "info-seeking-inference"
-            ],
-            "consecutive_challenge_count": 0,
-            "skill_id": "trap-question",
-            "phase": "VERIFY",
-            "route_rationale": "hypothesis-style question → verify or provoke correction",
-            "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-            "llm_mode": "live"
-          }
-        },
-        {
-          "speaker": "user",
-          "text": "我没说港存偏紧啊，一直是中等水平，不算紧张。价格松动的话，也得看下游订单有没有明显好转，现在采购积极性就中性，不会因为价格稍微松一点就大量补库，还是按需拿货稳妥。",
-          "timestamp": "2026-07-08T10:21:14.089488+00:00",
-          "skill_id": null,
-          "phase": null,
-          "metadata": {}
-        },
-        {
-          "speaker": "agent",
-          "text": "好的，按需拿货确实稳妥。那您觉得现在普氏62%指数都到150美元了，这个价位您那边还能接受吗？",
-          "timestamp": "2026-07-08T10:21:15.495500+00:00",
+          "text": "[mock-llm] [trap-question] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:39.895352+00:00",
           "skill_id": "trap-question",
           "phase": "VERIFY",
           "metadata": {
@@ -230,21 +226,21 @@
             "phase": "VERIFY",
             "route_rationale": "partial claim + price anchor → trapping verification",
             "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-            "llm_mode": "live"
+            "llm_mode": "mock"
           }
         },
         {
           "speaker": "user",
-          "text": "150美元折合下来差不多820块钱，这价格我们青岛港这边现货报价挺稳的，没见什么松动，目前还能接受。不过大家采购积极性也就是中性水平，现在钢厂利润一般，肯定还是按需拿货为主，不会去盲目追高囤货的。",
-          "timestamp": "2026-07-08T10:21:16.932592+00:00",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:39.896475+00:00",
           "skill_id": null,
           "phase": null,
           "metadata": {}
         },
         {
           "speaker": "agent",
-          "text": "嗯，150美元也就是820左右，确实跟您那边现货价差不多。那您觉得接下来一段时间，青岛港这边的到港量会不会慢慢上来，把港存补起来呢？",
-          "timestamp": "2026-07-08T10:21:32.120506+00:00",
+          "text": "[mock-llm] [trap-question] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:39.896536+00:00",
           "skill_id": "trap-question",
           "phase": "VERIFY",
           "metadata": {
@@ -255,21 +251,21 @@
             "phase": "VERIFY",
             "route_rationale": "partial claim + price anchor → trapping verification",
             "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-            "llm_mode": "live"
+            "llm_mode": "mock"
           }
         },
         {
           "speaker": "user",
-          "text": "到港量的事我也在关注，但说实话现在没看到明显的到港增加信号，船期排得不算紧。港存目前就是中等水平，库存够用，补库压力不大，我觉得短期港存变化不会太大。",
-          "timestamp": "2026-07-08T10:21:38.328286+00:00",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:39.898586+00:00",
           "skill_id": null,
           "phase": null,
           "metadata": {}
         },
         {
           "speaker": "agent",
-          "text": "不过我看这两天盘面连涨了好几天，现货都跟着报850了，您这边拿货成本也跟着涨了不少吧？",
-          "timestamp": "2026-07-08T10:21:39.972590+00:00",
+          "text": "[mock-llm] [trap-question] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:39.898655+00:00",
           "skill_id": "trap-question",
           "phase": "VERIFY",
           "metadata": {
@@ -280,21 +276,21 @@
             "phase": "VERIFY",
             "route_rationale": "partial claim + price anchor → trapping verification",
             "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-            "llm_mode": "live"
+            "llm_mode": "mock"
           }
         },
         {
           "speaker": "user",
-          "text": "850可没有，我们青岛港这边现货报价还是稳在820左右，没见什么松动。现在采购积极性也就是中性，大家都按需拿货，成本没你说的涨那么多。",
-          "timestamp": "2026-07-08T10:22:06.546332+00:00",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:39.902881+00:00",
           "skill_id": null,
           "phase": null,
           "metadata": {}
         },
         {
           "speaker": "agent",
-          "text": "嗯，那看来价格确实挺稳的。对了，我这边看到上周青岛港的疏港量创了年内新高，您那边有感觉到出货变快了吗？",
-          "timestamp": "2026-07-08T10:22:29.889990+00:00",
+          "text": "[mock-llm] [trap-question] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:39.903015+00:00",
           "skill_id": "trap-question",
           "phase": "VERIFY",
           "metadata": {
@@ -305,13 +301,38 @@
             "phase": "VERIFY",
             "route_rationale": "partial claim + price anchor → trapping verification",
             "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-            "llm_mode": "live"
+            "llm_mode": "mock"
           }
         },
         {
           "speaker": "user",
-          "text": "疏港量确实有点增加，这几天青岛港出货是比之前快了些。不过也没到特别夸张的地步，毕竟大家采购积极性还是中性的，基本都是按需提货。现在港存也就维持在中等水平，没见因为出货快就导致现货报价松动。",
-          "timestamp": "2026-07-08T10:22:31.266019+00:00",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:39.907080+00:00",
+          "skill_id": null,
+          "phase": null,
+          "metadata": {}
+        },
+        {
+          "speaker": "agent",
+          "text": "[mock-llm] [trap-question] 您好，想了解下您这边最近铁矿石经营情况，港口库存和采购节奏方便聊聊吗？",
+          "timestamp": "2026-07-08T10:29:39.907139+00:00",
+          "skill_id": "trap-question",
+          "phase": "VERIFY",
+          "metadata": {
+            "memory_root": "memory",
+            "secondary_skills": [],
+            "consecutive_challenge_count": 0,
+            "skill_id": "trap-question",
+            "phase": "VERIFY",
+            "route_rationale": "partial claim + price anchor → trapping verification",
+            "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
+            "llm_mode": "mock"
+          }
+        },
+        {
+          "speaker": "user",
+          "text": "[mock-llm] 青岛港这边港存中等，采购积极性一般，报价暂时还没明显松动。",
+          "timestamp": "2026-07-08T10:29:39.910762+00:00",
           "skill_id": null,
           "phase": null,
           "metadata": {}
@@ -322,21 +343,11 @@
           "memory_root": "memory",
           "secondary_skills": [],
           "consecutive_challenge_count": 0,
-          "skill_id": "trap-question",
-          "phase": "VERIFY",
-          "route_rationale": "partial claim + price anchor → trapping verification",
-          "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-          "llm_mode": "live"
-        },
-        {
-          "memory_root": "memory",
-          "secondary_skills": [],
-          "consecutive_challenge_count": 0,
-          "skill_id": "info-seeking-inference",
-          "phase": "PROBE",
-          "route_rationale": "user asked → infer gaps from question",
-          "skill_file": "skills/cheat-agent/SKILL-info-seeking-inference.md",
-          "llm_mode": "live"
+          "skill_id": "clarification-probe",
+          "phase": "RAPPORT",
+          "route_rationale": "early turn, intent unclear",
+          "skill_file": "skills/cheat-agent/SKILL-clarification-probe.md",
+          "llm_mode": "mock"
         },
         {
           "memory_root": "memory",
@@ -346,7 +357,7 @@
           "phase": "VERIFY",
           "route_rationale": "partial claim + price anchor → trapping verification",
           "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-          "llm_mode": "live"
+          "llm_mode": "mock"
         },
         {
           "memory_root": "memory",
@@ -356,7 +367,7 @@
           "phase": "VERIFY",
           "route_rationale": "partial claim + price anchor → trapping verification",
           "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-          "llm_mode": "live"
+          "llm_mode": "mock"
         },
         {
           "memory_root": "memory",
@@ -366,19 +377,7 @@
           "phase": "VERIFY",
           "route_rationale": "partial claim + price anchor → trapping verification",
           "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-          "llm_mode": "live"
-        },
-        {
-          "memory_root": "memory",
-          "secondary_skills": [
-            "info-seeking-inference"
-          ],
-          "consecutive_challenge_count": 0,
-          "skill_id": "trap-question",
-          "phase": "VERIFY",
-          "route_rationale": "hypothesis-style question → verify or provoke correction",
-          "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-          "llm_mode": "live"
+          "llm_mode": "mock"
         },
         {
           "memory_root": "memory",
@@ -388,7 +387,7 @@
           "phase": "VERIFY",
           "route_rationale": "partial claim + price anchor → trapping verification",
           "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-          "llm_mode": "live"
+          "llm_mode": "mock"
         },
         {
           "memory_root": "memory",
@@ -398,7 +397,7 @@
           "phase": "VERIFY",
           "route_rationale": "partial claim + price anchor → trapping verification",
           "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-          "llm_mode": "live"
+          "llm_mode": "mock"
         },
         {
           "memory_root": "memory",
@@ -408,7 +407,7 @@
           "phase": "VERIFY",
           "route_rationale": "partial claim + price anchor → trapping verification",
           "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-          "llm_mode": "live"
+          "llm_mode": "mock"
         },
         {
           "memory_root": "memory",
@@ -418,7 +417,27 @@
           "phase": "VERIFY",
           "route_rationale": "partial claim + price anchor → trapping verification",
           "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
-          "llm_mode": "live"
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "trap-question",
+          "phase": "VERIFY",
+          "route_rationale": "partial claim + price anchor → trapping verification",
+          "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
+          "llm_mode": "mock"
+        },
+        {
+          "memory_root": "memory",
+          "secondary_skills": [],
+          "consecutive_challenge_count": 0,
+          "skill_id": "trap-question",
+          "phase": "VERIFY",
+          "route_rationale": "partial claim + price anchor → trapping verification",
+          "skill_file": "skills/cheat-agent/SKILL-trap-question.md",
+          "llm_mode": "mock"
         }
       ],
       "turn_count": 20
