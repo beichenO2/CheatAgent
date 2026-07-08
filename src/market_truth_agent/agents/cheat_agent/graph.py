@@ -10,6 +10,8 @@ from market_truth_agent.agents.cheat_agent.state import (
     TurnRecord,
     UserModelSnapshot,
 )
+from market_truth_agent.llm.client import chat_completion, parse_utterance
+from market_truth_agent.llm.prompts import build_cheat_agent_prompt, load_skill_markdown
 
 SKILLS_DIR = Path(__file__).resolve().parents[4] / "skills" / "cheat-agent"
 
@@ -121,26 +123,47 @@ def route_skill(state: CheatAgentState) -> dict[str, Any]:
 
 
 def invoke_skill(state: CheatAgentState) -> dict[str, Any]:
-    """
-    Load selected skill and generate utterance via LLM.
-    Scaffold: placeholder text until skills + LLM wired.
-    """
+    """Load selected skill markdown and generate utterance via LLM."""
     skill_id = state.selected_skill_id or "cover-qa"
-    region = state.known_identity.region
-    price = state.session.price_snapshot.get("price", 820)
+    phase = state.selected_phase or "PROBE"
     skill_path = SKILLS_DIR / f"SKILL-{skill_id}.md"
+    skill_markdown = load_skill_markdown(skill_id)
 
-    # TODO(M6/M7): LLM call with skill_path content as system prompt fragment
-    utterance = (
-        f"[{skill_id}] 您好，看到{region}铁矿石主力约{price}元/吨。"
-        f"想了解下您这边最近经营情况？"
+    history = [
+        {"speaker": t.speaker, "text": t.text}
+        for t in state.conversation_history
+    ]
+    system, user = build_cheat_agent_prompt(
+        skill_id=skill_id,
+        skill_markdown=skill_markdown,
+        phase=phase,
+        known_identity={
+            "role": state.known_identity.role,
+            "region": state.known_identity.region,
+            "position": state.known_identity.position,
+        },
+        session={
+            "session_date": state.session.session_date,
+            "turn_count": state.session.turn_count,
+            "price_snapshot": state.session.price_snapshot,
+        },
+        user_model={
+            "inferred_gaps": state.user_model.inferred_gaps,
+            "partial_claims": state.user_model.partial_claims,
+            "resistance_level": state.user_model.resistance_level,
+        },
+        conversation_history=history,
+        route_rationale=state.route_rationale,
     )
+    raw = chat_completion(system, user, temperature=0.7)
+    utterance = parse_utterance(raw)
 
     metadata = {
         "skill_id": skill_id,
-        "phase": state.selected_phase,
+        "phase": phase,
         "route_rationale": state.route_rationale,
-        "skill_file": str(skill_path) if skill_path.exists() else "missing",
+        "skill_file": str(skill_path),
+        "llm_mode": "mock" if "[mock-llm]" in utterance else "live",
     }
     return {"agent_utterance": utterance, "turn_metadata": metadata}
 

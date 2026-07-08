@@ -12,8 +12,8 @@
 | M3 旧交互链路 | ❌ 已删 | 7 模板 + FSM |
 | M5 演示 UI | 暂缓 | 用户确认先不做 |
 | **M6 套话 Skills** | **✅ 完成** | 1 路由 + 11 专项；15 篇论文；`套话skill/` + `skills/cheat-agent/` |
-| **M7 cheatAgent 智能体** | **🔧 进行中（P0）** | LangGraph 脚手架 + `route_skill` 已接；待 `invoke_skill` 接 LLM |
-| **M8 Dataset + 冒烟评测** | **🔧 进行中** | 3 用户 × 20 轮 → 扩至 5×20×5 月 |
+| **M7 cheatAgent 智能体** | **✅ 完成** | LangGraph + route_skill + invoke_skill LLM + CustomerAgent LLM |
+| **M8 Dataset + 冒烟评测** | **🔧 进行中（P0）** | 3 用户 × 20 轮 → 扩至 5×20×5 月 |
 
 ---
 
@@ -59,13 +59,13 @@ src/market_truth_agent/agents/
 ```
 
 **待完成**：
-- [ ] 接 LLM（PolarPrivate / OpenAI）
-- [ ] Skills 文件加载 + prompt 组装
-- [ ] CustomerAgent 按 honesty/resistance 行为生成
+- [x] 接 LLM（PolarPrivate / OpenAI，`MTA_LLM_MODE=mock|live`）
+- [x] Skills 文件加载 + prompt 组装
+- [x] CustomerAgent 按 honesty/resistance 行为生成
 - [ ] 记忆分层持久化（L1–L3）
 - [ ] 用户审阅修改 graph 节点划分
 
-**验收**：`build_cheat_agent_graph()` 可编译；单轮 turn 可跑通。
+**验收**：✅ `build_cheat_agent_graph()` 可编译；✅ 单轮 turn 可跑通（mock/live）。
 
 ---
 

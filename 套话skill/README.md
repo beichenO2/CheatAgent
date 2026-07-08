@@ -11,10 +11,10 @@
 | ③ 10 方向分析 | ✅ | `analysis/*.md` |
 | ④ 11 专项 Skills | ✅ | 10 研究线 + `cover-qa` → `skills/SKILL-*.md` |
 | ⑤ 路由 Skill | ✅ | `skills/SKILL-router.md` |
-| ⑥ cheatAgent 集成 | 🟡 | `graph.py::route_skill` 规则版已接入；`invoke_skill` 待 M7 LLM |
+| ⑥ cheatAgent 集成 | ✅ | `route_skill` 规则路由 + `invoke_skill` LLM（M7） |
 | ⑦ 同步到 cheat-agent | ✅ | `skills/cheat-agent/` 已同步全部 12 个 SKILL 文件 |
 
-**下一步（M7）**：`invoke_skill` 加载 SKILL 文件 + PolarPrivate LLM 生成 utterance；CustomerAgent 接 LLM 跑通单轮对话。
+**下一步（M8）**：live LLM 生成 3×20 冒烟 dataset + 评测分离验证。
 
 ## 目录结构
 

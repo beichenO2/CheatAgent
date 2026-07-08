@@ -3,6 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+from market_truth_agent.llm.client import chat_completion, parse_utterance
+from market_truth_agent.llm.prompts import build_customer_agent_prompt
+
 
 @dataclass
 class CustomerPersona:
@@ -28,16 +31,26 @@ class CustomerAgentState:
 
 def run_customer_agent_turn(state: CustomerAgentState) -> str:
     """
-    Customer simulator — WILL use LLM + persona + latent GT.
-    Scaffold: minimal placeholder until LLM wired.
+    Customer simulator — LLM + persona + latent GT.
 
     honesty semantics:
     - high: tends to disclose truth aligned with latent
     - low: strategic disclosure favoring position (not every sentence is false)
     """
-    # TODO(M7): LLM with persona prompt + latent claims_truth
-    price = state.price_snapshot.get("price", 820)
-    return (
-        f"[customer:{state.persona.user_id}] "
-        f"主力{price}附近，我们{state.persona.region}这边情况还可以，您想了解哪方面？"
+    system, user = build_customer_agent_prompt(
+        persona={
+            "user_id": state.persona.user_id,
+            "role": state.persona.role,
+            "region": state.persona.region,
+            "position": state.persona.position,
+            "personality": state.persona.personality,
+            "honesty": state.persona.honesty,
+            "resistance": state.persona.resistance,
+        },
+        latent_claims_truth=state.latent_claims_truth,
+        price_snapshot=state.price_snapshot,
+        cheat_agent_utterance=state.cheat_agent_utterance,
+        conversation_history=state.conversation_history,
     )
+    raw = chat_completion(system, user, temperature=0.8)
+    return parse_utterance(raw)

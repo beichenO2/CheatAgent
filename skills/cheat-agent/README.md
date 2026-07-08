@@ -20,7 +20,7 @@ load_context → update_user_model → route_skill → invoke_skill → write_me
 | `load_context` | ✅ | 注入 session / identity / history |
 | `update_user_model` | 🟡 | 规则版 gap/resistance/claims 推断 |
 | `route_skill` | ✅ | 读 SKILL-router 决策树，输出 `selected_skill_id` + `phase` |
-| `invoke_skill` | ⏳ M7 | 加载 `SKILL-{id}.md`，LLM 生成 utterance |
+| `invoke_skill` | ✅ M7 | 加载 `SKILL-{id}.md`，LLM 生成 utterance（mock/live） |
 | `write_memory` | 🟡 | 脚手架已有，L1–L3 持久化待完善 |
 
 ## 论文材料
