@@ -28,14 +28,16 @@ accepted（单元/集成/Tier A 仍有效）；**Tier B 门禁 superseded by ADR
 | T-050 | ReCon 不读 honesty | `recon/core.py` 无 `persona.honesty` 引用 |
 | T-051 | 分析 pipeline 不依赖 GT 泄漏 | deception 与 honesty 无单调绑定 |
 
-## M8 冒烟门禁
+## M8 冒烟门禁 ✅（2026-07-08 实现）
 
-| ID | 用例 | 断言 |
-|----|------|------|
-| T-060 | 生成 3 用户 dataset | manifest.json 存在，每用户 meta.json |
-| T-061 | 每用户 ≥20 轮 | turn_count ≥ 20 |
-| T-062 | agent metadata 有 skill_id | skill_invoke_count > 0 |
-| T-063 | tactic_metrics 可算 | kind_count, richness 非 NaN |
+| ID | 用例 | 断言 | 实现 |
+|----|------|------|------|
+| T-060 | 生成 3 用户 dataset | manifest.json 存在，每用户 meta.json | `test_smoke_dataset.py` |
+| T-061 | 每用户 ≥20 轮 | turn_count ≥ 20 | `test_smoke_dataset.py` |
+| T-062 | agent metadata 有 skill_id | skill_invoke_count > 0 | `test_smoke_dataset.py` |
+| T-063 | tactic_metrics 可算 | kind_count, richness 非 NaN | `test_tactic_metrics.py` |
+| T-064 | smoke gate 全通过 | `validate_smoke_dataset().passed` | `test_memory_and_smoke_gate.py` |
+| T-065 | GT 隔离静态检查 | recon/invoke/prompt 无 honesty GT | `smoke_runner.py` |
 
 ## 套话性能（替代 T-034 bias_trigger）
 

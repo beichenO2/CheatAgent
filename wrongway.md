@@ -108,8 +108,9 @@
 
 ---
 
-## 下一步（见 roadmap M6–M8）
+## 下一步（见 `roadmap.md` Alpha 阶段）
 
-1. **M6** 构建套话 Skills（1 路由 + N 专项）— 用户主导
-2. **M7** LangGraph cheatAgent + CustomerAgent 架构
-3. **M8** Agent dataset 生成 + 冒烟评测（3×20）
+1. **Alpha dataset** — 10 用户 × 5 session × ≥20 轮（live LLM 可选）
+2. **分析评测补全** — Claim F1 vs latent、Pearson(r_u, honesty) 写入 `evaluate_dataset.py`
+3. **ReCon / Claim LLM 升级** — 规则版保留作 fallback，按论文复刻
+4. **M5 演示 UI** — 暂缓，Dashboard 方案见 `CheatAgent.md` §五

@@ -20,8 +20,8 @@
 - 不扩展至铁矿石以外的品类（除非用户明确要求）
 - 不假设 Agent 伪装人类
 - **禁止**规则模板冒充 LLM 对话（旧 `interaction/tactics/` 已删）
-- 套话 Skills：**M6 ✅** · cheatAgent LLM：**M7 ✅**（`MTA_LLM_MODE=mock|live`）
-- cheatAgent：**LangGraph**（ADR-008），待用户审阅修改
+- 套话 Skills：**M6 ✅** · cheatAgent LLM：**M7 ✅** · 冒烟 Benchmark：**M8 ✅**
+- cheatAgent：**LangGraph**（ADR-008）；记忆 L1–L3 已实现；节点划分待用户审阅
 - LLM 密钥走 PolarPrivate，不入库
 - 欺骗检测：ReCon（无 GT 泄漏）→ 后续 LLM 按论文复刻
 
@@ -29,7 +29,8 @@
 
 | 优先级 | 任务 | 负责 |
 |--------|------|------|
-| P1 | Alpha dataset 10×5 session | Agent |
+| P1 | Alpha dataset 10×5 session + live LLM 验证 | Agent |
+| P1 | evaluate_dataset：Claim F1 + Pearson | Agent |
 | P3 | M5 UI | 暂缓 |
 
 ## 工作范围

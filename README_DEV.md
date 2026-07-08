@@ -2,7 +2,7 @@
 
 铁矿石智能客服：**Agent 套话采集** + Claim 真伪推断 + 用户信用评估。
 
-> ⚠ **2026-07-08 重建中**：旧规则模板实现已删除，见 `wrongway.md`。
+> **2026-07-08**：M6–M8 已完成（Skills + LLM 链路 + 冒烟 benchmark）。旧规则模板已删除，见 `wrongway.md`。
 
 ## 快速开始
 
@@ -34,24 +34,28 @@ python scripts/generate_dataset.py
 |------|------|
 | `PolarSoul.md` | 项目定位 |
 | `polaris.json` | 当前状态 |
-| `roadmap.md` | M6–M8 路线图 |
+| `roadmap.md` | M6–M8 路线图 + Alpha 待办 |
+| `CheatAgent.md` | 方案/进度（对外汇报） |
 | `wrongway.md` | 已废弃路径与教训 |
 | `decisions/007-008` | Agent 重建 + LangGraph 架构 |
-| `skills/cheat-agent/` | 套话 Skills（M6 用户做） |
+| `skills/cheat-agent/` | 运行时套话 Skills |
+| `套话skill/` | 论文 + 分析 + Skills 源 |
 
 ## 目录
 
 ```
 src/market_truth_agent/
-  agents/           cheatAgent + CustomerAgent + simulation
+  agents/           cheatAgent + CustomerAgent + simulation + eval
+  llm/              mock/live LLM client + prompts
   analysis/         Truth Discovery, claim, ReCon 接入
   recon/            欺骗检测（无 GT 泄漏）
 skills/cheat-agent/ 1+N 套话 Skills
-benchmark/datasets/ Agent 生成 dataset
+benchmark/datasets/ Agent 生成 dataset（smoke_v1）
+memory/             L1–L3 持久化（gitignore）
 scripts/            generate / evaluate 分离
 test/               单元 + Tier A + Agent 冒烟
 ```
 
 ## LangGraph 架构
 
-详见 `decisions/008-cheat-agent-langgraph.md` — **待用户审阅修改**。
+详见 `decisions/008-cheat-agent-langgraph.md`。M6–M8 已实现；LangGraph 节点划分仍待用户审阅。

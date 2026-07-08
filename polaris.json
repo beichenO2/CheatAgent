@@ -2,16 +2,16 @@
   "name": "MarketTruthAgent",
   "_meta": {
     "schema_version": "1.1",
-    "last_synced_at": "2026-07-08T16:20:00+08:00"
+    "last_synced_at": "2026-07-08T16:43:00+08:00"
   },
   "description": "铁矿石智能客服：Agent 套话采集 + claim 真伪推断 + 用户信用评估",
   "tier": "research-prototype",
-  "status": "rebuilding",
+  "status": "smoke-complete",
   "version": "0.3.0",
   "health": {
-    "phase": "agent-rebuild",
-    "note": "M8 冒烟 dataset + smoke gate 完成；Alpha/Beta 规模待扩",
-    "last_verified": "2026-07-08T16:55:00+08:00"
+    "phase": "smoke-complete",
+    "note": "M6–M8 完成；Alpha dataset + Claim F1/Pearson 待扩",
+    "last_verified": "2026-07-08T16:43:00+08:00"
   },
   "active_work": [
     {
@@ -44,6 +44,30 @@
   ],
   "next_up": [
     {
+      "id": "NU-009",
+      "title": "Alpha dataset 10×5 session",
+      "priority": "P1",
+      "depends_on": ["AW-003"]
+    },
+    {
+      "id": "NU-010",
+      "title": "evaluate_dataset：Claim F1 + Pearson(r_u, honesty)",
+      "priority": "P1",
+      "depends_on": ["AW-003"]
+    },
+    {
+      "id": "NU-011",
+      "title": "live LLM 端到端验证（PolarPrivate/OpenAI）",
+      "priority": "P1",
+      "depends_on": ["AW-002"]
+    },
+    {
+      "id": "NU-008",
+      "title": "完整 dataset：30 用户 × 5 session × 5 月",
+      "priority": "P2",
+      "depends_on": ["NU-009"]
+    },
+    {
       "id": "NU-006",
       "title": "invoke_skill 加载 SKILL 文件 + LLM utterance",
       "priority": "P0",
@@ -56,12 +80,6 @@
       "priority": "P0",
       "status": "done",
       "depends_on": ["NU-006"]
-    },
-    {
-      "id": "NU-008",
-      "title": "完整 dataset：30 用户 × 5 session × 5 月",
-      "priority": "P1",
-      "depends_on": ["AW-003", "NU-007"]
     },
     {
       "id": "NU-005",
@@ -80,6 +98,7 @@
         {"name": "invoke_skill LLM 生成", "status": "done", "path": "agents/cheat_agent/graph.py"},
         {"name": "LangGraph cheatAgent", "status": "done", "path": "src/.../agents/cheat_agent/"},
         {"name": "CustomerAgent 模拟器", "status": "done", "path": "src/.../agents/customer_agent/"},
+        {"name": "记忆 L1–L3", "status": "done", "path": "agents/cheat_agent/memory.py"},
         {"name": "对话存储", "status": "done", "path": "storage/conversation_store.py"}
       ]
     },
@@ -99,16 +118,17 @@
       "features": [
         {"name": "Tier A 组件", "status": "done"},
         {"name": "Tier B Agent dataset", "status": "done", "note": "冒烟 3×20 + smoke gate"},
-        {"name": "套话指标 skill_kind/invoke/richness", "status": "done"},
+        {"name": "套话指标 skill_kind/invoke/richness/coverage", "status": "done"},
+        {"name": "Claim F1 / Pearson 离线评测", "status": "pending", "note": "roadmap Alpha"},
         {"name": "旧规则 Tier B", "status": "removed", "see": "wrongway.md"}
       ]
     }
   ],
   "verification": {
     "commands": [
-      "pytest test/ -v",
-      "python scripts/generate_dataset.py",
-      "python scripts/evaluate_dataset.py"
+      "MTA_LLM_MODE=mock pytest test/ -v",
+      "MTA_LLM_MODE=mock python scripts/generate_dataset.py",
+      "MTA_LLM_MODE=mock python scripts/evaluate_dataset.py"
     ]
   }
 }

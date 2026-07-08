@@ -4,7 +4,7 @@
 > - 规划：`roadmap.md`
 > - 架构/Benchmark/Agent重建/LangGraph/测试策略：`decisions/001-008`
 > - **已废弃教训**：`wrongway.md`
-> - **套话 Skills（M6 ✅）**：`套话skill/`（材料+分析）· `skills/cheat-agent/`（运行时）
+> - **套话 Skills（M6 ✅）· Agent LLM（M7 ✅）· 冒烟 Benchmark（M8 ✅）**：`套话skill/` · `skills/cheat-agent/` · `benchmark/datasets/smoke_v1/`
 > - 外部参考摘要：`reference/`
 
 # 问题

@@ -1,7 +1,7 @@
 # ADR-008: cheatAgent — LangGraph 双 Agent 架构
 
 ## 状态
-accepted（2026-07-08，架构草案，待用户审阅修改）
+accepted（2026-07-08；**M6–M8 已实现**；LangGraph 节点划分仍待用户审阅）
 
 ## 目标
 
@@ -126,28 +126,32 @@ sessions:
 - `scripts/generate_dataset.py`
 - `scripts/evaluate_dataset.py`
 
-## 代码位置（脚手架）
+## 代码位置（2026-07-08 实现）
 
 ```
-src/market_truth_agent/agents/
-  cheat_agent/
-    graph.py          # LangGraph 定义
-    state.py          # CheatAgentState
-    nodes/            # load_context, route_skill, invoke_skill, write_memory
-  customer_agent/
-    graph.py
-    state.py
-    personas.py
-  simulation/
-    runner.py         # 双 Agent 对话循环
-    dataset_builder.py
-  eval/
-    tactic_metrics.py
-    smoke_runner.py
+src/market_truth_agent/
+  agents/
+    cheat_agent/
+      graph.py              # LangGraph + route/invoke/write_memory
+      state.py
+      memory.py             # L1 session / L2 user / L3 episodic
+      skills_registry.py
+    customer_agent/
+      graph.py              # run_customer_agent_turn (LLM)
+      personas.py
+    simulation/
+      runner.py             # 双 Agent 对话循环
+    eval/
+      tactic_metrics.py
+      smoke_runner.py       # M8 smoke gate
+  llm/
+    client.py               # MTA_LLM_MODE mock|live
+    prompts.py
 
-skills/cheat-agent/   # M6 用户填充
-  SKILL-router.md     # 占位
-  README.md
+skills/cheat-agent/         # M6 ✅ — 1 router + 11 专项
+benchmark/datasets/smoke_v1/  # M8 ✅ 冒烟 dataset
+scripts/generate_dataset.py
+scripts/evaluate_dataset.py
 ```
 
 ## 依赖
@@ -161,23 +165,30 @@ agent = [
 ]
 ```
 
-LLM 调用走 PolarPrivate / 环境变量，密钥不入库。
+LLM 调用走 PolarPrivate / OpenAI 兼容端点，环境变量配置，密钥不入库。实现见 `llm/client.py`（`MTA_LLM_MODE=mock|live`）。
 
-## 冒烟测试（M8 门禁）
+## 冒烟测试（M8 门禁）✅ 2026-07-08 通过
 
-| 项 | 规格 |
-|----|------|
-| 用户数 | 3（honest≈0.85, medium≈0.55, strategic≈0.25） |
-| 轮次 | 每人 20 轮（user+agent 合计） |
-| 通过条件 | dataset 落盘；transcript 非空；skill metadata 有记录；分析 pipeline 可跑；无 GT 泄漏静态检查 |
+| 项 | 规格 | 状态 |
+|----|------|------|
+| 用户数 | 3（honest≈0.85, medium≈0.55, strategic≈0.25） | ✅ |
+| 轮次 | 每人 20 轮（user+agent 合计） | ✅ |
+| dataset 落盘 | `benchmark/datasets/smoke_v1/` | ✅ |
+| transcript 非空 | turns ≥ 20 | ✅ |
+| skill metadata | `agent_metadata[].skill_id` | ✅ |
+| GT 隔离 | `smoke_runner._check_gt_isolation()` | ✅ |
+| 分析 pipeline | `evaluate_dataset.py` 可跑 | ✅（claim 规则版待升级） |
+
+验证：`MTA_LLM_MODE=mock pytest test/agents/ -v` · `python scripts/generate_dataset.py`
 
 ## 待用户审阅/修改
 
 - [ ] LangGraph 节点划分是否足够细？
-- [ ] 记忆分层 L0–L3 是否符合预期？
-- [ ] Skill 调用协议（router 输出 schema）
-- [ ] LLM provider 选型（OpenAI / 内部 PolarPrivate）
-- [ ] CustomerAgent prompt 中 honesty/resistance 的具体行为定义
+- [x] 记忆分层 L0–L3 是否符合预期？（已实现 `memory.py`）
+- [x] Skill 调用协议（router 输出 schema — `route_skill` 返回 skill_id/phase）
+- [x] LLM provider 选型（`MTA_LLM_MODE` + OpenAI/PolarPrivate 兼容）
+- [x] CustomerAgent prompt 中 honesty/resistance 行为（`llm/prompts.py`）
+- [ ] live LLM 端到端质量验证（需 API 密钥）
 
 ## 参考
 

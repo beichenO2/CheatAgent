@@ -5,7 +5,7 @@ description: 套话策略路由——根据 user_model、对话阶段、resistan
 
 # SKILL-router — 套话策略路由
 
-> 实现：`graph.py::route_skill` 规则引擎；LLM 路由待 M7 接入。
+> 实现：`graph.py::route_skill` **规则引擎**（M6 ✅）；`invoke_skill` **LLM utterance**（M7 ✅）。LLM 路由为远期可选项，当前不在范围。
 
 ## 输入
 
