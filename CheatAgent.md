@@ -2,7 +2,7 @@
 
 > **维护说明**：方案、进度、讨论记录放本文档；代码放 [GitHub — beichenO2/CheatAgent](https://github.com/beichenO2/CheatAgent.git)
 >
-> **在线文档（智能文档 / Markdown）**：[腾讯文档 — CheatAgent 项目方案](https://docs.qq.com/aio/DZExvSmVmZ0pnc0FP)
+> **在线文档（智能文档 / Markdown）**：[腾讯文档 — CheatAgent 项目方案](https://docs.qq.com/aio/DZHZGSFVGYUJSQXdY)
 >
 > **最后更新**：2026-07-09（M9 分层融合 + TD Beta + 扩 GT 完成；Beta 30×5 全量 eval 跑中；展示方案定稿 ADR-011；方案复查见 ADR-010）
 
