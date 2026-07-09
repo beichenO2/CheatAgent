@@ -3,7 +3,7 @@
 | 报告 | 路径 | 在线文档 |
 |------|------|----------|
 | smoke_v1 评测 | `smoke_v1_eval.json` | https://docs.qq.com/aio/DZEZ2YU9zQUdSREtY |
-| beta_v1 评测（跑完后） | `beta_v1_eval.json` | — |
+| beta_v1 评测（跑完后） | `beta_v1_eval.json` | —（eval **15/30**，U016 跑中） |
 
 ## 运行 Beta 全量 pipeline
 

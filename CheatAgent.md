@@ -4,7 +4,7 @@
 >
 > **在线文档（智能文档 / Markdown）**：[腾讯文档 — CheatAgent 项目方案](https://docs.qq.com/aio/DZHZGSFVGYUJSQXdY)
 >
-> **最后更新**：2026-07-09（M9 分层融合 + TD Beta + 扩 GT 完成；Beta 30×5 全量 eval 跑中；展示方案定稿 ADR-011；方案复查见 ADR-010）
+> **最后更新**：2026-07-09 23:20（Beta eval **15/30** 完成 U001–U015；U016 跑中；beta_v2 生成 15/30；工作目录 artifacts/ 归档；展示方案 ADR-011 ✅）
 
 ---
 
@@ -386,7 +386,7 @@ U001 S001 实测：用户全程说真话且一致（10 句里 7 句重复 GT 的
 详细对比表见 `Readme.md` §Claim 融合路线分歧。
 
 > **2026-07-08 进展**：Normalize 层（**qwen3.7-plus** 纯文本）+ 新评测指标 + 消融实验已接入 `evaluate_dataset.py`。
-> **2026-07-09 进展**：定位正则覆盖 bug（`wrongway/04`）；Q4 拍板并**落地**分层融合（`analysis/fusion.py`，llm/voting/last_wins 消融）；TD Beta(2,2) 先验 + 单源不更新；扩 GT 30/30 用户；U001–U003 S001 回放 F1=1.0；**Beta 30×5 全量 eval 跑中**。
+> **2026-07-09 进展**：定位正则覆盖 bug（`wrongway/04`）；Q4 拍板并**落地**分层融合（`analysis/fusion.py`，llm/voting/last_wins 消融）；TD Beta(2,2) 先验 + 单源不更新；扩 GT 30/30 用户；U001–U003 S001 回放 F1=1.0；**Beta 30×5 全量 eval 跑中（15/30 完成）**；beta_v2 世界态一致数据集生成 15/30。
 
 **Q5：方案复查遗留问题（2026-07-09，ADR-010；同日用户拍板「全都修」→ 已全部修复）**
 
@@ -411,7 +411,7 @@ U001 S001 实测：用户全程说真话且一致（10 句里 7 句重复 GT 的
 | **M8** | 冒烟 dataset 3×20 + smoke gate + L1–L3 memory + 分析评测 | ✅ |
 | **M9** | 分层融合 + TD Beta 先验 + 扩 GT（ADR-010） | ✅ 2026-07-09 |
 | Alpha | 10 用户 × 5 session × ≥20 轮 | 🟡 7/10 live（被 Beta 取代优先级） |
-| **Beta** | 30 用户 × 5 session 生成 + 全量 eval | 🟡 生成 30/30 ✅；eval 跑中（ETA ~8h） |
+| **Beta** | 30 用户 × 5 session 生成 + 全量 eval | 🟡 生成 30/30 ✅；eval **15/30**（U016 跑中） |
 | M10 | cross-user TD + beta_v2 世界态一致数据集 | 📋 提案（ADR-010 L1/L2） |
 
 **验证命令**（与 CI 一致）：
