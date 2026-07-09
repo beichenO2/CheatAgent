@@ -198,6 +198,12 @@ def main() -> None:
             knowledge_depth=persona_data.get("knowledge_depth", 0.8),
         )
         latent_claims = meta.get("latent", {}).get("claims_truth", [])
+        # World-truth GT for veracity (core three, ADR-010 L3)
+        core_latent = meta.get("latent", {}).get("core_claims_truth") or [
+            c for c in latent_claims
+            if c.get("indicator") in ("港存", "采购积极性", "报价松动")
+            and c.get("region") == persona.region
+        ]
 
         session_results = []
         reliability_est = None
@@ -207,17 +213,20 @@ def main() -> None:
         for session_idx, session in enumerate(meta["sessions"], start=1):
             week = session.get("week", "2026-W27")
             conv = meta_to_conversation(meta, session)
+            # Prefer per-session GT (dialogue-aligned); fall back to user-level latent
+            session_latent = session.get("claims_truth") or latent_claims
             progress(
                 f"[eval]   session {session['session_id']} ({session_idx}/{len(meta['sessions'])}) "
-                f"turns={len(session.get('turns', []))}"
+                f"turns={len(session.get('turns', []))} gt_slots={len(session_latent)}"
             )
             eval_report = evaluate_session(
                 conv,
                 persona,
-                latent_claims,
+                session_latent,
                 week=week,
                 price_trajectory=PRICE_TRAJECTORY,
                 pipeline_config=pipeline_config,
+                veracity_claims=session.get("world_truth") or core_latent,
             )
             tactic = summarize_session(session.get("agent_metadata", []), registered)
             report["tactic_summary"].append(tactic)

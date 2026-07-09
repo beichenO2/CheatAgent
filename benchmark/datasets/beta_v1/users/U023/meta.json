@@ -28,6 +28,30 @@
         "indicator": "报价松动",
         "value": "是",
         "market_object": "铁矿石"
+      },
+      {
+        "region": "日照港",
+        "indicator": "到港量",
+        "value": "低",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "日照港",
+        "indicator": "疏港量",
+        "value": "高",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "日照港",
+        "indicator": "发运",
+        "value": "高",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "日照港",
+        "indicator": "利润",
+        "value": "低",
+        "market_object": "铁矿石"
       }
     ],
     "price_trajectory": [
@@ -73,7 +97,378 @@
         "trend": "跌",
         "week": "2026-W33"
       }
-    ]
+    ],
+    "core_claims_truth": [
+      {
+        "region": "日照港",
+        "indicator": "港存",
+        "value": "低",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "日照港",
+        "indicator": "采购积极性",
+        "value": "积极",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "日照港",
+        "indicator": "报价松动",
+        "value": "是",
+        "market_object": "铁矿石"
+      }
+    ],
+    "gt_expand": {
+      "sessions": [
+        {
+          "session_id": "S001",
+          "mined": [
+            {
+              "region": "日照港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "港存不高是事实"
+            },
+            {
+              "region": "日照港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "卖方报盘确实有松动空间"
+            },
+            {
+              "region": "日照港",
+              "indicator": "采购积极性",
+              "value": "中性",
+              "market_object": "铁矿石",
+              "evidence": "采购积极性倒还行...大家就是按需补"
+            },
+            {
+              "region": "日照港",
+              "indicator": "到港量",
+              "value": "高",
+              "market_object": "铁矿石",
+              "evidence": "到货量确实有在增加...卸货节奏比上周快了点"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "日照港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "到港量",
+              "value": "高",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S002",
+          "mined": [
+            {
+              "region": "日照港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "堆场确实没什么货，库容利用率就三四成吧"
+            },
+            {
+              "region": "日照港",
+              "indicator": "到港量",
+              "value": "高",
+              "market_object": "铁矿石",
+              "evidence": "到港量是比前两周多了一点/到港量虽然多了两成"
+            },
+            {
+              "region": "日照港",
+              "indicator": "疏港量",
+              "value": "中",
+              "market_object": "铁矿石",
+              "evidence": "我们日照这边上周疏港量其实没那么多"
+            },
+            {
+              "region": "日照港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石",
+              "evidence": "这两天询价的明显多起来，采购挺积极的/刚需那边的采购积极性还挺高"
+            },
+            {
+              "region": "日照港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "报盘松动确实挺明显的，780这个价位最近三天都有货在走"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "日照港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "到港量",
+              "value": "高",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "疏港量",
+              "value": "中",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S003",
+          "mined": [
+            {
+              "region": "日照港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "库存不算高，大概能撑个十来天吧"
+            },
+            {
+              "region": "日照港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石",
+              "evidence": "询价倒是挺积极的...他们拿得也挺快"
+            },
+            {
+              "region": "日照港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "大户那边倒是说让了点利...报价虽然松动"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "日照港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S004",
+          "mined": [
+            {
+              "region": "日照港",
+              "indicator": "到港量",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "最近到港量确实不多"
+            },
+            {
+              "region": "日照港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "港存偏低"
+            },
+            {
+              "region": "日照港",
+              "indicator": "疏港量",
+              "value": "中",
+              "market_object": "铁矿石",
+              "evidence": "堆场周转还凑合/卸货节奏倒是没明显加快，还是老样子"
+            },
+            {
+              "region": "日照港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石",
+              "evidence": "采购积极性倒是挺高/采购积极性确实挺积极的"
+            },
+            {
+              "region": "日照港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "现货报盘还是有松动空间的/大户出货节奏确实有点变化，最近报价有些松动"
+            },
+            {
+              "region": "日照港",
+              "indicator": "发运",
+              "value": "高",
+              "market_object": "铁矿石",
+              "evidence": "走货速度确实比上周快了一些/出货也快"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "日照港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "到港量",
+              "value": "低",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "疏港量",
+              "value": "中",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "发运",
+              "value": "高",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S005",
+          "mined": [
+            {
+              "region": "日照港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "日照港这边港存确实不高"
+            },
+            {
+              "region": "日照港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石",
+              "evidence": "钢厂补库的积极性还是挺高的"
+            },
+            {
+              "region": "日照港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "今天感觉报价有点松动了"
+            },
+            {
+              "region": "日照港",
+              "indicator": "发运",
+              "value": "高",
+              "market_object": "铁矿石",
+              "evidence": "卸货速度确实比上周快了一些"
+            },
+            {
+              "region": "日照港",
+              "indicator": "疏港量",
+              "value": "高",
+              "market_object": "铁矿石",
+              "evidence": "我们这边疏港量一直没下来"
+            },
+            {
+              "region": "日照港",
+              "indicator": "利润",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "现货840出头还是亏着"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "日照港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "发运",
+              "value": "高",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "疏港量",
+              "value": "高",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "日照港",
+              "indicator": "利润",
+              "value": "低",
+              "market_object": "铁矿石"
+            }
+          ]
+        }
+      ]
+    }
   },
   "sessions": [
     {
@@ -380,7 +775,33 @@
           "llm_mode": "live"
         }
       ],
-      "turn_count": 20
+      "turn_count": 20,
+      "claims_truth": [
+        {
+          "region": "日照港",
+          "indicator": "港存",
+          "value": "低",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "到港量",
+          "value": "高",
+          "market_object": "铁矿石"
+        }
+      ]
     },
     {
       "session_id": "S002",
@@ -686,7 +1107,39 @@
           "llm_mode": "live"
         }
       ],
-      "turn_count": 20
+      "turn_count": 20,
+      "claims_truth": [
+        {
+          "region": "日照港",
+          "indicator": "港存",
+          "value": "低",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "到港量",
+          "value": "高",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "疏港量",
+          "value": "中",
+          "market_object": "铁矿石"
+        }
+      ]
     },
     {
       "session_id": "S003",
@@ -992,7 +1445,27 @@
           "llm_mode": "live"
         }
       ],
-      "turn_count": 20
+      "turn_count": 20,
+      "claims_truth": [
+        {
+          "region": "日照港",
+          "indicator": "港存",
+          "value": "低",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        }
+      ]
     },
     {
       "session_id": "S004",
@@ -1298,7 +1771,45 @@
           "llm_mode": "live"
         }
       ],
-      "turn_count": 20
+      "turn_count": 20,
+      "claims_truth": [
+        {
+          "region": "日照港",
+          "indicator": "港存",
+          "value": "低",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "到港量",
+          "value": "低",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "疏港量",
+          "value": "中",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "发运",
+          "value": "高",
+          "market_object": "铁矿石"
+        }
+      ]
     },
     {
       "session_id": "S005",
@@ -1604,7 +2115,45 @@
           "llm_mode": "live"
         }
       ],
-      "turn_count": 20
+      "turn_count": 20,
+      "claims_truth": [
+        {
+          "region": "日照港",
+          "indicator": "港存",
+          "value": "低",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "发运",
+          "value": "高",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "疏港量",
+          "value": "高",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "日照港",
+          "indicator": "利润",
+          "value": "低",
+          "market_object": "铁矿石"
+        }
+      ]
     }
   ]
 }

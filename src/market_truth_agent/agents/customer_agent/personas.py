@@ -94,4 +94,12 @@ DATASET_PRESETS = {
     "smoke_v1": {"personas": SMOKE_PERSONAS, "sessions_per_user": 1, "min_turns": 20},
     "alpha_v1": {"personas": ALPHA_PERSONAS, "sessions_per_user": 5, "min_turns": 20},
     "beta_v1": {"personas": BETA_PERSONAS, "sessions_per_user": 5, "min_turns": 20},
+    # beta_v2: world truth shared per (region, week) — TD reliability calibration
+    # has clean GT (ADR-010 L2). Same personas; only honesty drives deviation.
+    "beta_v2": {
+        "personas": BETA_PERSONAS,
+        "sessions_per_user": 5,
+        "min_turns": 20,
+        "world_state": True,
+    },
 }

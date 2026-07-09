@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from dataclasses import asdict
@@ -43,6 +44,21 @@ def latent_for_persona(persona: CustomerPersona) -> list[dict[str, Any]]:
     ]
 
 
+def world_truth_for(region: str, week: str) -> list[dict[str, Any]]:
+    """Shared world state per (region, week) — ADR-010 L2 / beta_v2.
+
+    Every user in the same region+week gets the SAME latent truth; only
+    honesty decides whether they report it faithfully. Deterministic via md5
+    (Python's hash() is salted per process, unusable for reproducibility).
+    """
+    digest = hashlib.md5(f"{region}|{week}".encode("utf-8")).hexdigest()
+    variant = TRUTH_VARIANTS[int(digest, 16) % len(TRUTH_VARIANTS)]
+    return [
+        {"region": region, "indicator": ind, "value": val, "market_object": "铁矿石"}
+        for ind, val in variant
+    ]
+
+
 class SimulationRunner:
     """
     Dual-agent dialogue loop for dataset generation.
@@ -54,9 +70,20 @@ class SimulationRunner:
         self,
         output_dir: Path | None = None,
         memory_root: Path | None = None,
+        *,
+        world_state: bool = False,
     ) -> None:
         self.output_dir = output_dir or Path("benchmark/datasets/smoke_v1")
         self.memory_root = memory_root or Path("memory")
+        # world_state=True: latent truth shared per (region, week) — beta_v2
+        self.world_state = world_state
+
+    def _latent_for_session(
+        self, persona: CustomerPersona, week: str
+    ) -> list[dict[str, Any]]:
+        if self.world_state:
+            return world_truth_for(persona.region, week)
+        return latent_for_persona(persona)
 
     def run_session(
         self,
@@ -68,7 +95,7 @@ class SimulationRunner:
     ) -> tuple[dict[str, Any], Any]:
         session_id = f"S{session_index + 1:03d}"
         session_date, week, price_snapshot = session_schedule(session_index)
-        latent_claims = latent_for_persona(persona)
+        latent_claims = self._latent_for_session(persona, week)
 
         known = KnownIdentity(
             user_id=persona.user_id,
@@ -136,6 +163,9 @@ class SimulationRunner:
             "agent_metadata": agent_metadata,
             "turn_count": len(history),
         }
+        if self.world_state:
+            # Per-session world truth = veracity GT for this week (ADR-010 L2)
+            session["world_truth"] = latent_claims
         print(
             f"[sim] {persona.user_id} session {session_index + 1}/{session_id} "
             f"turns={len(history)} llm={llm_mode()}",
@@ -175,11 +205,28 @@ class SimulationRunner:
         )
         return {
             "persona": asdict(persona),
-            "latent": {
+            "latent": self._latent_block(persona, sessions),
+            "sessions": sessions,
+        }
+
+    def _latent_block(
+        self, persona: CustomerPersona, sessions: list[dict[str, Any]]
+    ) -> dict[str, Any]:
+        if not self.world_state:
+            return {
                 "claims_truth": latent_for_persona(persona),
                 "price_trajectory": PRICE_TRAJECTORY,
+            }
+        # World-state dataset: user-level claims_truth is week 1 world truth
+        # (compat for smoke gate); authoritative GT lives in session.world_truth.
+        first_week = sessions[0]["week"] if sessions else session_schedule(0)[1]
+        return {
+            "claims_truth": world_truth_for(persona.region, first_week),
+            "world_state": True,
+            "world_truth_by_week": {
+                s["week"]: s.get("world_truth", []) for s in sessions
             },
-            "sessions": sessions,
+            "price_trajectory": PRICE_TRAJECTORY,
         }
 
     def _user_meta_path(self, persona: CustomerPersona) -> Path:
@@ -217,10 +264,7 @@ class SimulationRunner:
         user_dir.mkdir(parents=True, exist_ok=True)
         meta = {
             "persona": asdict(persona),
-            "latent": {
-                "claims_truth": latent_for_persona(persona),
-                "price_trajectory": PRICE_TRAJECTORY,
-            },
+            "latent": self._latent_block(persona, sessions),
             "sessions": sessions,
         }
         meta_path = self._user_meta_path(persona)

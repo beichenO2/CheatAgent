@@ -147,7 +147,11 @@ def run_generate(
     personas = spec["personas"]
     min_turns = spec["min_turns"]
     sessions_per_user = spec["sessions_per_user"]
-    runner = SimulationRunner(output_dir)
+    world_state = bool(spec.get("world_state", False))
+    # Isolate cross-session memory per dataset so a regen never inherits
+    # another dataset's L2 user models.
+    memory_root = Path("memory") if preset in ("smoke_v1", "alpha_v1", "beta_v1") else Path(f"memory_{preset}")
+    runner = SimulationRunner(output_dir, memory_root=memory_root, world_state=world_state)
 
     progress(
         f"[pipeline] generate {preset} users={len(personas)} "
@@ -271,6 +275,13 @@ def run_evaluate(
             knowledge_depth=p.get("knowledge_depth", 0.8),
         )
         latent = meta.get("latent", {}).get("claims_truth", [])
+        # World-truth GT for veracity: core three slots, honesty-governed at
+        # generation (ADR-010 L3). Falls back to filtering user-level latent.
+        core_latent = meta.get("latent", {}).get("core_claims_truth") or [
+            c for c in latent
+            if c.get("indicator") in ("港存", "采购积极性", "报价松动")
+            and c.get("region") == persona.region
+        ]
         session_results = []
         reliability_est = None
         total_claims = 0
@@ -285,13 +296,16 @@ def run_evaluate(
 
             def _eval_one(sess: dict = session) -> dict:
                 conv = meta_to_conversation(meta, sess)
+                session_latent = sess.get("claims_truth") or latent
+                # world_truth (beta_v2, week-specific) > user-level core latent
                 return evaluate_session(
                     conv,
                     persona,
-                    latent,
+                    session_latent,
                     week=sess.get("week", "2026-W27"),
                     price_trajectory=PRICE_TRAJECTORY,
                     pipeline_config=pipeline_config,
+                    veracity_claims=sess.get("world_truth") or core_latent,
                 )
 
             eval_report = retry_call(_eval_one, label=f"eval:{uid}:{session['session_id']}")

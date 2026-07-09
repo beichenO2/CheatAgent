@@ -147,6 +147,25 @@ def _default_region_for_persona(persona: Persona) -> str:
     return getattr(persona, "region", None) or "青岛港"
 
 
+# World-truth indicators: the only slots whose latent value is honesty-governed
+# at generation time. Expanded (dialogue-mined) GT slots are user assertions,
+# NOT world truth — comparing TD output against them would reward "trust the
+# user" (ADR-010 L3). Veracity must therefore stay within this core set.
+CORE_TRUTH_INDICATORS = ("港存", "采购积极性", "报价松动")
+
+
+def core_truth_claims(
+    latent_claims: list[dict[str, Any]],
+    region: str | None = None,
+) -> list[dict[str, Any]]:
+    """Core-indicator slots only; optionally restricted to the persona's own
+    region (mined cross-region slots are hearsay echoes, not world truth)."""
+    out = [c for c in latent_claims if c.get("indicator") in CORE_TRUTH_INDICATORS]
+    if region:
+        out = [c for c in out if c.get("region") == region]
+    return out
+
+
 def evaluate_session(
     conversation: Conversation,
     persona: Persona,
@@ -157,11 +176,16 @@ def evaluate_session(
     pipeline_config: PipelineConfig | None = None,
     fusion_mode: str = "llm",
     run_fusion_ablation: bool = True,
+    veracity_claims: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Full metric bundle for one session.
 
     Primary slot_metrics use ``fusion_mode`` (default llm). When
     ``run_fusion_ablation`` is True, also report llm/voting/last_wins side-by-side.
+
+    ``latent_claims`` — dialogue-aligned session GT (drives slot F1).
+    ``veracity_claims`` — world-truth GT for TD veracity (defaults to the core
+    three indicators filtered from ``latent_claims``; ADR-010 L3).
     """
     pipeline = AnalysisPipeline(price_trajectory=price_trajectory, config=pipeline_config)
     result = pipeline.run(conversation, persona, week=week)
@@ -179,7 +203,14 @@ def evaluate_session(
     primary = fusion_all.get(fusion_mode) or next(iter(fusion_all.values()))
     slots = {k: v for k, v in primary.items() if k != "fused_slots"}
 
-    veracity = veracity_metrics(result, latent_claims, week, price_trajectory)
+    truth_gt = (
+        veracity_claims
+        if veracity_claims is not None
+        else core_truth_claims(latent_claims, region=default_region)
+    )
+    veracity = veracity_metrics(result, truth_gt, week, price_trajectory)
+    veracity["veracity_gt_slots"] = len(truth_gt)
+    veracity["veracity_scope"] = "core3" if veracity_claims is None else "custom"
     ext = external_metrics(result.claims, price_trajectory)
     esc = escalation_metrics(result, len(result.claims))
     rel = reliability_metrics(result, persona)
