@@ -2,9 +2,13 @@
 
 ## 状态
 
-accepted / 骨架已实现（2026-07-09）：`scripts/build_dashboard.py` 第一步（Overview +
-Per-user 表 + 指标难度 + F1 分布，论文风格）已交付，支持 eval 中途按 checkpoint
-增量重建（页面标注「阶段性快照」）；Session 回放面板为第二步。
+accepted / 已实现（2026-07-09）：`scripts/build_dashboard.py` 交付 Overview
+（论文风格：消融表 mean±std + bootstrap CI、散点 + Pearson、指标难度、F1 分布）
+与 **Session 回放面板**（对话 timeline + skill 徽标 + fused slots 证据回跳 +
+TC-02/05/07/08 判例书签，书签 turn 由 skill metadata 数据驱动）。
+支持 eval 中途按 checkpoint 增量重建（页面标注「阶段性快照 N/30」）。
+Playwright 已验证渲染与交互（5 图有 canvas、书签高亮、槽位点击回跳）。
+剩余：reliability 标定图在 `cross_user_td.json` 出现后自动填充（图 3 占位已就位）。
 
 ## 背景
 

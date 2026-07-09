@@ -76,6 +76,7 @@ def load_data(preset: str) -> dict[str, Any]:
 
     personas: dict[str, dict[str, Any]] = {}
     session_gt: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    session_turns: dict[tuple[str, str], list[dict[str, Any]]] = {}
     for meta_path in sorted(dataset_dir.glob("users/*/meta.json")):
         meta = json.loads(meta_path.read_text(encoding="utf-8"))
         p = meta["persona"]
@@ -83,6 +84,15 @@ def load_data(preset: str) -> dict[str, Any]:
         for s in meta.get("sessions", []):
             gt = s.get("claims_truth") or meta.get("latent", {}).get("claims_truth", [])
             session_gt[(p["user_id"], s["session_id"])] = gt
+            session_turns[(p["user_id"], s["session_id"])] = [
+                {
+                    "i": i,
+                    "speaker": t.get("speaker"),
+                    "text": t.get("text", ""),
+                    "skill": t.get("skill_id"),
+                }
+                for i, t in enumerate(s.get("turns", []))
+            ]
 
     rows: list[dict[str, Any]] = []
     for ckpt in sorted(ckpt_dir.glob("*_eval.json")):
@@ -122,6 +132,7 @@ def load_data(preset: str) -> dict[str, Any]:
         "rows": rows,
         "personas": personas,
         "session_gt": session_gt,
+        "session_turns": session_turns,
         "cross_td": cross_td,
         "n_users_total": len(personas),
     }
@@ -223,6 +234,73 @@ def aggregate(data: dict[str, Any]) -> dict[str, Any]:
     ver = [r["veracity_acc"] for r in rows if r["veracity_acc"] is not None]
     esc = [r["escalation_rate"] for r in rows if r["escalation_rate"] is not None]
 
+    # Session replay payload (evaluated sessions only)
+    replay = {}
+    skill_hist: dict[str, int] = {}
+    for r in rows:
+        key = (r["user_id"], r["session_id"])
+        turns = data["session_turns"].get(key, [])
+        if not turns:
+            continue
+        for t in turns:
+            if t.get("skill"):
+                skill_hist[t["skill"]] = skill_hist.get(t["skill"], 0) + 1
+        gt = data["session_gt"].get(key, [])
+        slots = []
+        for skey, slot in (r["fused_llm"] or {}).items():
+            region, _, indicator = skey.partition("/")
+            gt_val = next((c["value"] for c in gt
+                           if c["region"] == region and c["indicator"] == indicator), None)
+            slots.append({
+                "region": region, "indicator": indicator,
+                "value": slot.get("value"), "conf": slot.get("confidence"),
+                "ev": slot.get("evidence_turns") or [],
+                "gt": gt_val,
+            })
+        replay[f"{r['user_id']}|{r['session_id']}"] = {
+            "user_id": r["user_id"],
+            "session_id": r["session_id"],
+            "honesty": r["honesty"],
+            "f1": (r["modes"].get("llm") or {}).get("f1"),
+            "deception": r["mean_deception"],
+            "turns": turns,
+            "slots": slots,
+            "gt": [{"region": c["region"], "indicator": c["indicator"], "value": c["value"]}
+                   for c in gt],
+        }
+
+    # Testcase bookmarks (CheatAgent.md §五, 实录 = U001 S001).
+    # Turn indices derived from actual skill metadata (agent probe + user reply).
+    bookmarks = []
+    key0 = "U001|S001"
+    if key0 in replay:
+        turns0 = replay[key0]["turns"]
+
+        def _skill_pair(skill: str) -> list[int] | None:
+            for t in turns0:
+                if t.get("skill") == skill:
+                    return [t["i"], t["i"] + 1]
+            return None
+
+        def _slot_ev(indicator: str) -> list[int] | None:
+            for s in replay[key0]["slots"]:
+                if s["indicator"] == indicator and s["ev"]:
+                    return s["ev"]
+            return None
+
+        for tc, turns, note in (
+            ("TC-02", _skill_pair("reactance-biased-statement"),
+             "否认看空谣言恰为真话：deception 高 ≠ 丢弃真值"),
+            ("TC-05", _skill_pair("trap-question"),
+             "trap-question 打太极：deflect 不出槽，宁缺勿滥"),
+            ("TC-07", _skill_pair("cognitive-conflict-probe"),
+             "认知冲突追问后澄清：还行 → 中性（llm vs voting 消融判例）"),
+            ("TC-08", _slot_ev("采购积极性"),
+             "语义等价多表述合并：还行/随行就市/正常/中性 → 中性"),
+        ):
+            if turns:
+                bookmarks.append({"tc": tc, "key": key0, "turns": turns, "note": note})
+
     return {
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
         "n_users_evaluated": len(users_evaluated),
@@ -241,6 +319,9 @@ def aggregate(data: dict[str, Any]) -> dict[str, Any]:
                         "fit": rel_fit, "note": rel_note},
         "indicators": indicators,
         "f1_dist": f1_llm,
+        "replay": replay,
+        "bookmarks": bookmarks,
+        "skill_hist": sorted(skill_hist.items(), key=lambda kv: -kv[1]),
     }
 
 
@@ -280,6 +361,29 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .chart.tall { height:420px; }
   .placeholder { border:1px dashed var(--line); color:var(--muted); font-size:13px;
                  padding:32px; text-align:center; margin-top:14px; }
+  /* replay panel */
+  .replay-bar { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:12px 0; }
+  .replay-bar select { font-family:inherit; font-size:13px; padding:4px 8px;
+                       border:1px solid var(--line); background:#fff; }
+  .bm { font-size:12px; border:1px solid var(--line); background:#f4f2ed; padding:3px 9px;
+        cursor:pointer; user-select:none; }
+  .bm:hover { border-color:var(--accent); color:var(--accent); }
+  .replay { display:grid; grid-template-columns: 1fr 340px; gap:16px; margin-top:8px; }
+  .dlg { border:1px solid var(--line); max-height:560px; overflow:auto; padding:10px 12px; }
+  .turn { padding:7px 9px; margin:5px 0; font-size:13px; line-height:1.65; border-left:3px solid transparent; }
+  .turn .who { font-size:11px; color:var(--muted); margin-bottom:2px; display:flex; gap:8px; align-items:center; }
+  .turn.agent { background:#f7f6f2; border-left-color:#7d7461; }
+  .turn.user  { background:#fff; border-left-color:#4a6741; }
+  .turn.hl { outline:2px solid var(--accent); outline-offset:-2px; }
+  .chip { font-size:10.5px; border:1px solid var(--line); padding:0 6px; border-radius:8px;
+          color:var(--accent); background:#fff; }
+  .slotcards { display:flex; flex-direction:column; gap:8px; max-height:560px; overflow:auto; }
+  .slotcard { border:1px solid var(--line); padding:9px 11px; font-size:12.5px; cursor:pointer; }
+  .slotcard:hover { border-color:var(--accent); }
+  .slotcard .k { font-weight:600; }
+  .slotcard .m { color:var(--muted); font-size:11.5px; margin-top:3px; }
+  .ok { color:#2e5e2e; font-weight:600; } .bad { color:var(--accent); font-weight:600; }
+  .sessmeta { font-size:12.5px; color:var(--muted); margin:4px 0 0; }
   footer { margin-top:52px; font-size:12px; color:var(--muted); line-height:1.8;
            border-top:1px solid var(--line); padding-top:14px; }
   code { font-family:Menlo,monospace; font-size:12px; background:#f4f2ed; padding:1px 5px; }
@@ -324,7 +428,15 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   <div id="tbl-users" style="max-height:420px;overflow:auto"></div>
   <p class="caption"><b>表 2</b>：用户级汇总。reliability 列在 cross-user TD 报告存在时填充。</p>
 
-  <h2>8 指标定义（表 3）</h2>
+  <h2>8 Session 回放（图 6）</h2>
+  <p class="note">左侧为对话 timeline（客服轮带套话 skill 徽标），右侧为 LLM 融合终槽：
+     值 / 置信度 / evidence turns，并与 session GT 对照（✓ 命中 / ✗ 偏差）。
+     点击槽位卡片回跳其证据句。书签为 <code>CheatAgent.md</code> §五 测试判例（实录）。</p>
+  <div id="replay-holder"></div>
+  <div class="chart" id="chart-skill" style="height:280px"></div>
+  <p class="caption"><b>图 6</b>：套话 skill 触发分布（已评测 session 的 agent 轮统计）。</p>
+
+  <h2>9 指标定义（表 3）</h2>
   <table>
     <tr><th class="l">指标</th><th class="l">定义</th><th class="l">GT 来源 / 口径</th></tr>
     <tr><td class="l">slot F1 / recall / precision</td><td class="l">融合后 (region, indicator, value) 槽位与 session GT 的集合匹配</td><td class="l">对话对齐 session GT（`claims_truth`，扩标：核心值以 latent 为准）</td></tr>
@@ -491,6 +603,84 @@ if (D.rel_scatter.points.length){
     xAxis:{type:"category", data:bins.map(b=>`${b.lo.toFixed(1)}–${b.hi.toFixed(1)}`), axisLabel:{fontSize:11}},
     yAxis:{type:"value", name:"sessions"},
     series:[{type:"bar", data:bins.map(b=>b.n), itemStyle:{color:"#4a6741"}, barWidth:"70%"}],
+    tooltip:{},
+  });
+})();
+
+// Section 8: session replay
+(function(){
+  const keys = Object.keys(D.replay);
+  const holder = document.getElementById("replay-holder");
+  if (!keys.length){
+    holder.innerHTML = '<div class="placeholder">尚无已评测 session（checkpoint 生成后重建本页）。</div>';
+    return;
+  }
+  holder.innerHTML = `
+    <div class="replay-bar">
+      <label style="font-size:13px">session：</label>
+      <select id="sess-select">${keys.map(k=>`<option value="${k}">${k.replace("|"," · ")}</option>`).join("")}</select>
+      <span style="font-size:12px;color:var(--muted)">判例书签：</span>
+      ${D.bookmarks.map((b,i)=>`<span class="bm" data-i="${i}" title="${b.note}">${b.tc}</span>`).join("") || '<span style="font-size:12px;color:var(--muted)">（U001·S001 评测后出现）</span>'}
+    </div>
+    <div class="sessmeta" id="sess-meta"></div>
+    <div class="replay"><div class="dlg" id="dlg"></div><div class="slotcards" id="slots"></div></div>`;
+
+  const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  let current = keys[0];
+
+  function render(key, hlTurns){
+    current = key;
+    const S = D.replay[key];
+    document.getElementById("sess-select").value = key;
+    document.getElementById("sess-meta").textContent =
+      `honesty=${fmt(S.honesty,2)} · slot F1(llm)=${fmt(S.f1)} · mean deception=${fmt(S.deception)} · GT ${S.gt.length} 槽`;
+    const hl = new Set(hlTurns || []);
+    document.getElementById("dlg").innerHTML = S.turns.map(t => `
+      <div class="turn ${t.speaker} ${hl.has(t.i)?"hl":""}" id="t-${t.i}">
+        <div class="who">[${t.i}] ${t.speaker === "agent" ? "客服" : "客户"}${t.skill?` <span class="chip">${t.skill}</span>`:""}</div>
+        <div>${esc(t.text)}</div>
+      </div>`).join("");
+    document.getElementById("slots").innerHTML = S.slots.map((s,si) => {
+      const hit = s.gt != null && s.gt === s.value;
+      const mark = s.gt == null ? "（GT 无此槽）" : hit ? `<span class="ok">✓ GT=${s.gt}</span>` : `<span class="bad">✗ GT=${s.gt}</span>`;
+      return `<div class="slotcard" data-ev="${(s.ev||[]).join(",")}">
+        <div class="k">${s.region} / ${s.indicator} = ${s.value}</div>
+        <div class="m">conf ${fmt(s.conf,2)} · evidence turns [${(s.ev||[]).join(", ")}] · ${mark}</div>
+      </div>`;
+    }).join("") || '<div class="placeholder">本 session 无融合槽位</div>';
+    document.querySelectorAll("#slots .slotcard").forEach(card => {
+      card.onclick = () => {
+        const ev = card.dataset.ev ? card.dataset.ev.split(",").map(Number) : [];
+        render(current, ev);
+        if (ev.length) {
+          const el = document.getElementById("t-"+ev[0]);
+          if (el) el.scrollIntoView({block:"center", behavior:"smooth"});
+        }
+      };
+    });
+    if (hl.size){
+      const first = Math.min(...hl);
+      const el = document.getElementById("t-"+first);
+      if (el) el.scrollIntoView({block:"center"});
+    }
+  }
+  document.getElementById("sess-select").onchange = e => render(e.target.value);
+  document.querySelectorAll(".bm").forEach(bm => {
+    bm.onclick = () => { const b = D.bookmarks[+bm.dataset.i]; render(b.key, b.turns); };
+  });
+  render(current);
+})();
+
+// Figure 6: skill histogram
+(function(){
+  const el = document.getElementById("chart-skill");
+  if (!D.skill_hist.length){ el.outerHTML = '<div class="placeholder">暂无 skill 数据</div>'; return; }
+  const chart = echarts.init(el);
+  chart.setOption({
+    grid:{left:150,right:24,top:8,bottom:28},
+    xAxis:{type:"value", name:"invocations"},
+    yAxis:{type:"category", data:D.skill_hist.map(s=>s[0]).reverse(), axisLabel:{fontSize:11}},
+    series:[{type:"bar", data:D.skill_hist.map(s=>s[1]).reverse(), itemStyle:{color:"#7d7461"}, barWidth:"60%"}],
     tooltip:{},
   });
 })();

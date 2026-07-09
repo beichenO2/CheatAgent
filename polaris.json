@@ -80,8 +80,9 @@
       "id": "NU-005",
       "title": "M5 演示 UI：静态 Dashboard（ADR-011）",
       "priority": "P1",
-      "status": "partial",
-      "note": "骨架已实现（Overview/消融表图/散点/用户表，论文风格）；Session 回放面板待做；eval 期间可增量重建",
+      "status": "done",
+      "completed_at": "2026-07-09",
+      "note": "Overview（论文风格）+ Session 回放（TC 书签，Playwright 验证）；reliability 图等 cross_user_td.json 自动填充",
       "depends_on": ["AW-004"]
     },
     {
@@ -159,7 +160,7 @@
       "id": "R4",
       "need": "可展示界面（考核要求）",
       "features": [
-        {"name": "静态 Dashboard", "status": "planned", "note": "ADR-011：Overview/Per-user/Session 回放三层；build_dashboard.py → dashboard.html"}
+        {"name": "静态 Dashboard", "status": "done", "note": "ADR-011：论文风格 Overview + Session 回放（TC 书签）；scripts/build_dashboard.py → benchmark/reports/beta_v1/dashboard.html；reliability 图随 cross_user_td.json 自动填充"}
       ]
     }
   ],
