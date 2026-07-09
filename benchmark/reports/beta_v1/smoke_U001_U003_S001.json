@@ -1,0 +1,231 @@
+{
+  "smoke": "U001-U003 S001",
+  "note": "Beta prior + single-source no-update; fusion=llm primary",
+  "users": [
+    {
+      "user_id": "U001",
+      "honesty_gt": 0.2,
+      "session_id": "S001",
+      "claim_count": 23,
+      "slot_metrics": {
+        "tp": 3,
+        "fp": 1,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 0.75,
+        "f1": 0.8571428571428571,
+        "slot_recall": 1.0,
+        "slot_precision": 0.75,
+        "prediction_accuracy": 0.75,
+        "gt_slots": 3,
+        "pred_slots": 4
+      },
+      "fusion_ablation": {
+        "llm": {
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.75,
+          "f1": 0.8571428571428571,
+          "slot_recall": 1.0,
+          "slot_precision": 0.75,
+          "prediction_accuracy": 0.75,
+          "gt_slots": 3,
+          "pred_slots": 4
+        },
+        "voting": {
+          "tp": 3,
+          "fp": 2,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.6,
+          "f1": 0.7499999999999999,
+          "slot_recall": 1.0,
+          "slot_precision": 0.6,
+          "prediction_accuracy": 0.6,
+          "gt_slots": 3,
+          "pred_slots": 5
+        },
+        "last_wins": {
+          "tp": 3,
+          "fp": 2,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.6,
+          "f1": 0.7499999999999999,
+          "slot_recall": 1.0,
+          "slot_precision": 0.6,
+          "prediction_accuracy": 0.6,
+          "gt_slots": 3,
+          "pred_slots": 5
+        }
+      },
+      "reliability": {
+        "reliability_est": 0.5,
+        "honesty_gt": 0.2
+      },
+      "veracity": {
+        "em_error": 0.0,
+        "mv_error": 0.0,
+        "bucket_veracity_accuracy": 1.0,
+        "mv_baseline_accuracy": 1.0
+      },
+      "recon": {
+        "mean_deception": 0.787,
+        "honesty_gt": 0.2,
+        "deception_inverse_honesty_gap": 0.013000000000000012
+      }
+    },
+    {
+      "user_id": "U002",
+      "honesty_gt": 0.23,
+      "session_id": "S001",
+      "claim_count": 28,
+      "slot_metrics": {
+        "tp": 3,
+        "fp": 2,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 0.6,
+        "f1": 0.7499999999999999,
+        "slot_recall": 1.0,
+        "slot_precision": 0.6,
+        "prediction_accuracy": 0.6,
+        "gt_slots": 3,
+        "pred_slots": 5
+      },
+      "fusion_ablation": {
+        "llm": {
+          "tp": 3,
+          "fp": 2,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.6,
+          "f1": 0.7499999999999999,
+          "slot_recall": 1.0,
+          "slot_precision": 0.6,
+          "prediction_accuracy": 0.6,
+          "gt_slots": 3,
+          "pred_slots": 5
+        },
+        "voting": {
+          "tp": 3,
+          "fp": 5,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.375,
+          "f1": 0.5454545454545454,
+          "slot_recall": 1.0,
+          "slot_precision": 0.375,
+          "prediction_accuracy": 0.375,
+          "gt_slots": 3,
+          "pred_slots": 8
+        },
+        "last_wins": {
+          "tp": 3,
+          "fp": 5,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.375,
+          "f1": 0.5454545454545454,
+          "slot_recall": 1.0,
+          "slot_precision": 0.375,
+          "prediction_accuracy": 0.375,
+          "gt_slots": 3,
+          "pred_slots": 8
+        }
+      },
+      "reliability": {
+        "reliability_est": 0.5,
+        "honesty_gt": 0.23
+      },
+      "veracity": {
+        "em_error": 0.0,
+        "mv_error": 0.0,
+        "bucket_veracity_accuracy": 1.0,
+        "mv_baseline_accuracy": 1.0
+      },
+      "recon": {
+        "mean_deception": 0.673,
+        "honesty_gt": 0.23,
+        "deception_inverse_honesty_gap": 0.09699999999999998
+      }
+    },
+    {
+      "user_id": "U003",
+      "honesty_gt": 0.25,
+      "session_id": "S001",
+      "claim_count": 26,
+      "slot_metrics": {
+        "tp": 3,
+        "fp": 3,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 0.5,
+        "f1": 0.6666666666666666,
+        "slot_recall": 1.0,
+        "slot_precision": 0.5,
+        "prediction_accuracy": 0.5,
+        "gt_slots": 3,
+        "pred_slots": 6
+      },
+      "fusion_ablation": {
+        "llm": {
+          "tp": 3,
+          "fp": 3,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.5,
+          "f1": 0.6666666666666666,
+          "slot_recall": 1.0,
+          "slot_precision": 0.5,
+          "prediction_accuracy": 0.5,
+          "gt_slots": 3,
+          "pred_slots": 6
+        },
+        "voting": {
+          "tp": 3,
+          "fp": 3,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.5,
+          "f1": 0.6666666666666666,
+          "slot_recall": 1.0,
+          "slot_precision": 0.5,
+          "prediction_accuracy": 0.5,
+          "gt_slots": 3,
+          "pred_slots": 6
+        },
+        "last_wins": {
+          "tp": 3,
+          "fp": 3,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.5,
+          "f1": 0.6666666666666666,
+          "slot_recall": 1.0,
+          "slot_precision": 0.5,
+          "prediction_accuracy": 0.5,
+          "gt_slots": 3,
+          "pred_slots": 6
+        }
+      },
+      "reliability": {
+        "reliability_est": 0.5,
+        "honesty_gt": 0.25
+      },
+      "veracity": {
+        "em_error": 0.0,
+        "mv_error": 0.0,
+        "bucket_veracity_accuracy": 1.0,
+        "mv_baseline_accuracy": 1.0
+      },
+      "recon": {
+        "mean_deception": 0.7969999999999999,
+        "honesty_gt": 0.25,
+        "deception_inverse_honesty_gap": 0.04699999999999993
+      }
+    }
+  ]
+}

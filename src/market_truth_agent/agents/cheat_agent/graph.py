@@ -10,6 +10,7 @@ from market_truth_agent.agents.cheat_agent.state import (
     TurnRecord,
     UserModelSnapshot,
 )
+from market_truth_agent.agents.cheat_agent.router import route_skill
 from market_truth_agent.llm.client import chat_completion, parse_utterance
 from market_truth_agent.llm.prompts import build_cheat_agent_prompt, load_skill_markdown
 from market_truth_agent.agents.cheat_agent.memory import persist_turn_memory
@@ -53,75 +54,6 @@ def _last_user_turn(state: CheatAgentState) -> str:
         if turn.speaker == "user":
             return turn.text
     return ""
-
-
-def _user_asked_question(text: str) -> bool:
-    return "?" in text or "？" in text
-
-
-def _hypothesis_question(text: str) -> bool:
-    return any(w in text for w in ("是不是", "有没有", "会不会", "已经", "到了", "破"))
-
-
-def route_skill(state: CheatAgentState) -> dict[str, Any]:
-    """
-    Rule-based router aligned with skills/cheat-agent/SKILL-router.md (M6).
-    LLM routing deferred to M7.
-    """
-    gaps = state.user_model.inferred_gaps
-    resistance = state.user_model.resistance_level
-    claims = state.user_model.partial_claims
-    turn_count = state.session.turn_count
-    last_user = _last_user_turn(state)
-    has_price = bool(state.session.price_snapshot)
-
-    meta = state.turn_metadata or {}
-    consecutive_challenge = int(meta.get("consecutive_challenge_count", 0))
-
-    skill_id = "clarification-probe"
-    phase = "PROBE"
-    rationale = "default clarification"
-    secondary: list[str] = []
-
-    if resistance > 0.6 or consecutive_challenge >= 3:
-        skill_id, phase = "cover-qa", "RECOVER"
-        rationale = "high resistance or too many challenges → recover reciprocity"
-    elif _user_asked_question(last_user):
-        skill_id, phase = "info-seeking-inference", "PROBE"
-        rationale = "user asked → infer gaps from question"
-        if _hypothesis_question(last_user):
-            skill_id = "trap-question" if has_price else "reactance-biased-statement"
-            phase = "VERIFY" if has_price else "CHALLENGE"
-            rationale = "hypothesis-style question → verify or provoke correction"
-            secondary = ["info-seeking-inference"]
-    elif turn_count <= 2 and not gaps and not claims:
-        skill_id, phase = "clarification-probe", "RAPPORT"
-        rationale = "early turn, intent unclear"
-    elif claims and has_price:
-        skill_id, phase = "trap-question", "VERIFY"
-        rationale = "partial claim + price anchor → trapping verification"
-    elif claims:
-        skill_id, phase = "reactance-biased-statement", "CHALLENGE"
-        rationale = "partial claim without quant → biased statement"
-        secondary = ["socratic-probe"]
-    elif turn_count >= 4:
-        skill_id, phase = "implicit-user-modeling", "PROBE"
-        rationale = "multi-turn → implicit intent modeling"
-        secondary = ["bayesian-tom"]
-    elif "港存" not in gaps:
-        skill_id, phase = "reactance-biased-statement", "CHALLENGE"
-        rationale = "no inventory gap filled yet"
-
-    return {
-        "selected_skill_id": skill_id,
-        "selected_phase": phase,
-        "route_rationale": rationale,
-        "turn_metadata": {
-            **meta,
-            "secondary_skills": secondary,
-            "consecutive_challenge_count": consecutive_challenge + (1 if phase == "CHALLENGE" else 0),
-        },
-    }
 
 
 def invoke_skill(state: CheatAgentState) -> dict[str, Any]:
@@ -215,6 +147,16 @@ def build_cheat_agent_graph():
     return graph.compile()
 
 
+def _final_state(final: Any, fallback: CheatAgentState) -> CheatAgentState:
+    if isinstance(final, CheatAgentState):
+        return final
+    if isinstance(final, dict):
+        for key, val in final.items():
+            if hasattr(fallback, key):
+                setattr(fallback, key, val)
+    return fallback
+
+
 def run_cheat_agent_turn(
     *,
     known_identity: KnownIdentity,
@@ -223,7 +165,7 @@ def run_cheat_agent_turn(
     conversation_history: list[TurnRecord],
     memory_root: Path | str | None = None,
 ) -> tuple[str, dict[str, Any], UserModelSnapshot]:
-    """Single-turn convenience wrapper."""
+    """Single-turn wrapper — runs compiled LangGraph via invoke()."""
     state = CheatAgentState(
         known_identity=known_identity,
         session=session,
@@ -233,16 +175,6 @@ def run_cheat_agent_turn(
     if memory_root is not None:
         state.turn_metadata["memory_root"] = str(memory_root)
 
-    for step in (
-        update_user_model,
-        route_skill,
-        invoke_skill,
-        write_memory,
-    ):
-        updates = step(state)
-        for k, v in updates.items():
-            if k == "turn_metadata" and isinstance(v, dict):
-                state.turn_metadata.update(v)
-            else:
-                setattr(state, k, v)
-    return state.agent_utterance, state.turn_metadata, state.user_model
+    graph = build_cheat_agent_graph()
+    final = _final_state(graph.invoke(state), state)
+    return final.agent_utterance, final.turn_metadata, final.user_model

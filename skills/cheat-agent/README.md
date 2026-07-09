@@ -6,7 +6,7 @@
 
 | 类型 | 文件 | 状态 |
 |------|------|------|
-| 路由 | `SKILL-router.md` | ✅ 规则引擎已接入 `graph.py::route_skill` |
+| 路由 | `SKILL-router.md` | ✅ LLM 路由已接入 `router.py::route_skill` |
 | 专项 | `SKILL-*.md` × 11 | ✅ |
 
 ## 调用链
@@ -19,7 +19,7 @@ load_context → update_user_model → route_skill → invoke_skill → write_me
 |------|------|------|
 | `load_context` | ✅ | 注入 session / identity / history |
 | `update_user_model` | 🟡 | 规则版 gap/resistance/claims 推断 |
-| `route_skill` | ✅ | 读 SKILL-router 决策树，输出 `selected_skill_id` + `phase` |
+| `route_skill` | ✅ M7 | 读 SKILL-router + LLM 选 `skill_id` + `phase`（规则 mock/fallback） |
 | `invoke_skill` | ✅ M7 | 加载 `SKILL-{id}.md`，LLM 生成 utterance（mock/live） |
 | `write_memory` | ✅ | L1 session / L2 user model / L3 episodic |
 

@@ -25,6 +25,8 @@ def _check_gt_isolation() -> dict[str, bool]:
 
 
 def _expected_users(version: str | None) -> int:
+    if version == "beta_v1":
+        return 30
     if version == "alpha_v1":
         return 10
     return 3

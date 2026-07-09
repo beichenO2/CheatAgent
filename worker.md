@@ -29,7 +29,7 @@
 
 | 优先级 | 任务 | 负责 |
 |--------|------|------|
-| P1 | Alpha dataset 10×5（`--preset alpha_v1`） | Agent |
+| P1 | Alpha dataset 10×5（7/10 live，U008–U010 mock） | Agent |
 | P3 | M5 UI | 暂缓 |
 
 ## 工作范围

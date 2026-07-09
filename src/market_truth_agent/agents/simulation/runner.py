@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -14,10 +15,11 @@ from market_truth_agent.agents.cheat_agent.state import (
     TurnRecord,
 )
 from market_truth_agent.agents.cheat_agent.skills_registry import list_registered_skills
-from market_truth_agent.agents.customer_agent.graph import CustomerAgentState, CustomerPersona
-from market_truth_agent.agents.customer_agent.graph import run_customer_agent_turn
+from market_truth_agent.agents.customer_agent.graph import CustomerAgentState, run_customer_agent_turn
+from market_truth_agent.agents.customer_agent.state import CustomerPersona
 from market_truth_agent.benchmark.tier_b.price_data import PRICE_TRAJECTORY, TRUTH_VARIANTS
 from market_truth_agent.llm.client import llm_backend_label, llm_mode
+from market_truth_agent.utils.progress import progress
 
 
 def price_at_session_index(session_index: int) -> dict[str, Any]:
@@ -88,6 +90,9 @@ class SimulationRunner:
 
         cheat_utterance = ""
         for turn_idx in range(min_turns):
+            progress(
+                f"[sim] {persona.user_id} {session_id} turn {turn_idx + 1}/{min_turns}"
+            )
             ts = datetime.now(timezone.utc).isoformat()
 
             if turn_idx % 2 == 0:
@@ -131,6 +136,12 @@ class SimulationRunner:
             "agent_metadata": agent_metadata,
             "turn_count": len(history),
         }
+        print(
+            f"[sim] {persona.user_id} session {session_index + 1}/{session_id} "
+            f"turns={len(history)} llm={llm_mode()}",
+            file=sys.stderr,
+            flush=True,
+        )
         return session, user_model
 
     def run_user_sessions(
@@ -171,6 +182,96 @@ class SimulationRunner:
             "sessions": sessions,
         }
 
+    def _user_meta_path(self, persona: CustomerPersona) -> Path:
+        return self.output_dir / "users" / persona.user_id / "meta.json"
+
+    def _load_completed_sessions(
+        self, persona: CustomerPersona, *, min_turns: int
+    ) -> list[dict[str, Any]]:
+        path = self._user_meta_path(persona)
+        if not path.exists():
+            return []
+        try:
+            meta = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            return []
+        sessions: list[dict[str, Any]] = []
+        for session in meta.get("sessions", []):
+            turns = session.get("turns", [])
+            if len(turns) >= min_turns and session.get("agent_metadata"):
+                sessions.append(session)
+            else:
+                progress(
+                    f"[sim] {persona.user_id} drop partial session "
+                    f"{session.get('session_id', '?')} turns={len(turns)}"
+                )
+                break
+        return sessions
+
+    def _write_user_checkpoint(
+        self,
+        persona: CustomerPersona,
+        sessions: list[dict[str, Any]],
+    ) -> Path:
+        user_dir = self._user_meta_path(persona).parent
+        user_dir.mkdir(parents=True, exist_ok=True)
+        meta = {
+            "persona": asdict(persona),
+            "latent": {
+                "claims_truth": latent_for_persona(persona),
+                "price_trajectory": PRICE_TRAJECTORY,
+            },
+            "sessions": sessions,
+        }
+        meta_path = self._user_meta_path(persona)
+        meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+        return meta_path
+
+    def write_user_resumable(
+        self,
+        persona: CustomerPersona,
+        *,
+        sessions_per_user: int = 1,
+        min_turns: int = 20,
+    ) -> list[dict[str, Any]]:
+        """Generate sessions for one user; resume from last completed session."""
+        from market_truth_agent.utils.retry import retry_call
+
+        sessions = self._load_completed_sessions(persona, min_turns=min_turns)
+        if len(sessions) >= sessions_per_user:
+            progress(
+                f"[sim] resume skip {persona.user_id} "
+                f"({len(sessions)}/{sessions_per_user} sessions complete)"
+            )
+            return sessions
+
+        user_model = load_or_create_l2(persona.user_id, self.memory_root)
+        for session_index in range(len(sessions), sessions_per_user):
+            progress(
+                f"[sim] {persona.user_id} session {session_index + 1}/{sessions_per_user} "
+                f"(resume from {len(sessions)})"
+            )
+
+            def _run_one(
+                si: int = session_index,
+                um: Any = user_model,
+            ) -> tuple[dict[str, Any], Any]:
+                return self.run_session(
+                    persona,
+                    min_turns=min_turns,
+                    session_index=si,
+                    user_model=um,
+                )
+
+            session, user_model = retry_call(
+                _run_one,
+                label=f"sim:{persona.user_id}:S{session_index + 1}",
+            )
+            sessions.append(session)
+            meta_path = self._write_user_checkpoint(persona, sessions)
+            progress(f"[sim] checkpoint {persona.user_id} → {meta_path} sessions={len(sessions)}")
+        return sessions
+
     def write_dataset(
         self,
         personas: list[CustomerPersona],
@@ -178,11 +279,96 @@ class SimulationRunner:
         version: str = "smoke_v1",
         min_turns: int = 20,
         sessions_per_user: int = 1,
+        resume: bool = False,
     ) -> Path:
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        manifest_path = self.output_dir / "manifest.json"
+        if manifest_path.exists():
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest["llm_mode"] = llm_mode()
+            manifest["llm_backend"] = llm_backend_label()
+        else:
+            manifest = {
+                "version": version,
+                "users": [],
+                "generated_at": datetime.now(timezone.utc).isoformat(),
+                "llm_mode": llm_mode(),
+                "llm_backend": llm_backend_label(),
+                "registered_skills": list_registered_skills(),
+                "min_turns": min_turns,
+                "sessions_per_user": sessions_per_user,
+            }
+        manifest["version"] = version
+        manifest["min_turns"] = min_turns
+        manifest["sessions_per_user"] = sessions_per_user
+
+        existing_by_id = {u["user_id"]: u for u in manifest.get("users", [])}
+
+        for user_idx, persona in enumerate(personas, start=1):
+            progress(
+                f"[sim] generating {persona.user_id} ({user_idx}/{len(personas)}) "
+                f"sessions={sessions_per_user} turns={min_turns} resume={resume}"
+            )
+            if resume:
+                sessions = self.write_user_resumable(
+                    persona,
+                    sessions_per_user=sessions_per_user,
+                    min_turns=min_turns,
+                )
+            else:
+                sessions = self.run_user_sessions(
+                    persona,
+                    sessions_per_user=sessions_per_user,
+                    min_turns=min_turns,
+                )
+                self._write_user_checkpoint(persona, sessions)
+
+            meta_path = self._user_meta_path(persona)
+            entry = {
+                "user_id": persona.user_id,
+                "path": str(meta_path.relative_to(self.output_dir)),
+                "session_count": len(sessions),
+            }
+            existing_by_id[persona.user_id] = entry
+            manifest["users"] = [
+                existing_by_id[k] for k in sorted(existing_by_id.keys())
+            ]
+            print(
+                f"[sim] wrote {persona.user_id} ({len(sessions)} sessions) → {meta_path}",
+                file=sys.stderr,
+                flush=True,
+            )
+            manifest_path.write_text(
+                json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+
+        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+        return self.output_dir
+
+    def rebuild_manifest(
+        self,
+        personas: list[CustomerPersona],
+        *,
+        version: str,
+        min_turns: int,
+        sessions_per_user: int,
+    ) -> Path:
+        """Rebuild manifest.json from on-disk user meta files."""
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        users: list[dict[str, Any]] = []
+        for persona in personas:
+            meta_path = self._user_meta_path(persona)
+            if not meta_path.exists():
+                continue
+            meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            users.append({
+                "user_id": persona.user_id,
+                "path": str(meta_path.relative_to(self.output_dir)),
+                "session_count": len(meta.get("sessions", [])),
+            })
         manifest = {
             "version": version,
-            "users": [],
+            "users": users,
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "llm_mode": llm_mode(),
             "llm_backend": llm_backend_label(),
@@ -190,35 +376,9 @@ class SimulationRunner:
             "min_turns": min_turns,
             "sessions_per_user": sessions_per_user,
         }
-
-        for persona in personas:
-            user_dir = self.output_dir / "users" / persona.user_id
-            user_dir.mkdir(parents=True, exist_ok=True)
-
-            sessions = self.run_user_sessions(
-                persona,
-                sessions_per_user=sessions_per_user,
-                min_turns=min_turns,
-            )
-            meta = {
-                "persona": asdict(persona),
-                "latent": {
-                    "claims_truth": latent_for_persona(persona),
-                    "price_trajectory": PRICE_TRAJECTORY,
-                },
-                "sessions": sessions,
-            }
-            meta_path = user_dir / "meta.json"
-            meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
-            manifest["users"].append({
-                "user_id": persona.user_id,
-                "path": str(meta_path.relative_to(self.output_dir)),
-                "session_count": len(sessions),
-            })
-
         manifest_path = self.output_dir / "manifest.json"
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
-        return self.output_dir
+        return manifest_path
 
     def write_smoke_dataset(self, personas: list[CustomerPersona], *, min_turns: int = 20) -> Path:
         return self.write_dataset(
@@ -234,4 +394,13 @@ class SimulationRunner:
             version="alpha_v1",
             min_turns=min_turns,
             sessions_per_user=5,
+        )
+
+    def write_beta_dataset(self, personas: list[CustomerPersona], *, min_turns: int = 20) -> Path:
+        return self.write_dataset(
+            personas,
+            version="beta_v1",
+            min_turns=min_turns,
+            sessions_per_user=5,
+            resume=True,
         )

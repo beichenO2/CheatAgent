@@ -54,3 +54,29 @@ def test_claim_score_formula():
     claim = _claim("s1", "b", "高")
     score = compute_claim_score(claim, reliability=0.8, independence=1.0, external_consistency=0.5)
     assert isinstance(score, float)
+
+
+def test_single_source_bucket_keeps_prior():
+    """No cross-source evidence → reliability stays at Beta prior mean (0.5)."""
+    engine = TruthDiscoveryEngine(iterations=5)
+    bucket = "2026-W27|青岛港|铁矿石|港存"
+    claims = [
+        _claim("solo", bucket, "中", incentive=0.1, deception=0.1),
+        _claim("solo", bucket, "中", incentive=0.1, deception=0.1),
+    ]
+    _, rel = engine.infer(claims, lambda c: 0.9)
+    assert abs(rel["solo"] - 0.5) < 1e-6
+
+
+def test_multi_source_updates_reliability():
+    engine = TruthDiscoveryEngine(iterations=5)
+    bucket = "2026-W27|青岛港|铁矿石|港存"
+    claims = [
+        _claim("a", bucket, "高", incentive=0.1, deception=0.05),
+        _claim("b", bucket, "高", incentive=0.1, deception=0.05),
+        _claim("c", bucket, "低", incentive=0.8, deception=0.7),
+    ]
+    _, rel = engine.infer(claims, lambda c: 0.5)
+    assert rel["a"] > 0.5
+    assert rel["c"] < rel["a"]
+

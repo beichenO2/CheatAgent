@@ -1,0 +1,143 @@
+{
+  "user_id": "U002",
+  "session_results": [
+    {
+      "session_id": "S001",
+      "claim_count": 12,
+      "slot_metrics": {
+        "tp": 3,
+        "fp": 1,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 0.75,
+        "f1": 0.8571428571428571,
+        "slot_recall": 1.0,
+        "slot_precision": 0.75,
+        "prediction_accuracy": 0.75,
+        "gt_slots": 3,
+        "pred_slots": 4
+      },
+      "veracity": {
+        "em_error": 0.3333333333333333,
+        "mv_error": 0.3333333333333333,
+        "bucket_veracity_accuracy": 0.6666666666666667,
+        "mv_baseline_accuracy": 0.6666666666666667
+      },
+      "external": {
+        "external_consistency_mean": 0.5
+      },
+      "escalation": {
+        "escalation_count": 1,
+        "escalation_rate": 0.08333333333333333
+      },
+      "recon": {
+        "mean_deception": 0.5589999999999999,
+        "honesty_gt": 0.23,
+        "deception_inverse_honesty_gap": 0.21100000000000008
+      },
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.5589999999999999
+      },
+      "tactic": {
+        "skill_kind_count": 3,
+        "skill_invoke_count": 10,
+        "skill_richness": 1.0888999753422237,
+        "skill_coverage": 0.2727272727272727
+      }
+    }
+  ],
+  "user_metrics": [
+    {
+      "session_id": "S001",
+      "claim_count": 12,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.5589999999999999
+      },
+      "slot_metrics": {
+        "tp": 3,
+        "fp": 1,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 0.75,
+        "f1": 0.8571428571428571,
+        "slot_recall": 1.0,
+        "slot_precision": 0.75,
+        "prediction_accuracy": 0.75,
+        "gt_slots": 3,
+        "pred_slots": 4
+      },
+      "veracity": {
+        "em_error": 0.3333333333333333,
+        "mv_error": 0.3333333333333333,
+        "bucket_veracity_accuracy": 0.6666666666666667,
+        "mv_baseline_accuracy": 0.6666666666666667
+      },
+      "external": {
+        "external_consistency_mean": 0.5
+      },
+      "escalation": {
+        "escalation_count": 1,
+        "escalation_rate": 0.08333333333333333
+      },
+      "reliability": {
+        "reliability_est": 0.947,
+        "honesty_gt": 0.23
+      },
+      "recon": {
+        "mean_deception": 0.5589999999999999,
+        "honesty_gt": 0.23,
+        "deception_inverse_honesty_gap": 0.21100000000000008
+      }
+    },
+    {
+      "session_id": "S002",
+      "claim_count": 17,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.625
+      },
+      "slot_metrics": {
+        "tp": 3,
+        "fp": 4,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 0.42857142857142855,
+        "f1": 0.6,
+        "slot_recall": 1.0,
+        "slot_precision": 0.42857142857142855,
+        "prediction_accuracy": 0.42857142857142855,
+        "gt_slots": 3,
+        "pred_slots": 7
+      },
+      "veracity": {
+        "em_error": 0.0,
+        "mv_error": 0.0,
+        "bucket_veracity_accuracy": 1.0,
+        "mv_baseline_accuracy": 1.0
+      },
+      "external": {
+        "external_consistency_mean": 0.5
+      },
+      "escalation": {
+        "escalation_count": 3,
+        "escalation_rate": 0.17647058823529413
+      },
+      "reliability": {
+        "reliability_est": 0.947,
+        "honesty_gt": 0.23
+      },
+      "recon": {
+        "mean_deception": 0.625,
+        "honesty_gt": 0.23,
+        "deception_inverse_honesty_gap": 0.14500000000000002
+      }
+    }
+  ],
+  "reliability_est": 0.947,
+  "total_claims": 29
+}

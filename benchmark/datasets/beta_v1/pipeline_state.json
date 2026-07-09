@@ -1,0 +1,151 @@
+{
+  "users": {
+    "U001": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U002": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U003": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U004": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U005": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U006": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U007": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U008": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U009": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U010": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U011": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U012": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U013": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U014": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U015": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U016": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U017": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U018": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U019": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U020": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U021": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U022": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U023": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U024": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U025": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U026": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U027": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U028": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U029": {
+      "generate": "done",
+      "sessions": 5
+    },
+    "U030": {
+      "generate": "done",
+      "sessions": 5
+    }
+  },
+  "phase": "evaluate",
+  "updated_at": "2026-07-09T01:39:58.874439+00:00",
+  "preset": "beta_v1",
+  "started_at": "2026-07-08T15:16:30.438375+00:00",
+  "generate_gate": {
+    "dataset_dir": "benchmark/datasets/beta_v1",
+    "version": "beta_v1",
+    "llm_mode": "live",
+    "llm_backend": "polarprivate",
+    "user_count": 1,
+    "expected_users": 30,
+    "expected_sessions_per_user": 5,
+    "gt_isolation": {
+      "recon_no_persona_honesty": true,
+      "invoke_no_honesty_gt": true,
+      "cheat_prompt_no_honesty_field": true
+    },
+    "tactic_aggregate": {
+      "sessions": 5,
+      "avg_skill_kind_count": 2.2
+    },
+    "failures": [
+      "expected >=30 users, got 1"
+    ],
+    "passed": false
+  }
+}

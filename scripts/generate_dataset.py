@@ -24,6 +24,11 @@ def main() -> None:
         default=None,
         help="Output directory (default: benchmark/datasets/<preset>)",
     )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Resume generation from last completed session per user",
+    )
     args = parser.parse_args()
 
     preset = DATASET_PRESETS[args.preset]
@@ -34,6 +39,7 @@ def main() -> None:
         version=args.preset,
         min_turns=preset["min_turns"],
         sessions_per_user=preset["sessions_per_user"],
+        resume=args.resume,
     )
     gate = validate_smoke_dataset(out)
     payload = {

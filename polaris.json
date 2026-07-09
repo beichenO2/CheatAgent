@@ -2,16 +2,16 @@
   "name": "MarketTruthAgent",
   "_meta": {
     "schema_version": "1.1",
-    "last_synced_at": "2026-07-08T18:20:00+08:00"
+    "last_synced_at": "2026-07-08T21:00:00+08:00"
   },
   "description": "铁矿石智能客服：Agent 套话采集 + claim 真伪推断 + 用户信用评估",
   "tier": "research-prototype",
-  "status": "tier-b-smoke-live",
-  "version": "0.3.0",
+  "status": "tier-b-llm-analysis",
+  "version": "0.3.1",
   "health": {
-    "phase": "tier-b-smoke-live",
-    "note": "PolarPrivate live dataset + Claim F1/Pearson/EM 评测已接入",
-    "last_verified": "2026-07-08T18:20:00+08:00"
+    "phase": "tier-b-llm-analysis",
+    "note": "LLM route_skill + ClaimExtractor + ReCon + CustomerAgent LangGraph；Alpha 7/10 live",
+    "last_verified": "2026-07-08T21:00:00+08:00"
   },
   "active_work": [
     {
@@ -21,7 +21,7 @@
       "status": "done",
       "completed_at": "2026-07-08",
       "path": "套话skill/ + skills/cheat-agent/",
-      "note": "15 PDF · 10 分析 · route_skill 已接入"
+      "note": "15 PDF · 10 分析 · route_skill LLM 路由"
     },
     {
       "id": "AW-002",
@@ -30,7 +30,7 @@
       "status": "done",
       "completed_at": "2026-07-08",
       "path": "src/market_truth_agent/agents/",
-      "note": "invoke_skill + CustomerAgent LLM · mock/live via MTA_LLM_MODE"
+      "note": "LLM route_skill + invoke_skill + CustomerAgent LangGraph · mock/live"
     },
     {
       "id": "AW-003",
@@ -47,8 +47,8 @@
       "id": "NU-009",
       "title": "Alpha dataset 10×5 session",
       "priority": "P1",
-      "status": "in_progress",
-      "note": "管线+personas 就绪；全量 live 生成待跑",
+      "status": "partial",
+      "note": "U001–U007 live 5×20；U008–U010 mock；全量暂缓 benchmark/datasets/alpha_v1/",
       "depends_on": ["AW-003"]
     },
     {
@@ -100,10 +100,10 @@
       "need": "交互链路：Agent 套话采集",
       "features": [
         {"name": "1+N 套话 Skills", "status": "done", "path": "skills/cheat-agent/", "note": "11 专项 + router"},
-        {"name": "route_skill 规则路由", "status": "done", "path": "agents/cheat_agent/graph.py"},
+        {"name": "route_skill LLM 路由", "status": "done", "path": "agents/cheat_agent/router.py"},
         {"name": "invoke_skill LLM 生成", "status": "done", "path": "agents/cheat_agent/graph.py"},
         {"name": "LangGraph cheatAgent", "status": "done", "path": "src/.../agents/cheat_agent/"},
-        {"name": "CustomerAgent 模拟器", "status": "done", "path": "src/.../agents/customer_agent/"},
+        {"name": "CustomerAgent LangGraph", "status": "done", "path": "agents/customer_agent/graph.py"},
         {"name": "记忆 L1–L3", "status": "done", "path": "agents/cheat_agent/memory.py"},
         {"name": "PolarPrivate LLM", "status": "done", "path": "llm/client.py"},
         {"name": "对话存储", "status": "done", "path": "storage/conversation_store.py"}
@@ -113,8 +113,9 @@
       "id": "R2",
       "need": "分析链路：claim + 真伪 + 信用（GT 隔离）",
       "features": [
-        {"name": "Claim 抽取", "status": "partial", "note": "规则版保留，待 LLM 升级"},
-        {"name": "ReCon 欺骗检测", "status": "partial", "note": "已去 honesty GT 泄漏，待 LLM 复刻"},
+        {"name": "Normalize 层", "status": "done", "note": "ReCon→Normalize→Claim，qwen3.7-plus 纯文本", "path": "analysis/normalize.py"},
+        {"name": "Claim 形成", "status": "done", "note": "Normalize 输出 canonical slots → Claim"},
+        {"name": "ReCon 欺骗检测", "status": "done", "note": "LLM Formulation+Refinement，无 honesty GT 泄漏"},
         {"name": "Truth Discovery EM", "status": "done"},
         {"name": "价格走线校验", "status": "partial", "note": "待按 session 时间索引"}
       ]
@@ -124,7 +125,7 @@
       "need": "Agent Benchmark",
       "features": [
         {"name": "Tier A 组件", "status": "done"},
-        {"name": "Tier B Agent dataset", "status": "done", "note": "smoke_v1 live + alpha_v1 管线"},
+        {"name": "Tier B Agent dataset", "status": "partial", "note": "smoke_v1 + alpha_v1 U001–U007 live"},
         {"name": "套话指标 skill_kind/invoke/richness/coverage", "status": "done"},
         {"name": "Claim F1 / Pearson 离线评测", "status": "done", "note": "evaluate_dataset.py + claim_metrics.py"},
         {"name": "旧规则 Tier B", "status": "removed", "see": "wrongway.md"}
@@ -134,8 +135,8 @@
   "verification": {
     "commands": [
       "MTA_LLM_MODE=mock pytest test/ -v",
-      "python scripts/generate_dataset.py --preset smoke_v1",
-      "python scripts/evaluate_dataset.py --dataset-dir benchmark/datasets/smoke_v1"
+      "python scripts/evaluate_dataset.py --dataset-dir benchmark/datasets/smoke_v1",
+      "python scripts/evaluate_dataset.py --ablation-report"
     ]
   }
 }

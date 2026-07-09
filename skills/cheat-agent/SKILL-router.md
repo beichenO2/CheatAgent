@@ -1,11 +1,11 @@
 ---
 name: taohua-router
-description: 套话策略路由——根据 user_model、对话阶段、resistance，从 11 个专项 skill 中选最合适策略（含 cover-qa）。铁矿石电话客服。
+description: 套话策略路由——根据 user_model、对话阶段、resistance，从 11 个专项 skill 中选最合适策略（含 cover-qa）。铁矿石市场情报客服（非买卖撮合）。
 ---
 
 # SKILL-router — 套话策略路由
 
-> 实现：`graph.py::route_skill` **规则引擎**（M6 ✅）；`invoke_skill` **LLM utterance**（M7 ✅）。LLM 路由为远期可选项，当前不在范围。
+> 实现：`router.py::route_skill` **LLM 路由**（M7 ✅，读取 SKILL-router.md）；`invoke_skill` **LLM utterance**（M7 ✅）。规则引擎仅作 mock/fallback。
 
 ## 输入
 

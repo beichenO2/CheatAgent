@@ -7,12 +7,12 @@
 | 阶段 | 状态 | 说明 |
 |------|------|------|
 | M0 SSoT + 调研 | ✅ | ADR-001~008 |
-| M1 分析骨架 | 🟡 保留 | ontology、Truth Discovery EM、ReCon（已去 GT 泄漏） |
+| M1 分析骨架 | ✅ | LLM ClaimExtractor + ReCon LLM + Truth Discovery EM |
 | M2 旧 Tier B | ❌ 已删 | 规则 dialogue_simulator / 30 scenario |
 | M3 旧交互链路 | ❌ 已删 | 7 模板 + FSM |
 | M5 演示 UI | 暂缓 | 用户确认先不做 |
 | **M6 套话 Skills** | **✅ 完成** | 1 路由 + 11 专项；15 篇论文；`套话skill/` + `skills/cheat-agent/` |
-| **M7 cheatAgent 智能体** | **✅ 完成** | LangGraph + route_skill + invoke_skill LLM + CustomerAgent LLM |
+| **M7 cheatAgent 智能体** | **✅ 完成** | LangGraph + LLM route_skill + invoke_skill + CustomerAgent LangGraph |
 | **M8 Dataset + 冒烟评测** | **✅ live** | PolarPrivate 3×20 + Claim F1/Pearson/EM 评测 |
 
 ---
@@ -28,7 +28,7 @@
 | 10 方向分析 | `套话skill/analysis/*.md` | ✅ |
 | 路由 Skill | `skills/cheat-agent/SKILL-router.md` | ✅ |
 | 专项 Skills × 11 | `skills/cheat-agent/SKILL-*.md` | ✅ |
-| 路由规则接入 | `graph.py::route_skill` | ✅ |
+| 路由 LLM 接入 | `router.py::route_skill` | ✅ |
 
 **11 个 skill_id**：`clarification-probe` · `info-seeking-inference` · `bayesian-tom` · `implicit-user-modeling` · `reactance-biased-statement` · `socratic-probe` · `trap-question` · `info-design-disclosure` · `info-manipulation-bias` · `cognitive-conflict-probe` · `cover-qa`
 
@@ -44,7 +44,7 @@
 cheatAgent (LangGraph)          CustomerAgent (LLM simulator)
   ├ load_context                  ├ load_persona + latent GT
   ├ update_user_model             └ compose_reply (honesty=strategy)
-  ├ route_skill → SKILL-router
+  ├ route_skill → SKILL-router (LLM)
   ├ invoke_skill → SKILL-*
   └ write_memory (L0–L3)
 ```
@@ -65,8 +65,7 @@ src/market_truth_agent/agents/
 - [x] 记忆分层持久化 L1–L3（`cheat_agent/memory.py`）
 
 **待完成 / 待审阅**：
-- [ ] live LLM 端到端验证（需 API 密钥）
-- [ ] LLM 路由（`route_skill` 当前为规则引擎，非 LLM）
+- [x] Alpha live 部分生成（U001–U007 完成；U008–U010 mock，全量暂缓）
 - [ ] 用户审阅修改 graph 节点划分（ADR-008）
 
 **验收**：✅ `build_cheat_agent_graph()` 可编译；✅ 单轮 turn 可跑通（mock/live）。
@@ -104,14 +103,14 @@ pytest test/agents/ -v
 
 ---
 
-## Alpha — 10×5 dataset 🔧（管线就绪）
+## Alpha — 10×5 dataset 🟡（7/10 live）
 
 | 项 | 状态 |
 |----|------|
 | `ALPHA_PERSONAS` ×10 | ✅ `personas.py` |
 | 多 session + 跨 session 记忆 | ✅ `runner.write_dataset` |
 | 价格走线 7 周 | ✅ `price_data.PRICE_TRAJECTORY` |
-| 全量 mock/live 生成 | 待跑 `benchmark/datasets/alpha_v1/` |
+| live 生成 | 🟡 U001–U007 ✅（各 5×20）；U008–U010 mock；全量暂缓 |
 
 ### 套话性能指标（ADR-007）
 

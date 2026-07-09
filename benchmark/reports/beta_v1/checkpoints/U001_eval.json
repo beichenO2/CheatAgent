@@ -1,0 +1,528 @@
+{
+  "user_row": {
+    "user_id": "U001",
+    "honesty_gt": 0.2,
+    "reliability_est": 0.9125,
+    "claim_count": 75,
+    "slot_recall_mean": 0.6,
+    "slot_precision_mean": 0.325,
+    "sessions": [
+      {
+        "session_id": "S001",
+        "claim_count": 15,
+        "slot_metrics": {
+          "tp": 1,
+          "fp": 5,
+          "fn": 2,
+          "recall": 0.3333333333333333,
+          "precision": 0.16666666666666666,
+          "f1": 0.2222222222222222,
+          "slot_recall": 0.3333333333333333,
+          "slot_precision": 0.16666666666666666,
+          "prediction_accuracy": 0.16666666666666666,
+          "gt_slots": 3,
+          "pred_slots": 6
+        },
+        "veracity": {
+          "em_error": 0.6666666666666666,
+          "mv_error": 0.6666666666666666,
+          "bucket_veracity_accuracy": 0.33333333333333337,
+          "mv_baseline_accuracy": 0.33333333333333337
+        },
+        "external": {
+          "external_consistency_mean": 0.5
+        },
+        "escalation": {
+          "escalation_count": 1,
+          "escalation_rate": 0.06666666666666667
+        },
+        "recon": {
+          "mean_deception": 0.756,
+          "honesty_gt": 0.2,
+          "deception_inverse_honesty_gap": 0.04400000000000004
+        },
+        "pipeline": {
+          "enable_normalize": true,
+          "max_turns": null,
+          "mean_deception": 0.756
+        },
+        "tactic": {
+          "skill_kind_count": 3,
+          "skill_invoke_count": 10,
+          "skill_richness": 0.8979457248537798,
+          "skill_coverage": 0.2727272727272727
+        }
+      },
+      {
+        "session_id": "S002",
+        "claim_count": 16,
+        "slot_metrics": {
+          "tp": 1,
+          "fp": 7,
+          "fn": 2,
+          "recall": 0.3333333333333333,
+          "precision": 0.125,
+          "f1": 0.18181818181818182,
+          "slot_recall": 0.3333333333333333,
+          "slot_precision": 0.125,
+          "prediction_accuracy": 0.125,
+          "gt_slots": 3,
+          "pred_slots": 8
+        },
+        "veracity": {
+          "em_error": 0.6666666666666666,
+          "mv_error": 0.3333333333333333,
+          "bucket_veracity_accuracy": 0.33333333333333337,
+          "mv_baseline_accuracy": 0.6666666666666667
+        },
+        "external": {
+          "external_consistency_mean": 0.475
+        },
+        "escalation": {
+          "escalation_count": 6,
+          "escalation_rate": 0.375
+        },
+        "recon": {
+          "mean_deception": 0.7969999999999999,
+          "honesty_gt": 0.2,
+          "deception_inverse_honesty_gap": 0.0030000000000001137
+        },
+        "pipeline": {
+          "enable_normalize": true,
+          "max_turns": null,
+          "mean_deception": 0.7969999999999999
+        },
+        "tactic": {
+          "skill_kind_count": 3,
+          "skill_invoke_count": 10,
+          "skill_richness": 0.8018185525403374,
+          "skill_coverage": 0.2727272727272727
+        }
+      },
+      {
+        "session_id": "S003",
+        "claim_count": 15,
+        "slot_metrics": {
+          "tp": 3,
+          "fp": 3,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.5,
+          "f1": 0.6666666666666666,
+          "slot_recall": 1.0,
+          "slot_precision": 0.5,
+          "prediction_accuracy": 0.5,
+          "gt_slots": 3,
+          "pred_slots": 6
+        },
+        "veracity": {
+          "em_error": 0.0,
+          "mv_error": 0.3333333333333333,
+          "bucket_veracity_accuracy": 1.0,
+          "mv_baseline_accuracy": 0.6666666666666667
+        },
+        "external": {
+          "external_consistency_mean": 0.5066666666666666
+        },
+        "escalation": {
+          "escalation_count": 3,
+          "escalation_rate": 0.2
+        },
+        "recon": {
+          "mean_deception": 0.693,
+          "honesty_gt": 0.2,
+          "deception_inverse_honesty_gap": 0.1070000000000001
+        },
+        "pipeline": {
+          "enable_normalize": true,
+          "max_turns": null,
+          "mean_deception": 0.693
+        },
+        "tactic": {
+          "skill_kind_count": 2,
+          "skill_invoke_count": 10,
+          "skill_richness": 0.6108643020528935,
+          "skill_coverage": 0.18181818181818182
+        }
+      },
+      {
+        "session_id": "S004",
+        "claim_count": 18,
+        "slot_metrics": {
+          "tp": 2,
+          "fp": 4,
+          "fn": 1,
+          "recall": 0.6666666666666666,
+          "precision": 0.3333333333333333,
+          "f1": 0.4444444444444444,
+          "slot_recall": 0.6666666666666666,
+          "slot_precision": 0.3333333333333333,
+          "prediction_accuracy": 0.3333333333333333,
+          "gt_slots": 3,
+          "pred_slots": 6
+        },
+        "veracity": {
+          "em_error": 0.6666666666666666,
+          "mv_error": 0.6666666666666666,
+          "bucket_veracity_accuracy": 0.33333333333333337,
+          "mv_baseline_accuracy": 0.33333333333333337
+        },
+        "external": {
+          "external_consistency_mean": 0.4722222222222222
+        },
+        "escalation": {
+          "escalation_count": 1,
+          "escalation_rate": 0.05555555555555555
+        },
+        "recon": {
+          "mean_deception": 0.708,
+          "honesty_gt": 0.2,
+          "deception_inverse_honesty_gap": 0.09200000000000008
+        },
+        "pipeline": {
+          "enable_normalize": true,
+          "max_turns": null,
+          "mean_deception": 0.708
+        },
+        "tactic": {
+          "skill_kind_count": 1,
+          "skill_invoke_count": 10,
+          "skill_richness": -1.000088900581841e-12,
+          "skill_coverage": 0.09090909090909091
+        }
+      },
+      {
+        "session_id": "S005",
+        "claim_count": 11,
+        "slot_metrics": {
+          "tp": 2,
+          "fp": 2,
+          "fn": 1,
+          "recall": 0.6666666666666666,
+          "precision": 0.5,
+          "f1": 0.5714285714285715,
+          "slot_recall": 0.6666666666666666,
+          "slot_precision": 0.5,
+          "prediction_accuracy": 0.5,
+          "gt_slots": 3,
+          "pred_slots": 4
+        },
+        "veracity": {
+          "em_error": 0.3333333333333333,
+          "mv_error": 0.3333333333333333,
+          "bucket_veracity_accuracy": 0.6666666666666667,
+          "mv_baseline_accuracy": 0.6666666666666667
+        },
+        "external": {
+          "external_consistency_mean": 0.5
+        },
+        "escalation": {
+          "escalation_count": 2,
+          "escalation_rate": 0.18181818181818182
+        },
+        "recon": {
+          "mean_deception": 0.663,
+          "honesty_gt": 0.2,
+          "deception_inverse_honesty_gap": 0.137
+        },
+        "pipeline": {
+          "enable_normalize": true,
+          "max_turns": null,
+          "mean_deception": 0.663
+        },
+        "tactic": {
+          "skill_kind_count": 4,
+          "skill_invoke_count": 10,
+          "skill_richness": 1.0888999753412236,
+          "skill_coverage": 0.36363636363636365
+        }
+      }
+    ]
+  },
+  "session_metric_rows": [
+    {
+      "session_id": "S001",
+      "claim_count": 15,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.756
+      },
+      "slot_metrics": {
+        "tp": 1,
+        "fp": 5,
+        "fn": 2,
+        "recall": 0.3333333333333333,
+        "precision": 0.16666666666666666,
+        "f1": 0.2222222222222222,
+        "slot_recall": 0.3333333333333333,
+        "slot_precision": 0.16666666666666666,
+        "prediction_accuracy": 0.16666666666666666,
+        "gt_slots": 3,
+        "pred_slots": 6
+      },
+      "veracity": {
+        "em_error": 0.6666666666666666,
+        "mv_error": 0.6666666666666666,
+        "bucket_veracity_accuracy": 0.33333333333333337,
+        "mv_baseline_accuracy": 0.33333333333333337
+      },
+      "external": {
+        "external_consistency_mean": 0.5
+      },
+      "escalation": {
+        "escalation_count": 1,
+        "escalation_rate": 0.06666666666666667
+      },
+      "reliability": {
+        "reliability_est": 0.938,
+        "honesty_gt": 0.2
+      },
+      "recon": {
+        "mean_deception": 0.756,
+        "honesty_gt": 0.2,
+        "deception_inverse_honesty_gap": 0.04400000000000004
+      }
+    },
+    {
+      "session_id": "S002",
+      "claim_count": 16,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.7969999999999999
+      },
+      "slot_metrics": {
+        "tp": 1,
+        "fp": 7,
+        "fn": 2,
+        "recall": 0.3333333333333333,
+        "precision": 0.125,
+        "f1": 0.18181818181818182,
+        "slot_recall": 0.3333333333333333,
+        "slot_precision": 0.125,
+        "prediction_accuracy": 0.125,
+        "gt_slots": 3,
+        "pred_slots": 8
+      },
+      "veracity": {
+        "em_error": 0.6666666666666666,
+        "mv_error": 0.3333333333333333,
+        "bucket_veracity_accuracy": 0.33333333333333337,
+        "mv_baseline_accuracy": 0.6666666666666667
+      },
+      "external": {
+        "external_consistency_mean": 0.475
+      },
+      "escalation": {
+        "escalation_count": 6,
+        "escalation_rate": 0.375
+      },
+      "reliability": {
+        "reliability_est": 0.932,
+        "honesty_gt": 0.2
+      },
+      "recon": {
+        "mean_deception": 0.7969999999999999,
+        "honesty_gt": 0.2,
+        "deception_inverse_honesty_gap": 0.0030000000000001137
+      }
+    },
+    {
+      "session_id": "S003",
+      "claim_count": 15,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.693
+      },
+      "slot_metrics": {
+        "tp": 3,
+        "fp": 3,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 0.5,
+        "f1": 0.6666666666666666,
+        "slot_recall": 1.0,
+        "slot_precision": 0.5,
+        "prediction_accuracy": 0.5,
+        "gt_slots": 3,
+        "pred_slots": 6
+      },
+      "veracity": {
+        "em_error": 0.0,
+        "mv_error": 0.3333333333333333,
+        "bucket_veracity_accuracy": 1.0,
+        "mv_baseline_accuracy": 0.6666666666666667
+      },
+      "external": {
+        "external_consistency_mean": 0.5066666666666666
+      },
+      "escalation": {
+        "escalation_count": 3,
+        "escalation_rate": 0.2
+      },
+      "reliability": {
+        "reliability_est": 0.95,
+        "honesty_gt": 0.2
+      },
+      "recon": {
+        "mean_deception": 0.693,
+        "honesty_gt": 0.2,
+        "deception_inverse_honesty_gap": 0.1070000000000001
+      }
+    },
+    {
+      "session_id": "S004",
+      "claim_count": 18,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.708
+      },
+      "slot_metrics": {
+        "tp": 2,
+        "fp": 4,
+        "fn": 1,
+        "recall": 0.6666666666666666,
+        "precision": 0.3333333333333333,
+        "f1": 0.4444444444444444,
+        "slot_recall": 0.6666666666666666,
+        "slot_precision": 0.3333333333333333,
+        "prediction_accuracy": 0.3333333333333333,
+        "gt_slots": 3,
+        "pred_slots": 6
+      },
+      "veracity": {
+        "em_error": 0.6666666666666666,
+        "mv_error": 0.6666666666666666,
+        "bucket_veracity_accuracy": 0.33333333333333337,
+        "mv_baseline_accuracy": 0.33333333333333337
+      },
+      "external": {
+        "external_consistency_mean": 0.4722222222222222
+      },
+      "escalation": {
+        "escalation_count": 1,
+        "escalation_rate": 0.05555555555555555
+      },
+      "reliability": {
+        "reliability_est": 0.938,
+        "honesty_gt": 0.2
+      },
+      "recon": {
+        "mean_deception": 0.708,
+        "honesty_gt": 0.2,
+        "deception_inverse_honesty_gap": 0.09200000000000008
+      }
+    },
+    {
+      "session_id": "S005",
+      "claim_count": 11,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.663
+      },
+      "slot_metrics": {
+        "tp": 2,
+        "fp": 2,
+        "fn": 1,
+        "recall": 0.6666666666666666,
+        "precision": 0.5,
+        "f1": 0.5714285714285715,
+        "slot_recall": 0.6666666666666666,
+        "slot_precision": 0.5,
+        "prediction_accuracy": 0.5,
+        "gt_slots": 3,
+        "pred_slots": 4
+      },
+      "veracity": {
+        "em_error": 0.3333333333333333,
+        "mv_error": 0.3333333333333333,
+        "bucket_veracity_accuracy": 0.6666666666666667,
+        "mv_baseline_accuracy": 0.6666666666666667
+      },
+      "external": {
+        "external_consistency_mean": 0.5
+      },
+      "escalation": {
+        "escalation_count": 2,
+        "escalation_rate": 0.18181818181818182
+      },
+      "reliability": {
+        "reliability_est": 0.9125,
+        "honesty_gt": 0.2
+      },
+      "recon": {
+        "mean_deception": 0.663,
+        "honesty_gt": 0.2,
+        "deception_inverse_honesty_gap": 0.137
+      }
+    }
+  ],
+  "tactic_rows": [
+    {
+      "skill_kind_count": 3,
+      "skill_invoke_count": 10,
+      "skill_richness": 0.8979457248537798,
+      "skill_coverage": 0.2727272727272727
+    },
+    {
+      "skill_kind_count": 3,
+      "skill_invoke_count": 10,
+      "skill_richness": 0.8018185525403374,
+      "skill_coverage": 0.2727272727272727
+    },
+    {
+      "skill_kind_count": 2,
+      "skill_invoke_count": 10,
+      "skill_richness": 0.6108643020528935,
+      "skill_coverage": 0.18181818181818182
+    },
+    {
+      "skill_kind_count": 1,
+      "skill_invoke_count": 10,
+      "skill_richness": -1.000088900581841e-12,
+      "skill_coverage": 0.09090909090909091
+    },
+    {
+      "skill_kind_count": 4,
+      "skill_invoke_count": 10,
+      "skill_richness": 1.0888999753412236,
+      "skill_coverage": 0.36363636363636365
+    }
+  ],
+  "recon_rows": [
+    {
+      "user_id": "U001",
+      "mean_deception": 0.756,
+      "honesty_gt": 0.2
+    },
+    {
+      "user_id": "U001",
+      "mean_deception": 0.7969999999999999,
+      "honesty_gt": 0.2
+    },
+    {
+      "user_id": "U001",
+      "mean_deception": 0.693,
+      "honesty_gt": 0.2
+    },
+    {
+      "user_id": "U001",
+      "mean_deception": 0.708,
+      "honesty_gt": 0.2
+    },
+    {
+      "user_id": "U001",
+      "mean_deception": 0.663,
+      "honesty_gt": 0.2
+    }
+  ],
+  "reliability_row": {
+    "user_id": "U001",
+    "honesty_gt": 0.2,
+    "reliability_est": 0.9125
+  }
+}

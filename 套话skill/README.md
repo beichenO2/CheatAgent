@@ -14,7 +14,7 @@
 | ⑥ cheatAgent 集成 | ✅ | `route_skill` 规则路由 + `invoke_skill` LLM（M7） |
 | ⑦ 同步到 cheat-agent | ✅ | `skills/cheat-agent/` 已同步全部 12 个 SKILL 文件 |
 
-**下一步（Alpha）**：live LLM 扩至 10 用户 × 5 session；claim F1 / Pearson 离线对照。
+**Alpha（2026-07-08）**：`alpha_v1` U001–U007 各 5×20 live；U008–U010 mock。Claim F1 / Pearson 评测已接入 `evaluate_dataset.py`。
 
 ## 目录结构
 

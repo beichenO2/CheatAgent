@@ -13,13 +13,22 @@ from market_truth_agent.agents.cheat_agent.state import (
     TurnRecord,
     UserModelSnapshot,
 )
-from market_truth_agent.agents.customer_agent.graph import CustomerAgentState, CustomerPersona
-from market_truth_agent.agents.customer_agent.graph import run_customer_agent_turn
+from market_truth_agent.agents.customer_agent.graph import (
+    CustomerAgentState,
+    build_customer_agent_graph,
+    run_customer_agent_turn,
+)
+from market_truth_agent.agents.customer_agent.state import CustomerPersona
 from market_truth_agent.llm.prompts import build_cheat_agent_prompt, load_skill_markdown
 
 
 def test_build_cheat_agent_graph_compiles():
     graph = build_cheat_agent_graph()
+    assert graph is not None
+
+
+def test_build_customer_agent_graph_compiles():
+    graph = build_customer_agent_graph()
     assert graph is not None
 
 
@@ -98,3 +107,17 @@ def test_invoke_skill_source_uses_llm_not_template():
     assert "chat_completion" in source
     assert "load_skill_markdown" in source
     assert "想了解下您这边最近经营情况" not in source
+
+
+def test_run_cheat_agent_turn_uses_langgraph_invoke():
+    source = inspect.getsource(run_cheat_agent_turn)
+    assert "build_cheat_agent_graph" in source
+    assert "invoke" in source
+
+
+def test_run_customer_agent_turn_uses_langgraph_invoke():
+    from market_truth_agent.agents.customer_agent.graph import run_customer_agent_turn
+
+    source = inspect.getsource(run_customer_agent_turn)
+    assert "build_customer_agent_graph" in source
+    assert "invoke" in source

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from market_truth_agent.agents.customer_agent.graph import CustomerPersona
+from market_truth_agent.agents.customer_agent.state import CustomerPersona
 from market_truth_agent.benchmark.tier_b.price_data import ROLES, REGIONS, PERSONALITIES
 
 SMOKE_PERSONAS = [
@@ -36,6 +36,7 @@ SMOKE_PERSONAS = [
 ]
 
 # 10 users — honesty spread for Pearson / reliability calibration
+# position: 长期固定 long（见 CheatAgent.md 仿真假设）；不生成 short/neutral
 _ALPHA_SPECS: list[tuple[str, str, str, str, float, float]] = [
     ("U001", "厂长", "青岛港", "谨慎型", 0.85, 0.2),
     ("U002", "贸易员", "日照港", "健谈型", 0.55, 0.4),
@@ -62,7 +63,35 @@ ALPHA_PERSONAS = [
     for uid, role, region, personality, honesty, resistance in _ALPHA_SPECS
 ]
 
+
+def build_beta_personas(count: int = 30) -> list[CustomerPersona]:
+    """30 users with honesty spread 0.20–0.95 for reliability calibration."""
+    personas: list[CustomerPersona] = []
+    for i in range(count):
+        uid = f"U{i + 1:03d}"
+        role = ROLES[i % len(ROLES)]
+        region = REGIONS[i % len(REGIONS)]
+        personality = PERSONALITIES[i % len(PERSONALITIES)]
+        honesty = round(0.20 + (i / max(count - 1, 1)) * 0.75, 2)
+        resistance = round(0.15 + (1.0 - honesty) * 0.55, 2)
+        personas.append(
+            CustomerPersona(
+                user_id=uid,
+                role=role,
+                region=region,
+                position="long",
+                personality=personality,
+                honesty=honesty,
+                resistance=resistance,
+            )
+        )
+    return personas
+
+
+BETA_PERSONAS = build_beta_personas(30)
+
 DATASET_PRESETS = {
     "smoke_v1": {"personas": SMOKE_PERSONAS, "sessions_per_user": 1, "min_turns": 20},
     "alpha_v1": {"personas": ALPHA_PERSONAS, "sessions_per_user": 5, "min_turns": 20},
+    "beta_v1": {"personas": BETA_PERSONAS, "sessions_per_user": 5, "min_turns": 20},
 }

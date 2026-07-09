@@ -28,7 +28,7 @@ def latent_slots(latent_claims: list[dict[str, Any]]) -> dict[ClaimSlot, str]:
 
 
 def predicted_slots(claims: list[Claim]) -> dict[ClaimSlot, str]:
-    """Last claim wins per (region, indicator) slot."""
+    """Last claim wins per (region, indicator) slot. Legacy / last_wins baseline."""
     out: dict[ClaimSlot, str] = {}
     for claim in claims:
         out[(claim.region, claim.indicator)] = claim.value
@@ -38,9 +38,13 @@ def predicted_slots(claims: list[Claim]) -> dict[ClaimSlot, str]:
 def claim_f1_vs_latent(
     claims: list[Claim],
     latent_claims: list[dict[str, Any]],
+    *,
+    pred: dict[ClaimSlot, str] | None = None,
 ) -> dict[str, float | int]:
+    """Slot F1 vs latent. Optional ``pred`` overrides last-wins aggregation."""
     gt = latent_slots(latent_claims)
-    pred = predicted_slots(claims)
+    if pred is None:
+        pred = predicted_slots(claims)
     keys = set(gt) | set(pred)
     tp = fp = fn = 0
     for key in keys:
