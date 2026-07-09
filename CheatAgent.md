@@ -327,10 +327,17 @@ CustomerAgent（客户模拟器）              cheatAgent（套话客服）
 
 ---
 
-## 六、展示方案（2026-07-09 定稿，详见 ADR-011）
+## 六、展示方案（2026-07-09 定稿 + 追加，详见 ADR-011）
 
-**已选：方案 B Dashboard 为主**；方案 A（LibreChat 聊天页）不做——它展示不了
-抗欺诈性能，其叙事价值由 Dashboard 内嵌「session 回放」面板承担。
+**双载体**：
+- **方案 B Dashboard**（评测成果，论文风格）——已交付
+- **方案 C 智能客服 Web UI**（2026-07-09 用户追加）——已交付：PolarUI 模版 Web
+  （PolarChat = LibreChat 套壳）承载客服工作流，**客服 = Agent、客户 = 登录用户（人类直接交互）**；
+  发行版 `~/Desktop/Web_related/market-truth-cs/`（UI :3081 · API :3921），
+  预置 beta_v1 **30 用户（u001–u030 直登）× 150 段对话记录 + 三层记忆**
+  （用户层画像=业务已知信息、会话层=eval LLM 融合槽位；GT 隔离，不导入 honesty/latent）；
+  LLM 经 LLM Proxy（PolarPrivate，开源版 [PolarPrivate_OpenSource](https://github.com/beichenO2/PolarPrivate_OpenSource.git)）。
+  原「方案 A LibreChat 聊天页」由此升级实现——不再是裸聊天页，而是带记忆/情报采集的完整客服站。
 
 **形态**：`scripts/build_dashboard.py` 读评测产物 → 生成自包含静态
 `dashboard.html`（ECharts + 内嵌 JSON）。零服务依赖、双击可开、可直接发给老师。

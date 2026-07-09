@@ -10,7 +10,7 @@
 | M1 分析骨架 | ✅ | LLM ClaimExtractor + ReCon LLM + Truth Discovery EM |
 | M2 旧 Tier B | ❌ 已删 | 规则 dialogue_simulator / 30 scenario |
 | M3 旧交互链路 | ❌ 已删 | 7 模板 + FSM |
-| M5 演示 UI | ✅ 完成 | `build_dashboard.py`：论文风格 Overview + Session 回放（TC 判例书签）；reliability 图等 cross_user_td 数据自动填充 |
+| M5 演示 UI | ✅ 完成 | ① Dashboard：论文风格 Overview + Session 回放（TC 书签）② 客服 Web UI：PolarChat 发行版 `market-truth-cs`（:3081，30 用户 × 150 对话 + 三层记忆，LLM 走 PolarPrivate_OpenSource） |
 | **M6 套话 Skills** | **✅ 完成** | 1 路由 + 11 专项；15 篇论文；`套话skill/` + `skills/cheat-agent/` |
 | **M7 cheatAgent 智能体** | **✅ 完成** | LangGraph + LLM route_skill + invoke_skill + CustomerAgent LangGraph |
 | **M8 Dataset + 冒烟评测** | **✅ live** | PolarPrivate 3×20 + Claim F1/Pearson/EM 评测 |

@@ -501,7 +501,7 @@ document.getElementById("tbl-ablation").innerHTML = "<table><tr><th class='l'>èž
   MODES.forEach((mo, i) => {
     series.push({
       name: MNAME[mo], type: "bar", barGap: "10%",
-      data: METS.map(m => D.ablation[mo]?.[m]?.mean ?? 0),
+      data: METS.map(m => +((D.ablation[mo]?.[m]?.mean ?? 0).toFixed(3))),
       itemStyle: {color: ["#8b1a1a","#4a6741","#7d7461"][i]},
     });
     series.push({
@@ -525,7 +525,8 @@ document.getElementById("tbl-ablation").innerHTML = "<table><tr><th class='l'>èž
     grid: {left:48, right:16, top:36, bottom:28},
     xAxis: {type:"category", data:["F1","recall","precision"], axisLabel:{fontSize:12}},
     yAxis: {type:"value", min:0, max:1},
-    series, tooltip:{trigger:"axis"},
+    series,
+    tooltip: {trigger:"axis", valueFormatter: v => (typeof v === "number" ? v.toFixed(3) : v)},
   });
 })();
 
@@ -583,8 +584,8 @@ if (D.rel_scatter.points.length){
     xAxis:{type:"category", data:inds.map(i=>(i.core?"â— ":"â—‹ ")+i.indicator), axisLabel:{fontSize:12,interval:0,rotate:20}},
     yAxis:{type:"value",min:0,max:1},
     series:[
-      {name:"recall",type:"bar",data:inds.map(i=>i.recall),itemStyle:{color:"#8b1a1a"}},
-      {name:"precision",type:"bar",data:inds.map(i=>i.precision),itemStyle:{color:"#7d7461"}},
+      {name:"recall",type:"bar",data:inds.map(i=>i.recall==null?null:+i.recall.toFixed(3)),itemStyle:{color:"#8b1a1a"}},
+      {name:"precision",type:"bar",data:inds.map(i=>i.precision==null?null:+i.precision.toFixed(3)),itemStyle:{color:"#7d7461"}},
     ],
     tooltip:{trigger:"axis", formatter: ps => {
       const i = inds[ps[0].dataIndex];

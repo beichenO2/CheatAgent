@@ -2,10 +2,16 @@
 > - 项目灵魂：`PolarSoul.md`
 > - 当前状态：`polaris.json`
 > - 规划：`roadmap.md`
-> - 架构/Benchmark/Agent重建/LangGraph/测试策略：`decisions/001-008`
+> - 架构/Benchmark/Agent重建/LangGraph/测试策略：`decisions/001-011`
 > - **已废弃教训**：`wrongway.md`
-> - **套话 Skills（M6 ✅）· Agent LLM（M7 ✅）· 冒烟 Benchmark（M8 ✅）**：`套话skill/` · `skills/cheat-agent/` · `benchmark/datasets/smoke_v1/`
+> - **套话 Skills（M6 ✅）· Agent LLM（M7 ✅）· Benchmark（M8/M9 ✅）**：`套话skill/` · `skills/cheat-agent/` · `benchmark/datasets/beta_v1/`
 > - 外部参考摘要：`reference/`
+>
+> **展示（M5 ✅）**：
+> - 评测 Dashboard（论文风格）：`benchmark/reports/beta_v1/dashboard.html`（`scripts/build_dashboard.py` 重建）
+> - 智能客服 Web UI：`~/Desktop/Web_related/market-truth-cs/`（PolarChat :3081，30 用户直登 + 150 段对话回放）；
+>   **LLM API 统一走 LLM Proxy**——使用 [PolarPrivate_OpenSource](https://github.com/beichenO2/PolarPrivate_OpenSource.git)
+>   提供 OpenAI 兼容服务（即生态内 PolarPrivate 的开源版，默认 `http://127.0.0.1:12790`）
 
 # 问题
 考核内容：
