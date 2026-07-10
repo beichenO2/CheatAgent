@@ -14,7 +14,7 @@
       {
         "region": "青岛港",
         "indicator": "港存",
-        "value": "中",
+        "value": "低",
         "market_object": "铁矿石"
       },
       {
@@ -26,7 +26,7 @@
       {
         "region": "青岛港",
         "indicator": "报价松动",
-        "value": "否",
+        "value": "是",
         "market_object": "铁矿石"
       }
     ],
@@ -176,7 +176,261 @@
         "trend": "跌",
         "week": "2026-W33"
       }
-    ]
+    ],
+    "core_claims_truth": [
+      {
+        "region": "青岛港",
+        "indicator": "港存",
+        "value": "中",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "青岛港",
+        "indicator": "采购积极性",
+        "value": "积极",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "青岛港",
+        "indicator": "报价松动",
+        "value": "否",
+        "market_object": "铁矿石"
+      }
+    ],
+    "gt_expand": {
+      "sessions": [
+        {
+          "session_id": "S001",
+          "mined": [
+            {
+              "region": "青岛港",
+              "indicator": "港存",
+              "value": "中",
+              "market_object": "铁矿石",
+              "evidence": "最近港存感觉中等水平"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石",
+              "evidence": "厂里采购积极性挺高的"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "报价松动",
+              "value": "否",
+              "market_object": "铁矿石",
+              "evidence": "报价也没怎么松动"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "青岛港",
+              "indicator": "港存",
+              "value": "中",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "报价松动",
+              "value": "否",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S002",
+          "mined": [
+            {
+              "region": "青岛港",
+              "indicator": "港存",
+              "value": "中",
+              "market_object": "铁矿石",
+              "evidence": "我这边看港存也就是中等水平"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "采购积极性",
+              "value": "中性",
+              "market_object": "铁矿石",
+              "evidence": "采购积极性也一般，大家都不急"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "报价松动",
+              "value": "否",
+              "market_object": "铁矿石",
+              "evidence": "市场报价也没怎么松动"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "青岛港",
+              "indicator": "港存",
+              "value": "中",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "采购积极性",
+              "value": "中性",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "报价松动",
+              "value": "否",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S003",
+          "mined": [
+            {
+              "region": "青岛港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "青岛港这边库存一直低"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石",
+              "evidence": "后面采购积极性还在"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "报价也松动了些"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "青岛港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S004",
+          "mined": [
+            {
+              "region": "青岛港",
+              "indicator": "报价松动",
+              "value": "否",
+              "market_object": "铁矿石",
+              "evidence": "青岛港这边报价挺稳的，根本没松动"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "港存",
+              "value": "中",
+              "market_object": "铁矿石",
+              "evidence": "现在港口库存也就是个中等水平"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "采购积极性",
+              "value": "中性",
+              "market_object": "铁矿石",
+              "evidence": "大家采购积极性都一般，中性得很"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "青岛港",
+              "indicator": "港存",
+              "value": "中",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "采购积极性",
+              "value": "中性",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "报价松动",
+              "value": "否",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S005",
+          "mined": [
+            {
+              "region": "青岛港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "港上库存低"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石",
+              "evidence": "最近厂里确实在补"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "报价松动是事实"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "青岛港",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "青岛港",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            }
+          ]
+        }
+      ]
+    }
   },
   "sessions": [
     {
@@ -485,6 +739,26 @@
       ],
       "turn_count": 20,
       "world_truth": [
+        {
+          "region": "青岛港",
+          "indicator": "港存",
+          "value": "中",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "青岛港",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "青岛港",
+          "indicator": "报价松动",
+          "value": "否",
+          "market_object": "铁矿石"
+        }
+      ],
+      "claims_truth": [
         {
           "region": "青岛港",
           "indicator": "港存",
@@ -829,6 +1103,26 @@
           "value": "否",
           "market_object": "铁矿石"
         }
+      ],
+      "claims_truth": [
+        {
+          "region": "青岛港",
+          "indicator": "港存",
+          "value": "中",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "青岛港",
+          "indicator": "采购积极性",
+          "value": "中性",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "青岛港",
+          "indicator": "报价松动",
+          "value": "否",
+          "market_object": "铁矿石"
+        }
       ]
     },
     {
@@ -1137,6 +1431,26 @@
       ],
       "turn_count": 20,
       "world_truth": [
+        {
+          "region": "青岛港",
+          "indicator": "港存",
+          "value": "低",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "青岛港",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "青岛港",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        }
+      ],
+      "claims_truth": [
         {
           "region": "青岛港",
           "indicator": "港存",
@@ -1481,6 +1795,26 @@
           "value": "否",
           "market_object": "铁矿石"
         }
+      ],
+      "claims_truth": [
+        {
+          "region": "青岛港",
+          "indicator": "港存",
+          "value": "中",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "青岛港",
+          "indicator": "采购积极性",
+          "value": "中性",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "青岛港",
+          "indicator": "报价松动",
+          "value": "否",
+          "market_object": "铁矿石"
+        }
       ]
     },
     {
@@ -1789,6 +2123,26 @@
       ],
       "turn_count": 20,
       "world_truth": [
+        {
+          "region": "青岛港",
+          "indicator": "港存",
+          "value": "低",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "青岛港",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "青岛港",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        }
+      ],
+      "claims_truth": [
         {
           "region": "青岛港",
           "indicator": "港存",

@@ -34,6 +34,7 @@ def build_cheat_agent_prompt(
     user_model: dict[str, Any],
     conversation_history: list[dict[str, str]],
     route_rationale: str = "",
+    extra_context: str = "",
 ) -> tuple[str, str]:
     """Build system/user prompts for invoke_skill. Must NOT include honesty GT."""
     system = f"""你是铁矿石市场 **情报客服**（cheatAgent），正在执行套话 skill「{skill_id}」。
@@ -55,11 +56,14 @@ def build_cheat_agent_prompt(
 - 禁止输出 [skill_id] 标签或元数据到 utterance
 - 价格与港存表述须与 price_snapshot 一致；只引用公开行情，禁止编造货源或成交承诺
 """
+    memory_block = ""
+    if extra_context and extra_context.strip():
+        memory_block = f"\n## 业务系统记忆背景\n{extra_context.strip()}\n"
     user = f"""## 当前会话
 session_date: {session.get('session_date')}
 turn_count: {session.get('turn_count')}
 price_snapshot: {json.dumps(session.get('price_snapshot', {}), ensure_ascii=False)}
-
+{memory_block}
 ## 用户建模（无 GT）
 inferred_gaps: {user_model.get('inferred_gaps', [])}
 partial_claims: {user_model.get('partial_claims', [])}

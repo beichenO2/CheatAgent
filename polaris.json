@@ -2,25 +2,26 @@
   "name": "MarketTruthAgent",
   "_meta": {
     "schema_version": "1.1",
-    "last_synced_at": "2026-07-09T17:20:00+08:00"
+    "last_synced_at": "2026-07-10T19:17:00+08:00"
   },
   "description": "铁矿石智能客服：Agent 套话采集 + claim 真伪推断 + 用户信用评估",
   "tier": "research-prototype",
-  "status": "beta-eval-running",
-  "version": "0.4.0",
+  "status": "beta-v2-complete",
+  "version": "0.5.0",
   "health": {
-    "phase": "beta-eval-running",
-    "note": "M9 + L1-L4 复查修复完成（ADR-010）；beta_v1 eval 重跑 ∥ beta_v2 世界态生成；Dashboard 论文风格定稿（ADR-011）",
-    "last_verified": "2026-07-09T17:55:00+08:00"
+    "phase": "beta-v2-complete",
+    "note": "beta_v2 Layer3 验收：F1=0.888 · td_world_truth_accuracy=1.0 · reliability r=+0.258；成果见 benchmark/reports/RESULTS.md",
+    "last_verified": "2026-07-10T19:17:00+08:00"
   },
   "active_work": [
     {
       "id": "AW-004",
       "title": "Beta 30×5 全量 eval（fusion 消融并行）",
       "priority": "P0",
-      "status": "in_progress",
+      "status": "done",
+      "completed_at": "2026-07-10",
       "path": "scripts/run_benchmark_pipeline.py",
-      "note": "L3/L4 修复后 2026-07-09 17:40 重启（GT 重挖→eval 链式）；日志 benchmark/logs/beta_v1_eval_full.log"
+      "note": "30/30 完成；recall=0.862 prec=0.800 F1=0.822(llm)；日志 benchmark/logs/beta_v1_eval_full.log"
     },
     {
       "id": "AW-006",
@@ -34,9 +35,19 @@
       "id": "AW-007",
       "title": "beta_v2 世界态一致数据集生成",
       "priority": "P0",
-      "status": "in_progress",
+      "status": "done",
+      "completed_at": "2026-07-10",
       "path": "benchmark/datasets/beta_v2/",
-      "note": "world_truth 按 (region, week) 共享；与 beta_v1 eval 并行；日志 benchmark/logs/beta_v2_generate.log"
+      "note": "30/30 live；world_truth_for(region,week)"
+    },
+    {
+      "id": "AW-008",
+      "title": "beta_v2 expand → eval → cross_user_td",
+      "priority": "P0",
+      "status": "done",
+      "completed_at": "2026-07-10",
+      "path": "scripts/run_benchmark_pipeline.py",
+      "note": "30/30；F1=0.888；td_world_truth_accuracy=1.0；reliability r=+0.258；Dashboard 已重建"
     },
     {
       "id": "AW-005",
@@ -89,15 +100,15 @@
       "id": "NU-012",
       "title": "cross-user TD：跑 beta_v1 诊断 + beta_v2 标定",
       "priority": "P1",
-      "status": "planned",
-      "note": "脚本已就绪 scripts/cross_user_td.py；等 eval checkpoint 出齐后执行",
+      "status": "partial",
+      "note": "beta_v1 诊断完成 r=-0.097(n=30)；beta_v2 干净标定待 eval",
       "depends_on": ["AW-004", "AW-007"]
     },
     {
       "id": "NU-013",
       "title": "beta_v2：expand（新口径）→ evaluate → cross_user_td",
       "priority": "P1",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": ["AW-007"]
     },
     {
@@ -140,7 +151,7 @@
         {"name": "Claim 形成", "status": "done", "note": "Normalize 输出 canonical slots → Claim"},
         {"name": "ReCon 欺骗检测", "status": "done", "note": "LLM Formulation+Refinement，无 honesty GT 泄漏"},
         {"name": "Truth Discovery Beta 后验", "status": "done", "note": "Beta(2,2) + 单源桶不更新（ADR-010）"},
-        {"name": "cross-user TD 阶段", "status": "planned", "note": "ADR-010 L1：跨用户 reliability 标定"},
+        {"name": "cross-user TD 阶段", "status": "partial", "note": "beta_v1 诊断 r=-0.097；beta_v2 干净标定待 eval"},
         {"name": "价格走线校验", "status": "partial", "note": "待按 session 时间索引"}
       ]
     },
@@ -149,10 +160,11 @@
       "need": "Agent Benchmark",
       "features": [
         {"name": "Tier A 组件", "status": "done"},
-        {"name": "Tier B Agent dataset", "status": "done", "note": "beta_v1 30×5×20 全 live + session 扩 GT 30/30"},
+        {"name": "Tier B Agent dataset", "status": "partial", "note": "beta_v1 30×5 eval 完成但世界态 P0 缺陷(wrongway/02§2.3)；beta_v2 生成完成待 eval"},
         {"name": "套话指标 skill_kind/invoke/richness/coverage", "status": "done"},
         {"name": "Claim F1 / Pearson 离线评测", "status": "done", "note": "evaluate_dataset.py + run_benchmark_pipeline.py 断点续跑"},
-        {"name": "beta_v1 全量 eval", "status": "in_progress", "note": "2026-07-09 跑中；reliability_pearson 待 cross-user TD"},
+        {"name": "beta_v1 全量 eval", "status": "done", "note": "Layer1-2 only；F1=0.822；wrongway/02§2.3"},
+        {"name": "beta_v2 eval + TD 标定", "status": "in_progress", "note": "expand→eval 2026-07-10 启动"},
         {"name": "旧规则 Tier B", "status": "removed", "see": "wrongway.md"}
       ]
     },

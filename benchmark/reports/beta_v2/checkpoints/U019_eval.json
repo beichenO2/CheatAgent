@@ -1,0 +1,1548 @@
+{
+  "user_row": {
+    "user_id": "U019",
+    "honesty_gt": 0.67,
+    "reliability_est": 0.5,
+    "claim_count": 108,
+    "slot_recall_mean": 0.95,
+    "slot_precision_mean": 0.95,
+    "sessions": [
+      {
+        "session_id": "S001",
+        "claim_count": 22,
+        "slot_metrics": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "f1": 1.0,
+          "slot_recall": 1.0,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 3,
+          "pred_slots": 3
+        },
+        "fusion_ablation": {
+          "llm": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "f1": 1.0,
+            "slot_recall": 1.0,
+            "slot_precision": 1.0,
+            "prediction_accuracy": 1.0,
+            "gt_slots": 3,
+            "pred_slots": 3
+          },
+          "voting": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "f1": 1.0,
+            "slot_recall": 1.0,
+            "slot_precision": 1.0,
+            "prediction_accuracy": 1.0,
+            "gt_slots": 3,
+            "pred_slots": 3
+          },
+          "last_wins": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "f1": 1.0,
+            "slot_recall": 1.0,
+            "slot_precision": 1.0,
+            "prediction_accuracy": 1.0,
+            "gt_slots": 3,
+            "pred_slots": 3
+          }
+        },
+        "veracity": {
+          "em_error": 0.0,
+          "mv_error": 0.0,
+          "bucket_veracity_accuracy": 1.0,
+          "mv_baseline_accuracy": 1.0,
+          "veracity_gt_slots": 3,
+          "veracity_scope": "custom"
+        },
+        "external": {
+          "external_consistency_mean": 0.5
+        },
+        "escalation": {
+          "escalation_count": 6,
+          "escalation_rate": 0.2727272727272727
+        },
+        "recon": {
+          "mean_deception": 0.702,
+          "honesty_gt": 0.67,
+          "deception_inverse_honesty_gap": 0.372
+        },
+        "pipeline": {
+          "enable_normalize": true,
+          "max_turns": null,
+          "mean_deception": 0.702,
+          "fusion_mode": "llm"
+        },
+        "tactic": {
+          "skill_kind_count": 3,
+          "skill_invoke_count": 10,
+          "skill_richness": 0.8018185525403374,
+          "skill_coverage": 0.2727272727272727
+        }
+      },
+      {
+        "session_id": "S002",
+        "claim_count": 19,
+        "slot_metrics": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "f1": 1.0,
+          "slot_recall": 1.0,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 4,
+          "pred_slots": 4
+        },
+        "fusion_ablation": {
+          "llm": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "f1": 1.0,
+            "slot_recall": 1.0,
+            "slot_precision": 1.0,
+            "prediction_accuracy": 1.0,
+            "gt_slots": 4,
+            "pred_slots": 4
+          },
+          "voting": {
+            "tp": 4,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.8,
+            "f1": 0.888888888888889,
+            "slot_recall": 1.0,
+            "slot_precision": 0.8,
+            "prediction_accuracy": 0.8,
+            "gt_slots": 4,
+            "pred_slots": 5
+          },
+          "last_wins": {
+            "tp": 4,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.8,
+            "f1": 0.888888888888889,
+            "slot_recall": 1.0,
+            "slot_precision": 0.8,
+            "prediction_accuracy": 0.8,
+            "gt_slots": 4,
+            "pred_slots": 5
+          }
+        },
+        "veracity": {
+          "em_error": 0.0,
+          "mv_error": 0.0,
+          "bucket_veracity_accuracy": 1.0,
+          "mv_baseline_accuracy": 1.0,
+          "veracity_gt_slots": 3,
+          "veracity_scope": "custom"
+        },
+        "external": {
+          "external_consistency_mean": 0.5526315789473685
+        },
+        "escalation": {
+          "escalation_count": 4,
+          "escalation_rate": 0.21052631578947367
+        },
+        "recon": {
+          "mean_deception": 0.687,
+          "honesty_gt": 0.67,
+          "deception_inverse_honesty_gap": 0.3570000000000001
+        },
+        "pipeline": {
+          "enable_normalize": true,
+          "max_turns": null,
+          "mean_deception": 0.687,
+          "fusion_mode": "llm"
+        },
+        "tactic": {
+          "skill_kind_count": 3,
+          "skill_invoke_count": 10,
+          "skill_richness": 0.8979457248537798,
+          "skill_coverage": 0.2727272727272727
+        }
+      },
+      {
+        "session_id": "S003",
+        "claim_count": 30,
+        "slot_metrics": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "f1": 1.0,
+          "slot_recall": 1.0,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 4,
+          "pred_slots": 4
+        },
+        "fusion_ablation": {
+          "llm": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "f1": 1.0,
+            "slot_recall": 1.0,
+            "slot_precision": 1.0,
+            "prediction_accuracy": 1.0,
+            "gt_slots": 4,
+            "pred_slots": 4
+          },
+          "voting": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "f1": 1.0,
+            "slot_recall": 1.0,
+            "slot_precision": 1.0,
+            "prediction_accuracy": 1.0,
+            "gt_slots": 4,
+            "pred_slots": 4
+          },
+          "last_wins": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0,
+            "f1": 1.0,
+            "slot_recall": 1.0,
+            "slot_precision": 1.0,
+            "prediction_accuracy": 1.0,
+            "gt_slots": 4,
+            "pred_slots": 4
+          }
+        },
+        "veracity": {
+          "em_error": 0.0,
+          "mv_error": 0.0,
+          "bucket_veracity_accuracy": 1.0,
+          "mv_baseline_accuracy": 1.0,
+          "veracity_gt_slots": 3,
+          "veracity_scope": "custom"
+        },
+        "external": {
+          "external_consistency_mean": 0.5
+        },
+        "escalation": {
+          "escalation_count": 5,
+          "escalation_rate": 0.16666666666666666
+        },
+        "recon": {
+          "mean_deception": 0.64,
+          "honesty_gt": 0.67,
+          "deception_inverse_honesty_gap": 0.31000000000000005
+        },
+        "pipeline": {
+          "enable_normalize": true,
+          "max_turns": null,
+          "mean_deception": 0.64,
+          "fusion_mode": "llm"
+        },
+        "tactic": {
+          "skill_kind_count": 3,
+          "skill_invoke_count": 10,
+          "skill_richness": 0.8979457248537798,
+          "skill_coverage": 0.2727272727272727
+        }
+      },
+      {
+        "session_id": "S004",
+        "claim_count": 15,
+        "slot_metrics": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 1,
+          "recall": 0.75,
+          "precision": 1.0,
+          "f1": 0.8571428571428571,
+          "slot_recall": 0.75,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 4,
+          "pred_slots": 3
+        },
+        "fusion_ablation": {
+          "llm": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 1,
+            "recall": 0.75,
+            "precision": 1.0,
+            "f1": 0.8571428571428571,
+            "slot_recall": 0.75,
+            "slot_precision": 1.0,
+            "prediction_accuracy": 1.0,
+            "gt_slots": 4,
+            "pred_slots": 3
+          },
+          "voting": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 1,
+            "recall": 0.75,
+            "precision": 1.0,
+            "f1": 0.8571428571428571,
+            "slot_recall": 0.75,
+            "slot_precision": 1.0,
+            "prediction_accuracy": 1.0,
+            "gt_slots": 4,
+            "pred_slots": 3
+          },
+          "last_wins": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 1,
+            "recall": 0.75,
+            "precision": 1.0,
+            "f1": 0.8571428571428571,
+            "slot_recall": 0.75,
+            "slot_precision": 1.0,
+            "prediction_accuracy": 1.0,
+            "gt_slots": 4,
+            "pred_slots": 3
+          }
+        },
+        "veracity": {
+          "em_error": 0.0,
+          "mv_error": 0.0,
+          "bucket_veracity_accuracy": 1.0,
+          "mv_baseline_accuracy": 1.0,
+          "veracity_gt_slots": 3,
+          "veracity_scope": "custom"
+        },
+        "external": {
+          "external_consistency_mean": 0.5
+        },
+        "escalation": {
+          "escalation_count": 2,
+          "escalation_rate": 0.13333333333333333
+        },
+        "recon": {
+          "mean_deception": 0.712,
+          "honesty_gt": 0.67,
+          "deception_inverse_honesty_gap": 0.382
+        },
+        "pipeline": {
+          "enable_normalize": true,
+          "max_turns": null,
+          "mean_deception": 0.712,
+          "fusion_mode": "llm"
+        },
+        "tactic": {
+          "skill_kind_count": 6,
+          "skill_invoke_count": 10,
+          "skill_richness": 1.6094379124281004,
+          "skill_coverage": 0.5454545454545454
+        }
+      },
+      {
+        "session_id": "S005",
+        "claim_count": 22,
+        "slot_metrics": {
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.75,
+          "f1": 0.8571428571428571,
+          "slot_recall": 1.0,
+          "slot_precision": 0.75,
+          "prediction_accuracy": 0.75,
+          "gt_slots": 3,
+          "pred_slots": 4
+        },
+        "fusion_ablation": {
+          "llm": {
+            "tp": 3,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.75,
+            "f1": 0.8571428571428571,
+            "slot_recall": 1.0,
+            "slot_precision": 0.75,
+            "prediction_accuracy": 0.75,
+            "gt_slots": 3,
+            "pred_slots": 4
+          },
+          "voting": {
+            "tp": 3,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.75,
+            "f1": 0.8571428571428571,
+            "slot_recall": 1.0,
+            "slot_precision": 0.75,
+            "prediction_accuracy": 0.75,
+            "gt_slots": 3,
+            "pred_slots": 4
+          },
+          "last_wins": {
+            "tp": 2,
+            "fp": 2,
+            "fn": 1,
+            "recall": 0.6666666666666666,
+            "precision": 0.5,
+            "f1": 0.5714285714285715,
+            "slot_recall": 0.6666666666666666,
+            "slot_precision": 0.5,
+            "prediction_accuracy": 0.5,
+            "gt_slots": 3,
+            "pred_slots": 4
+          }
+        },
+        "veracity": {
+          "em_error": 0.0,
+          "mv_error": 0.0,
+          "bucket_veracity_accuracy": 1.0,
+          "mv_baseline_accuracy": 1.0,
+          "veracity_gt_slots": 3,
+          "veracity_scope": "custom"
+        },
+        "external": {
+          "external_consistency_mean": 0.4636363636363636
+        },
+        "escalation": {
+          "escalation_count": 4,
+          "escalation_rate": 0.18181818181818182
+        },
+        "recon": {
+          "mean_deception": 0.647,
+          "honesty_gt": 0.67,
+          "deception_inverse_honesty_gap": 0.31700000000000006
+        },
+        "pipeline": {
+          "enable_normalize": true,
+          "max_turns": null,
+          "mean_deception": 0.647,
+          "fusion_mode": "llm"
+        },
+        "tactic": {
+          "skill_kind_count": 3,
+          "skill_invoke_count": 10,
+          "skill_richness": 0.8979457248537798,
+          "skill_coverage": 0.2727272727272727
+        }
+      }
+    ]
+  },
+  "session_metric_rows": [
+    {
+      "session_id": "S001",
+      "claim_count": 22,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.702,
+        "fusion_mode": "llm"
+      },
+      "slot_metrics": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "f1": 1.0,
+        "slot_recall": 1.0,
+        "slot_precision": 1.0,
+        "prediction_accuracy": 1.0,
+        "gt_slots": 3,
+        "pred_slots": 3
+      },
+      "fusion_ablation": {
+        "llm": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "f1": 1.0,
+          "slot_recall": 1.0,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 3,
+          "pred_slots": 3,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "中",
+              "confidence": 0.85,
+              "evidence_turns": [
+                1,
+                3,
+                7,
+                9,
+                11,
+                13
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "积极",
+              "confidence": 0.9,
+              "evidence_turns": [
+                1,
+                3,
+                5,
+                7,
+                9,
+                13,
+                15,
+                17
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "否",
+              "confidence": 0.9,
+              "evidence_turns": [
+                1,
+                3,
+                5,
+                7,
+                9,
+                13,
+                15,
+                17
+              ]
+            }
+          }
+        },
+        "voting": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "f1": 1.0,
+          "slot_recall": 1.0,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 3,
+          "pred_slots": 3,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "中",
+              "confidence": 1.0,
+              "evidence_turns": [
+                1,
+                3,
+                7,
+                9,
+                11,
+                13
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "积极",
+              "confidence": 1.0,
+              "evidence_turns": [
+                1,
+                3,
+                5,
+                7,
+                9,
+                13,
+                15,
+                17
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "否",
+              "confidence": 1.0,
+              "evidence_turns": [
+                1,
+                3,
+                5,
+                7,
+                9,
+                13,
+                15,
+                17
+              ]
+            }
+          }
+        },
+        "last_wins": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "f1": 1.0,
+          "slot_recall": 1.0,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 3,
+          "pred_slots": 3,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "中",
+              "confidence": 0.65,
+              "evidence_turns": [
+                13
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "积极",
+              "confidence": 0.65,
+              "evidence_turns": [
+                17
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "否",
+              "confidence": 0.7,
+              "evidence_turns": [
+                17
+              ]
+            }
+          }
+        }
+      },
+      "veracity": {
+        "em_error": 0.0,
+        "mv_error": 0.0,
+        "bucket_veracity_accuracy": 1.0,
+        "mv_baseline_accuracy": 1.0,
+        "veracity_gt_slots": 3,
+        "veracity_scope": "custom"
+      },
+      "external": {
+        "external_consistency_mean": 0.5
+      },
+      "escalation": {
+        "escalation_count": 6,
+        "escalation_rate": 0.2727272727272727
+      },
+      "reliability": {
+        "reliability_est": 0.5,
+        "honesty_gt": 0.67
+      },
+      "recon": {
+        "mean_deception": 0.702,
+        "honesty_gt": 0.67,
+        "deception_inverse_honesty_gap": 0.372
+      }
+    },
+    {
+      "session_id": "S002",
+      "claim_count": 19,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.687,
+        "fusion_mode": "llm"
+      },
+      "slot_metrics": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "f1": 1.0,
+        "slot_recall": 1.0,
+        "slot_precision": 1.0,
+        "prediction_accuracy": 1.0,
+        "gt_slots": 4,
+        "pred_slots": 4
+      },
+      "fusion_ablation": {
+        "llm": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "f1": 1.0,
+          "slot_recall": 1.0,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 4,
+          "pred_slots": 4,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "中",
+              "confidence": 0.85,
+              "evidence_turns": [
+                1,
+                7,
+                9,
+                11,
+                19
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "否",
+              "confidence": 0.9,
+              "evidence_turns": [
+                1,
+                3,
+                9,
+                11,
+                13,
+                19
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "中性",
+              "confidence": 0.8,
+              "evidence_turns": [
+                5,
+                9,
+                11,
+                13
+              ]
+            },
+            "青岛港/疏港量": {
+              "value": "中",
+              "confidence": 0.6,
+              "evidence_turns": [
+                15,
+                17
+              ]
+            }
+          }
+        },
+        "voting": {
+          "tp": 4,
+          "fp": 1,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.8,
+          "f1": 0.888888888888889,
+          "slot_recall": 1.0,
+          "slot_precision": 0.8,
+          "prediction_accuracy": 0.8,
+          "gt_slots": 4,
+          "pred_slots": 5,
+          "fused_slots": {
+            "青岛港/报价松动": {
+              "value": "否",
+              "confidence": 1.0,
+              "evidence_turns": [
+                1,
+                3,
+                9,
+                11,
+                13,
+                19
+              ]
+            },
+            "青岛港/港存": {
+              "value": "中",
+              "confidence": 1.0,
+              "evidence_turns": [
+                1,
+                7,
+                9,
+                11,
+                19
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "中性",
+              "confidence": 1.0,
+              "evidence_turns": [
+                3,
+                5,
+                9,
+                11,
+                13
+              ]
+            },
+            "青岛港/到港量": {
+              "value": "平稳",
+              "confidence": 1.0,
+              "evidence_turns": [
+                7
+              ]
+            },
+            "青岛港/疏港量": {
+              "value": "中",
+              "confidence": 0.5,
+              "evidence_turns": [
+                17
+              ]
+            }
+          }
+        },
+        "last_wins": {
+          "tp": 4,
+          "fp": 1,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.8,
+          "f1": 0.888888888888889,
+          "slot_recall": 1.0,
+          "slot_precision": 0.8,
+          "prediction_accuracy": 0.8,
+          "gt_slots": 4,
+          "pred_slots": 5,
+          "fused_slots": {
+            "青岛港/报价松动": {
+              "value": "否",
+              "confidence": 0.65,
+              "evidence_turns": [
+                19
+              ]
+            },
+            "青岛港/港存": {
+              "value": "中",
+              "confidence": 0.6,
+              "evidence_turns": [
+                19
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "中性",
+              "confidence": 0.7,
+              "evidence_turns": [
+                13
+              ]
+            },
+            "青岛港/到港量": {
+              "value": "平稳",
+              "confidence": 0.5,
+              "evidence_turns": [
+                7
+              ]
+            },
+            "青岛港/疏港量": {
+              "value": "中",
+              "confidence": 0.5,
+              "evidence_turns": [
+                17
+              ]
+            }
+          }
+        }
+      },
+      "veracity": {
+        "em_error": 0.0,
+        "mv_error": 0.0,
+        "bucket_veracity_accuracy": 1.0,
+        "mv_baseline_accuracy": 1.0,
+        "veracity_gt_slots": 3,
+        "veracity_scope": "custom"
+      },
+      "external": {
+        "external_consistency_mean": 0.5526315789473685
+      },
+      "escalation": {
+        "escalation_count": 4,
+        "escalation_rate": 0.21052631578947367
+      },
+      "reliability": {
+        "reliability_est": 0.5,
+        "honesty_gt": 0.67
+      },
+      "recon": {
+        "mean_deception": 0.687,
+        "honesty_gt": 0.67,
+        "deception_inverse_honesty_gap": 0.3570000000000001
+      }
+    },
+    {
+      "session_id": "S003",
+      "claim_count": 30,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.64,
+        "fusion_mode": "llm"
+      },
+      "slot_metrics": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "f1": 1.0,
+        "slot_recall": 1.0,
+        "slot_precision": 1.0,
+        "prediction_accuracy": 1.0,
+        "gt_slots": 4,
+        "pred_slots": 4
+      },
+      "fusion_ablation": {
+        "llm": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "f1": 1.0,
+          "slot_recall": 1.0,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 4,
+          "pred_slots": 4,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "低",
+              "confidence": 0.95,
+              "evidence_turns": [
+                3,
+                7,
+                11,
+                17,
+                19
+              ]
+            },
+            "青岛港/疏港量": {
+              "value": "高",
+              "confidence": 0.85,
+              "evidence_turns": [
+                1,
+                3,
+                15
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "积极",
+              "confidence": 0.95,
+              "evidence_turns": [
+                1,
+                3,
+                7,
+                15,
+                19
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "是",
+              "confidence": 0.9,
+              "evidence_turns": [
+                3,
+                5,
+                7,
+                19
+              ]
+            }
+          }
+        },
+        "voting": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "f1": 1.0,
+          "slot_recall": 1.0,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 4,
+          "pred_slots": 4,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "低",
+              "confidence": 0.8943661971830986,
+              "evidence_turns": [
+                3,
+                5,
+                7,
+                9,
+                11,
+                13,
+                15,
+                17,
+                19
+              ]
+            },
+            "青岛港/疏港量": {
+              "value": "高",
+              "confidence": 1.0,
+              "evidence_turns": [
+                1,
+                3,
+                15
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "积极",
+              "confidence": 1.0,
+              "evidence_turns": [
+                1,
+                3,
+                5,
+                7,
+                9,
+                13,
+                15,
+                17,
+                19
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "是",
+              "confidence": 1.0,
+              "evidence_turns": [
+                3,
+                5,
+                7,
+                9,
+                13,
+                15,
+                17,
+                19
+              ]
+            }
+          }
+        },
+        "last_wins": {
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 1.0,
+          "f1": 1.0,
+          "slot_recall": 1.0,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 4,
+          "pred_slots": 4,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "低",
+              "confidence": 0.75,
+              "evidence_turns": [
+                19
+              ]
+            },
+            "青岛港/疏港量": {
+              "value": "高",
+              "confidence": 0.5499999999999999,
+              "evidence_turns": [
+                15
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "积极",
+              "confidence": 0.7,
+              "evidence_turns": [
+                19
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "是",
+              "confidence": 0.7,
+              "evidence_turns": [
+                19
+              ]
+            }
+          }
+        }
+      },
+      "veracity": {
+        "em_error": 0.0,
+        "mv_error": 0.0,
+        "bucket_veracity_accuracy": 1.0,
+        "mv_baseline_accuracy": 1.0,
+        "veracity_gt_slots": 3,
+        "veracity_scope": "custom"
+      },
+      "external": {
+        "external_consistency_mean": 0.5
+      },
+      "escalation": {
+        "escalation_count": 5,
+        "escalation_rate": 0.16666666666666666
+      },
+      "reliability": {
+        "reliability_est": 0.5,
+        "honesty_gt": 0.67
+      },
+      "recon": {
+        "mean_deception": 0.64,
+        "honesty_gt": 0.67,
+        "deception_inverse_honesty_gap": 0.31000000000000005
+      }
+    },
+    {
+      "session_id": "S004",
+      "claim_count": 15,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.712,
+        "fusion_mode": "llm"
+      },
+      "slot_metrics": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 1,
+        "recall": 0.75,
+        "precision": 1.0,
+        "f1": 0.8571428571428571,
+        "slot_recall": 0.75,
+        "slot_precision": 1.0,
+        "prediction_accuracy": 1.0,
+        "gt_slots": 4,
+        "pred_slots": 3
+      },
+      "fusion_ablation": {
+        "llm": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 1,
+          "recall": 0.75,
+          "precision": 1.0,
+          "f1": 0.8571428571428571,
+          "slot_recall": 0.75,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 4,
+          "pred_slots": 3,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "中",
+              "confidence": 0.9,
+              "evidence_turns": [
+                1,
+                3,
+                7,
+                9,
+                11,
+                13,
+                15
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "中性",
+              "confidence": 0.85,
+              "evidence_turns": [
+                3,
+                5,
+                7,
+                9,
+                17
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "否",
+              "confidence": 0.8,
+              "evidence_turns": [
+                1,
+                7,
+                17
+              ]
+            }
+          }
+        },
+        "voting": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 1,
+          "recall": 0.75,
+          "precision": 1.0,
+          "f1": 0.8571428571428571,
+          "slot_recall": 0.75,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 4,
+          "pred_slots": 3,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "中",
+              "confidence": 1.0,
+              "evidence_turns": [
+                1,
+                3,
+                7,
+                9,
+                11,
+                13,
+                15
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "否",
+              "confidence": 1.0,
+              "evidence_turns": [
+                1,
+                7,
+                17
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "中性",
+              "confidence": 1.0,
+              "evidence_turns": [
+                3,
+                5,
+                7,
+                9,
+                17
+              ]
+            }
+          }
+        },
+        "last_wins": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 1,
+          "recall": 0.75,
+          "precision": 1.0,
+          "f1": 0.8571428571428571,
+          "slot_recall": 0.75,
+          "slot_precision": 1.0,
+          "prediction_accuracy": 1.0,
+          "gt_slots": 4,
+          "pred_slots": 3,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "中",
+              "confidence": 0.75,
+              "evidence_turns": [
+                15
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "否",
+              "confidence": 0.5,
+              "evidence_turns": [
+                17
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "中性",
+              "confidence": 0.5,
+              "evidence_turns": [
+                17
+              ]
+            }
+          }
+        }
+      },
+      "veracity": {
+        "em_error": 0.0,
+        "mv_error": 0.0,
+        "bucket_veracity_accuracy": 1.0,
+        "mv_baseline_accuracy": 1.0,
+        "veracity_gt_slots": 3,
+        "veracity_scope": "custom"
+      },
+      "external": {
+        "external_consistency_mean": 0.5
+      },
+      "escalation": {
+        "escalation_count": 2,
+        "escalation_rate": 0.13333333333333333
+      },
+      "reliability": {
+        "reliability_est": 0.5,
+        "honesty_gt": 0.67
+      },
+      "recon": {
+        "mean_deception": 0.712,
+        "honesty_gt": 0.67,
+        "deception_inverse_honesty_gap": 0.382
+      }
+    },
+    {
+      "session_id": "S005",
+      "claim_count": 22,
+      "pipeline": {
+        "enable_normalize": true,
+        "max_turns": null,
+        "mean_deception": 0.647,
+        "fusion_mode": "llm"
+      },
+      "slot_metrics": {
+        "tp": 3,
+        "fp": 1,
+        "fn": 0,
+        "recall": 1.0,
+        "precision": 0.75,
+        "f1": 0.8571428571428571,
+        "slot_recall": 1.0,
+        "slot_precision": 0.75,
+        "prediction_accuracy": 0.75,
+        "gt_slots": 3,
+        "pred_slots": 4
+      },
+      "fusion_ablation": {
+        "llm": {
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.75,
+          "f1": 0.8571428571428571,
+          "slot_recall": 1.0,
+          "slot_precision": 0.75,
+          "prediction_accuracy": 0.75,
+          "gt_slots": 3,
+          "pred_slots": 4,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "低",
+              "confidence": 0.95,
+              "evidence_turns": [
+                1,
+                5,
+                7,
+                9,
+                11,
+                17,
+                19
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "积极",
+              "confidence": 0.85,
+              "evidence_turns": [
+                3,
+                5,
+                7,
+                11,
+                17
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "是",
+              "confidence": 0.75,
+              "evidence_turns": [
+                1,
+                3,
+                5,
+                11,
+                13,
+                17
+              ]
+            },
+            "青岛港/利润": {
+              "value": "低",
+              "confidence": 0.8,
+              "evidence_turns": [
+                9,
+                11
+              ]
+            }
+          }
+        },
+        "voting": {
+          "tp": 3,
+          "fp": 1,
+          "fn": 0,
+          "recall": 1.0,
+          "precision": 0.75,
+          "f1": 0.8571428571428571,
+          "slot_recall": 1.0,
+          "slot_precision": 0.75,
+          "prediction_accuracy": 0.75,
+          "gt_slots": 3,
+          "pred_slots": 4,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "低",
+              "confidence": 1.0,
+              "evidence_turns": [
+                1,
+                5,
+                7,
+                9,
+                11,
+                17,
+                19
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "是",
+              "confidence": 0.8750000000000001,
+              "evidence_turns": [
+                1,
+                3,
+                5,
+                11,
+                13,
+                15,
+                17
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "积极",
+              "confidence": 0.8309859154929577,
+              "evidence_turns": [
+                5,
+                7,
+                11,
+                17
+              ]
+            },
+            "青岛港/利润": {
+              "value": "低",
+              "confidence": 1.0,
+              "evidence_turns": [
+                9,
+                11
+              ]
+            }
+          }
+        },
+        "last_wins": {
+          "tp": 2,
+          "fp": 2,
+          "fn": 1,
+          "recall": 0.6666666666666666,
+          "precision": 0.5,
+          "f1": 0.5714285714285715,
+          "slot_recall": 0.6666666666666666,
+          "slot_precision": 0.5,
+          "prediction_accuracy": 0.5,
+          "gt_slots": 3,
+          "pred_slots": 4,
+          "fused_slots": {
+            "青岛港/港存": {
+              "value": "低",
+              "confidence": 0.7999999999999999,
+              "evidence_turns": [
+                19
+              ]
+            },
+            "青岛港/报价松动": {
+              "value": "否",
+              "confidence": 0.6,
+              "evidence_turns": [
+                19
+              ]
+            },
+            "青岛港/采购积极性": {
+              "value": "积极",
+              "confidence": 0.7,
+              "evidence_turns": [
+                17
+              ]
+            },
+            "青岛港/利润": {
+              "value": "低",
+              "confidence": 0.7,
+              "evidence_turns": [
+                11
+              ]
+            }
+          }
+        }
+      },
+      "veracity": {
+        "em_error": 0.0,
+        "mv_error": 0.0,
+        "bucket_veracity_accuracy": 1.0,
+        "mv_baseline_accuracy": 1.0,
+        "veracity_gt_slots": 3,
+        "veracity_scope": "custom"
+      },
+      "external": {
+        "external_consistency_mean": 0.4636363636363636
+      },
+      "escalation": {
+        "escalation_count": 4,
+        "escalation_rate": 0.18181818181818182
+      },
+      "reliability": {
+        "reliability_est": 0.5,
+        "honesty_gt": 0.67
+      },
+      "recon": {
+        "mean_deception": 0.647,
+        "honesty_gt": 0.67,
+        "deception_inverse_honesty_gap": 0.31700000000000006
+      }
+    }
+  ],
+  "tactic_rows": [
+    {
+      "skill_kind_count": 3,
+      "skill_invoke_count": 10,
+      "skill_richness": 0.8018185525403374,
+      "skill_coverage": 0.2727272727272727
+    },
+    {
+      "skill_kind_count": 3,
+      "skill_invoke_count": 10,
+      "skill_richness": 0.8979457248537798,
+      "skill_coverage": 0.2727272727272727
+    },
+    {
+      "skill_kind_count": 3,
+      "skill_invoke_count": 10,
+      "skill_richness": 0.8979457248537798,
+      "skill_coverage": 0.2727272727272727
+    },
+    {
+      "skill_kind_count": 6,
+      "skill_invoke_count": 10,
+      "skill_richness": 1.6094379124281004,
+      "skill_coverage": 0.5454545454545454
+    },
+    {
+      "skill_kind_count": 3,
+      "skill_invoke_count": 10,
+      "skill_richness": 0.8979457248537798,
+      "skill_coverage": 0.2727272727272727
+    }
+  ],
+  "recon_rows": [
+    {
+      "user_id": "U019",
+      "mean_deception": 0.702,
+      "honesty_gt": 0.67
+    },
+    {
+      "user_id": "U019",
+      "mean_deception": 0.687,
+      "honesty_gt": 0.67
+    },
+    {
+      "user_id": "U019",
+      "mean_deception": 0.64,
+      "honesty_gt": 0.67
+    },
+    {
+      "user_id": "U019",
+      "mean_deception": 0.712,
+      "honesty_gt": 0.67
+    },
+    {
+      "user_id": "U019",
+      "mean_deception": 0.647,
+      "honesty_gt": 0.67
+    }
+  ],
+  "reliability_row": {
+    "user_id": "U019",
+    "honesty_gt": 0.67,
+    "reliability_est": 0.5
+  }
+}

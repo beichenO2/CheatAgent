@@ -8,10 +8,12 @@
 > - 外部参考摘要：`reference/`
 >
 > **展示（M5 ✅）**：
-> - 评测 Dashboard（论文风格）：`benchmark/reports/beta_v1/dashboard.html`（`scripts/build_dashboard.py` 重建）
-> - 智能客服 Web UI：`~/Desktop/Web_related/market-truth-cs/`（PolarChat :3081，30 用户直登 + 150 段对话回放）；
+> - 评测成果摘要：`benchmark/reports/RESULTS.md`（**beta_v2 ✅** · F1=0.888 · td_world_truth_accuracy=1.0 · reliability r=+0.258）
+> - 评测 Dashboard：`benchmark/reports/beta_v2/dashboard.html`（主）· `beta_v1/dashboard.html`（对照）；本地 http://127.0.0.1:8931/beta_v2/dashboard.html
+> - 智能客服 Web UI：`~/Desktop/Web_related/market-truth-cs/`（PolarChat :3085 / API :3925，30 用户直登 + 150 段对话回放；侧栏按情景分组，JWT 鉴权链见 ADR-009；**DEV/Release 双模式 + 跨端口身份补全 + 数据清洗** 2026-07-10 已完成）；
 >   **LLM API 统一走 LLM Proxy**——使用 [PolarPrivate_OpenSource](https://github.com/beichenO2/PolarPrivate_OpenSource.git)
 >   提供 OpenAI 兼容服务（即生态内 PolarPrivate 的开源版，默认 `http://127.0.0.1:12790`）
+> - UI 截图 / 快照：`artifacts/mtcs/screenshots/` · `artifacts/mtcs/snapshots/`
 
 # 问题
 考核内容：
@@ -333,6 +335,8 @@ claim_score(c) =
 >
 > - **Tier A**（组件）：FaitCrowd / BigTom+ReCon 等邻域数据集
 > - **Tier B**（主评测）：**30 段长对话**；预设 persona（身份/性格/头寸/诚实度）；程序 latent state 作 GT；**仅 1 条价格走线**作对话外因素
+>
+> **⚠️ beta_v1 世界态 P0 缺陷**（2026-07-10）：生成时按 `user_id` 独立随机 latent，未按 `(region, week)` 共享——跨用户 TD 无法验收。详见 `wrongway/02-benchmark-dataset.md` §2.3。修复数据集 **`beta_v2` 已全量验收**（td_world_truth_accuracy=1.0 · reliability r=+0.258）；beta_v1 仅作抽取+融合（Layer 1–2）对照。成果见 `benchmark/reports/RESULTS.md`。
 >
 > ~~Tier C~~ 取消。数据集全景见 `reference/benchmark-landscape.md`。
 

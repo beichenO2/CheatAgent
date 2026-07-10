@@ -2,63 +2,178 @@
   "users": {
     "U001": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U002": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U003": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U004": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U005": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U006": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U007": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U008": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U009": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U010": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U011": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U012": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U013": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
     },
     "U014": {
       "generate": "done",
-      "sessions": 5
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U015": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U016": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U017": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U018": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U019": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U020": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U021": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U022": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U023": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U024": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U025": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U026": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U027": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U028": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U029": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
+    },
+    "U030": {
+      "generate": "done",
+      "sessions": 5,
+      "evaluate": "done"
     }
   },
-  "phase": "generate",
-  "updated_at": "2026-07-09T15:08:27.786133+00:00",
+  "phase": "done",
+  "updated_at": "2026-07-10T11:17:39.729709+00:00",
   "preset": "beta_v2",
-  "started_at": "2026-07-09T09:41:48.778322+00:00"
+  "started_at": "2026-07-09T09:41:48.778322+00:00",
+  "generate_gate": {
+    "dataset_dir": "benchmark/datasets/beta_v2",
+    "version": "beta_v2",
+    "llm_mode": "live",
+    "llm_backend": "polarprivate",
+    "user_count": 30,
+    "expected_users": 3,
+    "expected_sessions_per_user": 5,
+    "gt_isolation": {
+      "recon_no_persona_honesty": true,
+      "invoke_no_honesty_gt": true,
+      "cheat_prompt_no_honesty_field": true
+    },
+    "tactic_aggregate": {
+      "sessions": 150,
+      "avg_skill_kind_count": 3.6266666666666665
+    },
+    "failures": [],
+    "passed": true
+  },
+  "report_path": "benchmark/reports/beta_v2_eval.json"
 }

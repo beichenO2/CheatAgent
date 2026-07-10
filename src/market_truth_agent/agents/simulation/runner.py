@@ -37,6 +37,12 @@ def session_schedule(session_index: int) -> tuple[str, str, dict[str, Any]]:
 
 
 def latent_for_persona(persona: CustomerPersona) -> list[dict[str, Any]]:
+    """Per-user fixed variant — smoke/alpha legacy ONLY.
+
+    WRONG for Beta cross-user TD: each user_id gets a different market state;
+    week is ignored; honest users conflict in the same bucket.
+    See wrongway/02-benchmark-dataset.md §2.3. Use world_truth_for + world_state=True.
+    """
     variant = TRUTH_VARIANTS[hash(persona.user_id) % len(TRUTH_VARIANTS)]
     return [
         {"region": persona.region, "indicator": ind, "value": val, "market_object": "铁矿石"}

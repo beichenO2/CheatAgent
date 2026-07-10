@@ -1,8 +1,10 @@
 # Roadmap — MarketTruthAgent
 
-## 状态（2026-07-09）
+## 状态（2026-07-10 19:17）
 
 **YOLO 阶段交付已废弃**（规则模板 + 硬编码 benchmark）。见 `wrongway.md`。
+
+> **一句话**：抽槽和核心真值还原都很好；共享世界态下 TD 对 world_truth 全对；用户可信度与 honesty 已能测出正相关（beta_v1 几乎测不出）。详见 `benchmark/reports/RESULTS.md`。
 
 | 阶段 | 状态 | 说明 |
 |------|------|------|
@@ -10,15 +12,15 @@
 | M1 分析骨架 | ✅ | LLM ClaimExtractor + ReCon LLM + Truth Discovery EM |
 | M2 旧 Tier B | ❌ 已删 | 规则 dialogue_simulator / 30 scenario |
 | M3 旧交互链路 | ❌ 已删 | 7 模板 + FSM |
-| M5 演示 UI | ✅ 完成 | ① Dashboard：论文风格 Overview + Session 回放（TC 书签）② 客服 Web UI：PolarChat 发行版 `market-truth-cs`（:3081，30 用户 × 150 对话 + 三层记忆，LLM 走 PolarPrivate_OpenSource） |
+| M5 演示 UI | ✅ 完成 | ① Dashboard：论文风格 Overview + Session 回放（TC 书签）② 客服 Web UI：PolarChat 发行版 `market-truth-cs`（:3085/:3925，30 用户 × 150 对话 + 三层记忆 + 情景侧栏分组；JWT 链 + DEV/Release 双模式 + 数据清洗已回灌 `_template`） |
 | **M6 套话 Skills** | **✅ 完成** | 1 路由 + 11 专项；15 篇论文；`套话skill/` + `skills/cheat-agent/` |
 | **M7 cheatAgent 智能体** | **✅ 完成** | LangGraph + LLM route_skill + invoke_skill + CustomerAgent LangGraph |
 | **M8 Dataset + 冒烟评测** | **✅ live** | PolarPrivate 3×20 + Claim F1/Pearson/EM 评测 |
 | **M9 分层融合 + TD Beta + 扩 GT** | **✅ 完成** | ADR-010：Fusion(llm/voting/last_wins) · Beta(2,2) 先验 · session GT 扩标 30/30 |
 | **M9.5 复查修复 L1–L4** | **✅ 代码完成** | ADR-010 修复记录：veracity 限核心三槽 · 传闻回声过滤 · `cross_user_td.py` · beta_v2 世界态 |
-| **Beta 全量 eval** | **🟡 重跑中** | L3/L4 修复后 2026-07-09 17:40 重启（GT 重挖 → eval 链式）；ETA ~9h |
-| **beta_v2 生成** | **🟡 跑中** | 世界态按 (region, week) 共享；与 eval 并行；ETA 一夜 |
-| M10 cross-user TD 标定 | 📋 等数据 | 脚本已就绪；beta_v1 出诊断、beta_v2 出干净标定 |
+| **Beta 全量 eval** | **✅ 完成（Layer 1–2 only）** | 30/30 · F1=0.822；**禁止**用 beta_v1 报 TD 真值还原（见 `wrongway/02` §2.3） |
+| **beta_v2 生成** | **✅ 完成** | 30/30；`world_truth_for(region,week)` |
+| **beta_v2 eval + TD 标定** | **✅ 完成** | 30/30 · F1=0.888 · **td_world_truth_accuracy=1.0** · reliability r=+0.258 · Dashboard 已重建 |
 
 ---
 
@@ -144,18 +146,28 @@ pytest test/agents/ -v
 | 扩 GT | `scripts/expand_latent_gt.py`：session 级挖断言 → `session.claims_truth`，30/30 用户 |
 | 冒烟验证 | U001/U002/U003 S001 回放 F1 = 1.0 / 1.0 / 1.0（扩 GT + 手工补标后） |
 
-## Beta — 30×5 全量 eval 🟡（L3/L4 修复后重跑中）
+## Beta — 30×5 全量 eval ✅（2026-07-10 完成）
 
 - 命令：`run_benchmark_pipeline.py --preset beta_v1 --phase evaluate --resume`
-- 日志：`benchmark/logs/beta_v1_eval_full.log`；checkpoint 续跑，产物 `benchmark/reports/beta_v1_eval.json`
-- 2026-07-09 17:40 重启：GT 重挖（L4 口径）→ 清旧 checkpoint → eval（L3 veracity=核心三槽）
-- L1–L4 全部已修（ADR-010 修复记录）；beta_v1 的 reliability 数字仍只作诊断（L2 世界态限制），干净标定看 beta_v2
+- 日志：`benchmark/logs/beta_v1_eval_full.log`（35428s COMPLETE）
+- 产物：`benchmark/reports/beta_v1_eval.json` · `cross_user_td.json` · `dashboard.html`
+- **主指标（150 session, fusion=llm）**：recall **0.862** · precision **0.800** · F1 **0.822** · veracity **0.885**
+- **消融**：llm > voting > last_wins（F1 0.822 > 0.806 > 0.773）
+- L1–L4 全部已修（ADR-010 修复记录）；**beta_v1 世界态 P0 缺陷**见 `wrongway/02` §2.3——跨用户 TD 干净标定**仅** beta_v2
+- **ReCon**：Pearson(deception, honesty) **r=-0.128** (n=150)，弱负相关
 
-## M10 — cross-user TD 标定 + beta_v2（已实现，等数据）
+## Beta v2 — expand → eval 🟡（2026-07-10 启动）
 
-1. `scripts/cross_user_td.py`：fused slots 全库分桶 → Beta 后验 → Pearson(honesty)；支持 fusion 消融与 beta_v2 world_truth 精度
-2. beta_v2 preset：`world_truth_for(region, week)` md5 确定性世界态；生成跑中（`benchmark/logs/beta_v2_generate.log`，memory_beta_v2 隔离）
-3. beta_v2 生成完 → expand（新口径）→ evaluate → cross_user_td → Dashboard 补 reliability 标定图（ADR-011）
+- 生成：✅ 30/30（`world_truth_for(region,week)`，`memory_beta_v2/`）
+- 命令链：
+  ```bash
+  python scripts/expand_latent_gt.py --dataset benchmark/datasets/beta_v2
+  python scripts/run_benchmark_pipeline.py --preset beta_v2 --phase evaluate --resume
+  python scripts/cross_user_td.py --preset beta_v2
+  python scripts/build_dashboard.py --preset beta_v2
+  ```
+- 日志：`benchmark/logs/beta_v2_expand.log` · `benchmark/logs/beta_v2_eval.log`
+- 验收：`td_world_truth_accuracy` + reliability Pearson（干净标定）
 
 ## 旧验收（已作废）
 

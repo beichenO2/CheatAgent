@@ -8,7 +8,7 @@
 | 文件 | 主题 | 收录教训 |
 |------|------|----------|
 | [01-agent-design.md](01-agent-design.md) | 架构与 Agent 设计 | 规则模板冒充智能 Agent；ADR-004「炼化融合」不建 Skill |
-| [02-benchmark-dataset.md](02-benchmark-dataset.md) | Benchmark 与数据集 | 规则闭环冒充 Tier B；数据集规模不足 |
+| [02-benchmark-dataset.md](02-benchmark-dataset.md) | Benchmark 与数据集 | 规则闭环冒充 Tier B；数据集规模不足；**beta_v1 世界态按 user_id 独立随机（P0）** |
 | [03-gt-isolation-metrics.md](03-gt-isolation-metrics.md) | GT 隔离与指标 | ReCon 读 honesty GT 泄漏；bias_triggered 指标选错 |
 | [04-analysis-pipeline.md](04-analysis-pipeline.md) | 分析链路 | **正则覆盖 LLM 输出**；last-wins 聚合与追问逻辑错位 |
 | [05-llm-ops.md](05-llm-ops.md) | LLM 与工程运维 | VL 模型误用；静默长任务；manifest 覆盖；checkpoint 序列化崩溃；长链路无重试 |

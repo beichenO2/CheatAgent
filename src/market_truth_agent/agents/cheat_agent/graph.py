@@ -88,6 +88,7 @@ def invoke_skill(state: CheatAgentState) -> dict[str, Any]:
         },
         conversation_history=history,
         route_rationale=state.route_rationale,
+        extra_context=state.extra_context or "",
     )
     raw = chat_completion(system, user, temperature=0.7)
     utterance = parse_utterance(raw)
@@ -164,6 +165,7 @@ def run_cheat_agent_turn(
     user_model: UserModelSnapshot,
     conversation_history: list[TurnRecord],
     memory_root: Path | str | None = None,
+    extra_context: str = "",
 ) -> tuple[str, dict[str, Any], UserModelSnapshot]:
     """Single-turn wrapper — runs compiled LangGraph via invoke()."""
     state = CheatAgentState(
@@ -171,6 +173,7 @@ def run_cheat_agent_turn(
         session=session,
         user_model=user_model,
         conversation_history=conversation_history,
+        extra_context=extra_context or "",
     )
     if memory_root is not None:
         state.turn_metadata["memory_root"] = str(memory_root)

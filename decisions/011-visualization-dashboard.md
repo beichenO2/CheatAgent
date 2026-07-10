@@ -8,7 +8,7 @@ accepted / 已实现（2026-07-09）：`scripts/build_dashboard.py` 交付 Overv
 TC-02/05/07/08 判例书签，书签 turn 由 skill metadata 数据驱动）。
 支持 eval 中途按 checkpoint 增量重建（页面标注「阶段性快照 N/30」）。
 Playwright 已验证渲染与交互（5 图有 canvas、书签高亮、槽位点击回跳）。
-剩余：reliability 标定图在 `cross_user_td.json` 出现后自动填充（图 3 占位已就位）。
+剩余：reliability 标定图已随 `cross_user_td.json` 自动填充（beta_v1 诊断 r=-0.097）；beta_v2 干净标定待 eval 后更新。
 
 ## 背景
 

@@ -301,6 +301,20 @@ def aggregate(data: dict[str, Any]) -> dict[str, Any]:
             if turns:
                 bookmarks.append({"tc": tc, "key": key0, "turns": turns, "note": note})
 
+    td_kpi: dict[str, Any] = {}
+    if data["cross_td"]:
+        td = data["cross_td"]
+        td_kpi = {
+            "union_alignment": td.get("td_union_gt_alignment"),
+            "union_alignment_core3": td.get("td_union_gt_alignment_core3"),
+            "plurality_accuracy": td.get("td_plurality_gt_accuracy"),
+            "world_truth_accuracy": td.get("td_world_truth_accuracy"),
+            "union_pairs": td.get("union_gt_pairs_judged"),
+            "multi_source_buckets": td.get("n_multi_source_buckets"),
+            "scope": td.get("union_gt_scope"),
+            "note": td.get("note"),
+        }
+
     return {
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
         "n_users_evaluated": len(users_evaluated),
@@ -311,6 +325,7 @@ def aggregate(data: dict[str, Any]) -> dict[str, Any]:
             "f1": {"mean": mean(f1_llm), "std": std(f1_llm), "ci": bootstrap_ci(f1_llm)},
             "veracity": {"mean": mean(ver), "std": std(ver)},
             "escalation": {"mean": mean(esc)},
+            "td_union": td_kpi,
         },
         "ablation": ablation,
         "user_rows": user_rows,
@@ -345,7 +360,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .runstate { font-size:13px; color:var(--accent); margin-bottom:28px; }
   h2 { font-size:19px; margin:44px 0 12px; border-bottom:1px solid var(--line); padding-bottom:6px; }
   p.note { font-size:13px; color:var(--muted); line-height:1.7; margin:6px 0 14px; }
-  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:18px 0; }
+  .kpis { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin:18px 0; }
   .kpi { border:1px solid var(--line); padding:14px 16px; }
   .kpi .v { font-size:22px; font-family:Georgia,serif; }
   .kpi .l { font-size:12px; color:var(--muted); margin-top:2px; }
@@ -416,6 +431,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   <div id="rel-holder"></div>
   <p class="caption" id="cap-rel"></p>
 
+  <h2>4b 跨用户 TD 准确度（表 1b）</h2>
+  <p class="note" id="td-union-note"></p>
+  <div id="tbl-td-union"></div>
+  <p class="caption"><b>表 1b</b>：30 用户 fused slots 按 (week, region, indicator) 分桶后 TD 聚合。
+     GT 取各 session <code>claims_truth</code> 的<strong>并集</strong>（同桶可有多值，不要求共享世界态）。
+     beta_v2 另报 <code>td_world_truth_accuracy</code>（共享 world_truth）。</p>
+
   <h2>5 指标难度（图 4）</h2>
   <div class="chart" id="chart-ind"></div>
   <p class="caption"><b>图 4</b>：per-indicator recall / precision（fusion=llm）。●=核心三槽（honesty 约束的世界真值），○=扩标指标（对话断言口径）。</p>
@@ -443,6 +465,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <tr><td class="l">bucket_veracity_accuracy</td><td class="l">1 − TD bucket 推断错误率</td><td class="l">仅核心三槽 × persona region（世界真值；ADR-010 L3）</td></tr>
     <tr><td class="l">mean_deception</td><td class="l">ReCon 每 user turn 策略性风格分均值</td><td class="l">无 GT；与 honesty 求相关（期望负）</td></tr>
     <tr><td class="l">reliability_est</td><td class="l">Beta(2,2) 后验均值；仅多源桶更新</td><td class="l">cross-user TD（ADR-010 L1）；对 honesty 求 Pearson</td></tr>
+    <tr><td class="l">td_union_gt_alignment</td><td class="l">TD 桶真值 vs 各 session GT 并集的一致率（每条用户 GT 一票）</td><td class="l">claims_truth 按桶取并集；beta_v1 主口径</td></tr>
+    <tr><td class="l">td_world_truth_accuracy</td><td class="l">TD vs 共享 world_truth（每桶唯一真值）</td><td class="l">beta_v2 干净标定；无 world_truth 时为 —</td></tr>
     <tr><td class="l">escalation_rate</td><td class="l">触发人工升级的 claim 占比</td><td class="l">策略层，无 GT</td></tr>
   </table>
   <p class="caption"><b>表 3</b>：口径备忘详见 <code>decisions/010</code>；可视化规范见 <code>decisions/011</code>。</p>
@@ -467,14 +491,38 @@ document.getElementById("runstate").textContent =
 
 // KPIs
 const k = D.kpi;
+const td = k.td_union || {};
 document.getElementById("kpis").innerHTML = [
   {v: fmt(k.f1.mean), s: k.f1.ci ? `±${fmt(k.f1.std,2)} · CI [${fmt(k.f1.ci[0])}, ${fmt(k.f1.ci[1])}]` : "", l: "slot F1（fusion=llm）"},
   {v: fmt(k.veracity.mean), s: k.veracity.std!=null?`±${fmt(k.veracity.std,2)}`:"", l: "veracity（核心三槽）"},
+  {v: pct(td.union_alignment), s: td.union_pairs ? `n=${td.union_pairs} GT 对` : "待 cross_user_td", l: "TD vs union GT"},
   {v: `${D.n_sessions}`, s: `${D.n_users_evaluated} 用户`, l: "session 数"},
   {v: `${D.n_claims}`, s: pct(k.escalation.mean) + " escalation", l: "claim 总数"},
 ].map(x=>`<div class="kpi"><div class="v">${x.v}</div><div class="s">${x.s||"&nbsp;"}</div><div class="l">${x.l}</div></div>`).join("");
 document.getElementById("kpi-note").textContent =
-  "F1 为 session 级均值；CI 为 session 重采样 bootstrap 95% 区间。";
+  "F1 为 session 级（用户内融合）；TD vs union GT 为跨用户聚合后与各 session GT 并集的一致率。";
+
+// Table 1b: cross-user TD union GT
+(function(){
+  const el = document.getElementById("tbl-td-union");
+  const note = document.getElementById("td-union-note");
+  if (!td.union_alignment && td.union_alignment !== 0) {
+    el.innerHTML = '<div class="placeholder">cross-user TD 未生成 — 运行 <code>python scripts/cross_user_td.py --preset __PRESET__</code></div>';
+    note.textContent = "";
+    return;
+  }
+  note.textContent = (td.note || td.scope || "") +
+    (td.multi_source_buckets ? ` · 多源桶 ${td.multi_source_buckets}` : "");
+  const rows = [
+    ["td_union_gt_alignment", "TD vs 各 session GT（并集，每条一票）", pct(td.union_alignment), td.union_pairs],
+    ["td_union_gt_alignment（核心三槽）", "仅港存/采购积极性/报价松动", pct(td.union_alignment_core3), "—"],
+    ["td_plurality_gt_accuracy", "TD vs 并集 GT 众数（按桶）", pct(td.plurality_accuracy), "—"],
+    ["td_world_truth_accuracy", "TD vs 共享 world_truth（beta_v2）", td.world_truth_accuracy==null?"—":pct(td.world_truth_accuracy), "—"],
+  ];
+  el.innerHTML = "<table><tr><th class='l'>指标</th><th class='l'>口径</th><th>值</th><th>n</th></tr>" +
+    rows.map(r=>`<tr><td class='l'><code>${r[0]}</code></td><td class='l'>${r[1]}</td><td><b>${r[2]}</b></td><td>${r[3]}</td></tr>`).join("") +
+    "</table>";
+})();
 
 // Table 1: ablation
 const MODES = ["llm","voting","last_wins"], MNAME = {llm:"LLM 语义融合", voting:"加权投票", last_wins:"last-wins"};

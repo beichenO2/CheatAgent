@@ -51,17 +51,19 @@ reliability 标定」的核心目标当前测不出来。
 `(week, region, indicator)` 全库分桶跑 TD → 得跨源 reliability 后验 → 再算 Pearson。
 不必重跑逐 session eval，可从 checkpoints/fused_slots 后处理。
 
-### L2（P0）：世界态跨用户不一致 → cross-user TD 无 GT 可评
+### L2（P0）：世界态跨用户不一致 → cross-user TD 无共享 GT 可评
+
+> **根因归档**：`wrongway/02-benchmark-dataset.md` §2.3（beta_v1 用 `latent_for_persona(user_id)` 独立随机，未按 `(region, week)` 共享；**禁止再犯**）
 
 同 region 同 week 不同用户的 latent 核心值互相矛盾（青岛港 W09 港存：
 中/中/高/高/低/高/高/中/高/高）。TD 前提是每个桶一个世界真值、各源按 honesty 汇报；
 当前即使全诚实用户也互相冲突，L1 的 cross-user TD 就算实现，其 veracity 与
 reliability 标定也没有干净 GT。
 
-**行动（beta_v2 提案，待拍板）**：世界态按 `(region, week)` 共享生成一份
+**行动（beta_v2，已拍板）**：世界态按 `(region, week)` 共享生成一份
 `world_truth`；每用户 latent = world_truth ± honesty/头寸驱动的谎报偏移。
 重生成对话（约一夜 LLM 量）。beta_v1 降级定位为「抽取 + 融合」基准（Layer 1–2），
-TD 标定（Layer 3）放 beta_v2。
+TD 标定（Layer 3）**仅** beta_v2 验收。
 
 ### L3（P1）：扩 GT 污染 veracity 口径
 
@@ -90,6 +92,8 @@ veracity 中排除）。slot F1 不受影响（它本来就测「说了什么抽
 | external_consistency / escalation | 外部/策略 | ✅ 有效 |
 | bucket_veracity_accuracy | TD | ✅ 已限核心三槽 + persona region（L3 修复） |
 | reliability_pearson | TD | 🟡 `cross_user_td.py` 已实现（L1）；干净标定等 beta_v2（L2） |
+| td_union_gt_alignment | 跨用户 TD | ✅ session claims_truth 按桶取并集（不要求共享 world_truth） |
+| td_world_truth_accuracy | 跨用户 TD | beta_v2 共享 world_truth 时启用 |
 
 ---
 

@@ -63,5 +63,8 @@ class CheatAgentState:
     agent_utterance: str = ""
     turn_metadata: dict[str, Any] = field(default_factory=dict)
 
+    # Optional Web/memory background (HTTP workflow injects memoryPayload here)
+    extra_context: str = ""
+
     # Memory write flags
     memory_updated: bool = False

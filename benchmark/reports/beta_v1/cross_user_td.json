@@ -1,0 +1,2349 @@
+{
+  "preset": "beta_v1",
+  "fusion_mode": "llm",
+  "n_users": 30,
+  "n_claims": 726,
+  "n_buckets": 110,
+  "n_multi_source_buckets": 101,
+  "n_union_gt_buckets": 102,
+  "n_union_gt_pairs": 654,
+  "reliability_pearson": {
+    "pearson_r": -0.09706979237339397,
+    "n": 30
+  },
+  "td_world_truth_accuracy": null,
+  "world_truth_buckets_judged": 0,
+  "td_union_gt_alignment": 0.6009,
+  "td_union_gt_alignment_core3": 0.6358,
+  "td_union_gt_alignment_honesty_weighted": 0.3375,
+  "td_plurality_gt_accuracy": 0.7474,
+  "td_plurality_gt_accuracy_core3": 0.9333,
+  "union_gt_pairs_judged": 654,
+  "union_gt_buckets_plurality_judged": 95,
+  "union_gt_scope": "session claims_truth union per (week, region, indicator)",
+  "note": "union GT: session claims_truth 按桶取并集（允许同桶多值）；td_union_gt_alignment = TD 与每条用户 GT 的一致率。beta_v2 另提供 td_world_truth_accuracy（共享世界态）。",
+  "reliability": [
+    {
+      "user_id": "U001",
+      "honesty_gt": 0.2,
+      "reliability_est": 0.4031
+    },
+    {
+      "user_id": "U002",
+      "honesty_gt": 0.23,
+      "reliability_est": 0.7338
+    },
+    {
+      "user_id": "U003",
+      "honesty_gt": 0.25,
+      "reliability_est": 0.8472
+    },
+    {
+      "user_id": "U004",
+      "honesty_gt": 0.28,
+      "reliability_est": 0.5688
+    },
+    {
+      "user_id": "U005",
+      "honesty_gt": 0.3,
+      "reliability_est": 0.4852
+    },
+    {
+      "user_id": "U006",
+      "honesty_gt": 0.33,
+      "reliability_est": 0.7519
+    },
+    {
+      "user_id": "U007",
+      "honesty_gt": 0.36,
+      "reliability_est": 0.844
+    },
+    {
+      "user_id": "U008",
+      "honesty_gt": 0.38,
+      "reliability_est": 0.3109
+    },
+    {
+      "user_id": "U009",
+      "honesty_gt": 0.41,
+      "reliability_est": 0.8992
+    },
+    {
+      "user_id": "U010",
+      "honesty_gt": 0.43,
+      "reliability_est": 0.9832
+    },
+    {
+      "user_id": "U011",
+      "honesty_gt": 0.46,
+      "reliability_est": 0.7907
+    },
+    {
+      "user_id": "U012",
+      "honesty_gt": 0.48,
+      "reliability_est": 0.3558
+    },
+    {
+      "user_id": "U013",
+      "honesty_gt": 0.51,
+      "reliability_est": 0.4123
+    },
+    {
+      "user_id": "U014",
+      "honesty_gt": 0.54,
+      "reliability_est": 0.8896
+    },
+    {
+      "user_id": "U015",
+      "honesty_gt": 0.56,
+      "reliability_est": 0.4597
+    },
+    {
+      "user_id": "U016",
+      "honesty_gt": 0.59,
+      "reliability_est": 0.8846
+    },
+    {
+      "user_id": "U017",
+      "honesty_gt": 0.61,
+      "reliability_est": 0.4123
+    },
+    {
+      "user_id": "U018",
+      "honesty_gt": 0.64,
+      "reliability_est": 0.8992
+    },
+    {
+      "user_id": "U019",
+      "honesty_gt": 0.67,
+      "reliability_est": 0.5
+    },
+    {
+      "user_id": "U020",
+      "honesty_gt": 0.69,
+      "reliability_est": 0.2807
+    },
+    {
+      "user_id": "U021",
+      "honesty_gt": 0.72,
+      "reliability_est": 0.0833
+    },
+    {
+      "user_id": "U022",
+      "honesty_gt": 0.74,
+      "reliability_est": 0.482
+    },
+    {
+      "user_id": "U023",
+      "honesty_gt": 0.77,
+      "reliability_est": 0.4312
+    },
+    {
+      "user_id": "U024",
+      "honesty_gt": 0.79,
+      "reliability_est": 0.605
+    },
+    {
+      "user_id": "U025",
+      "honesty_gt": 0.82,
+      "reliability_est": 0.844
+    },
+    {
+      "user_id": "U026",
+      "honesty_gt": 0.85,
+      "reliability_est": 0.7519
+    },
+    {
+      "user_id": "U027",
+      "honesty_gt": 0.87,
+      "reliability_est": 0.8899
+    },
+    {
+      "user_id": "U028",
+      "honesty_gt": 0.9,
+      "reliability_est": 0.3077
+    },
+    {
+      "user_id": "U029",
+      "honesty_gt": 0.92,
+      "reliability_est": 0.7311
+    },
+    {
+      "user_id": "U030",
+      "honesty_gt": 0.95,
+      "reliability_est": 0.6259
+    }
+  ],
+  "buckets": [
+    {
+      "bucket": "2026-W09|唐山|铁矿石|利润",
+      "n_sources": 3,
+      "n_claims": 3,
+      "td_value": "低",
+      "td_confidence": 1.0,
+      "values": [
+        "低"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中",
+        "低"
+      ],
+      "union_gt_plurality": "低",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|唐山|铁矿石|到港量",
+      "n_sources": 3,
+      "n_claims": 3,
+      "td_value": "中",
+      "td_confidence": 0.6798,
+      "values": [
+        "中",
+        "高"
+      ],
+      "union_gt_n": 3,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.3333,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W09|唐山|铁矿石|压港",
+      "n_sources": 5,
+      "n_claims": 5,
+      "td_value": "低",
+      "td_confidence": 0.6178,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W09|唐山|铁矿石|发运",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "中",
+      "td_confidence": 1.0,
+      "values": [
+        "中"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|唐山|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.8466,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 8,
+      "td_union_alignment": 0.8,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|唐山|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "中",
+      "td_confidence": 0.7496,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|唐山|铁矿石|疏港量",
+      "n_sources": 8,
+      "n_claims": 8,
+      "td_value": "中",
+      "td_confidence": 0.6665,
+      "values": [
+        "中",
+        "高"
+      ],
+      "union_gt_n": 9,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6667,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|唐山|铁矿石|采购积极性",
+      "n_sources": 11,
+      "n_claims": 11,
+      "td_value": "中性",
+      "td_confidence": 0.4861,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 4,
+      "td_union_alignment": 0.4,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W09|日照港|铁矿石|利润",
+      "n_sources": 3,
+      "n_claims": 3,
+      "td_value": "低",
+      "td_confidence": 0.6218,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 1,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 0,
+      "td_union_alignment": 0.0,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W09|日照港|铁矿石|到港量",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "高",
+      "td_confidence": 1.0,
+      "values": [
+        "高"
+      ],
+      "union_gt_n": 3,
+      "union_gt_values": [
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 3,
+      "td_union_alignment": 1.0,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|日照港|铁矿石|压港",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "低",
+      "td_confidence": 0.5183,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W09|日照港|铁矿石|发运",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "高",
+      "td_confidence": 1.0,
+      "values": [
+        "高"
+      ],
+      "union_gt_n": 1,
+      "union_gt_values": [
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 1,
+      "td_union_alignment": 1.0,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|日照港|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.6409,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|日照港|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "高",
+      "td_confidence": 0.6489,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|日照港|铁矿石|疏港量",
+      "n_sources": 7,
+      "n_claims": 7,
+      "td_value": "高",
+      "td_confidence": 0.3173,
+      "values": [
+        "中",
+        "低",
+        "平稳",
+        "高"
+      ],
+      "union_gt_n": 7,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.1429,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W09|日照港|铁矿石|采购积极性",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "积极",
+      "td_confidence": 0.5313,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|青岛港|铁矿石|利润",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "低",
+      "td_confidence": 0.5514,
+      "values": [
+        "中",
+        "低"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中",
+        "低"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W09|青岛港|铁矿石|到港量",
+      "n_sources": 3,
+      "n_claims": 3,
+      "td_value": "低",
+      "td_confidence": 1.0,
+      "values": [
+        "低"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "低"
+      ],
+      "union_gt_plurality": "低",
+      "td_union_matches": 2,
+      "td_union_alignment": 1.0,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|青岛港|铁矿石|压港",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "高",
+      "td_confidence": 0.5065,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W09|青岛港|铁矿石|发运",
+      "n_sources": 1,
+      "n_claims": 1,
+      "td_value": "中",
+      "td_confidence": 1.0,
+      "values": [
+        "中"
+      ],
+      "union_gt_n": 1,
+      "union_gt_values": [
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 0,
+      "td_union_alignment": 0.0,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W09|青岛港|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.7276,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|青岛港|铁矿石|港存",
+      "n_sources": 11,
+      "n_claims": 11,
+      "td_value": "高",
+      "td_confidence": 0.6054,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W09|青岛港|铁矿石|疏港量",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "高",
+      "td_confidence": 0.5789,
+      "values": [
+        "中",
+        "高"
+      ],
+      "union_gt_n": 4,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 2,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W09|青岛港|铁矿石|采购积极性",
+      "n_sources": 11,
+      "n_claims": 11,
+      "td_value": "积极",
+      "td_confidence": 0.5805,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|唐山|铁矿石|利润",
+      "n_sources": 1,
+      "n_claims": 1,
+      "td_value": "中",
+      "td_confidence": 1.0,
+      "values": [
+        "中"
+      ],
+      "union_gt_n": 1,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 1,
+      "td_union_alignment": 1.0,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|唐山|铁矿石|到港量",
+      "n_sources": 5,
+      "n_claims": 5,
+      "td_value": "中",
+      "td_confidence": 0.7928,
+      "values": [
+        "中",
+        "高"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W13|唐山|铁矿石|压港",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "低",
+      "td_confidence": 0.5951,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W13|唐山|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.9282,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 8,
+      "td_union_alignment": 0.8,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|唐山|铁矿石|港存",
+      "n_sources": 11,
+      "n_claims": 11,
+      "td_value": "中",
+      "td_confidence": 0.6911,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|唐山|铁矿石|疏港量",
+      "n_sources": 9,
+      "n_claims": 9,
+      "td_value": "高",
+      "td_confidence": 0.4519,
+      "values": [
+        "中",
+        "低",
+        "平稳",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 3,
+      "td_union_alignment": 0.3,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W13|唐山|铁矿石|采购积极性",
+      "n_sources": 11,
+      "n_claims": 11,
+      "td_value": "积极",
+      "td_confidence": 0.4555,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 11,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 5,
+      "td_union_alignment": 0.4545,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|日照港|铁矿石|利润",
+      "n_sources": 4,
+      "n_claims": 4,
+      "td_value": "低",
+      "td_confidence": 0.5238,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 0,
+      "td_union_alignment": 0.0,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W13|日照港|铁矿石|到港量",
+      "n_sources": 5,
+      "n_claims": 5,
+      "td_value": "高",
+      "td_confidence": 1.0,
+      "values": [
+        "高"
+      ],
+      "union_gt_n": 5,
+      "union_gt_values": [
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 5,
+      "td_union_alignment": 1.0,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|日照港|铁矿石|压港",
+      "n_sources": 4,
+      "n_claims": 4,
+      "td_value": "低",
+      "td_confidence": 0.7805,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W13|日照港|铁矿石|发运",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "高",
+      "td_confidence": 0.5513,
+      "values": [
+        "中",
+        "高"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|日照港|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.7272,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|日照港|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "高",
+      "td_confidence": 0.6355,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|日照港|铁矿石|疏港量",
+      "n_sources": 8,
+      "n_claims": 8,
+      "td_value": "高",
+      "td_confidence": 0.5517,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 5,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 2,
+      "td_union_alignment": 0.4,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W13|日照港|铁矿石|采购积极性",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "积极",
+      "td_confidence": 0.6323,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|青岛港|铁矿石|利润",
+      "n_sources": 3,
+      "n_claims": 3,
+      "td_value": "中",
+      "td_confidence": 1.0,
+      "values": [
+        "中"
+      ],
+      "union_gt_n": 4,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 4,
+      "td_union_alignment": 1.0,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|青岛港|铁矿石|到港量",
+      "n_sources": 6,
+      "n_claims": 6,
+      "td_value": "高",
+      "td_confidence": 0.7063,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 4,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 2,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|青岛港|铁矿石|压港",
+      "n_sources": 4,
+      "n_claims": 4,
+      "td_value": "高",
+      "td_confidence": 0.7272,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W13|青岛港|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.7446,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|青岛港|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "高",
+      "td_confidence": 0.6374,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W13|青岛港|铁矿石|疏港量",
+      "n_sources": 5,
+      "n_claims": 5,
+      "td_value": "高",
+      "td_confidence": 0.4499,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 5,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.2,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W13|青岛港|铁矿石|采购积极性",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "积极",
+      "td_confidence": 0.731,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|唐山|铁矿石|利润",
+      "n_sources": 1,
+      "n_claims": 1,
+      "td_value": "中",
+      "td_confidence": 1.0,
+      "values": [
+        "中"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 2,
+      "td_union_alignment": 1.0,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|唐山|铁矿石|到港量",
+      "n_sources": 5,
+      "n_claims": 5,
+      "td_value": "中",
+      "td_confidence": 0.8215,
+      "values": [
+        "中",
+        "高"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 2,
+      "td_union_alignment": 1.0,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|唐山|铁矿石|压港",
+      "n_sources": 3,
+      "n_claims": 3,
+      "td_value": "低",
+      "td_confidence": 0.7468,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W17|唐山|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.8312,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 8,
+      "td_union_alignment": 0.8,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|唐山|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "中",
+      "td_confidence": 0.7341,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|唐山|铁矿石|疏港量",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "中",
+      "td_confidence": 0.4243,
+      "values": [
+        "中",
+        "低",
+        "平稳",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 8,
+      "td_union_alignment": 0.8,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|唐山|铁矿石|采购积极性",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "中性",
+      "td_confidence": 0.4325,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 11,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "中性",
+      "td_union_matches": 5,
+      "td_union_alignment": 0.4545,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|日照港|铁矿石|利润",
+      "n_sources": 4,
+      "n_claims": 4,
+      "td_value": "低",
+      "td_confidence": 0.7242,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 3,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "低",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.3333,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|日照港|铁矿石|到港量",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "高",
+      "td_confidence": 0.5273,
+      "values": [
+        "中",
+        "高"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "低",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W17|日照港|铁矿石|压港",
+      "n_sources": 3,
+      "n_claims": 3,
+      "td_value": "低",
+      "td_confidence": 0.6375,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W17|日照港|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.6455,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|日照港|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "高",
+      "td_confidence": 0.6179,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|日照港|铁矿石|疏港量",
+      "n_sources": 7,
+      "n_claims": 7,
+      "td_value": "高",
+      "td_confidence": 0.6239,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 7,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 3,
+      "td_union_alignment": 0.4286,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|日照港|铁矿石|采购积极性",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "积极",
+      "td_confidence": 0.5287,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|青岛港|铁矿石|利润",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "中",
+      "td_confidence": 0.5246,
+      "values": [
+        "中",
+        "低"
+      ],
+      "union_gt_n": 3,
+      "union_gt_values": [
+        "中",
+        "低"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 2,
+      "td_union_alignment": 0.6667,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|青岛港|铁矿石|到港量",
+      "n_sources": 6,
+      "n_claims": 6,
+      "td_value": "高",
+      "td_confidence": 0.6629,
+      "values": [
+        "中",
+        "高"
+      ],
+      "union_gt_n": 5,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 3,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|青岛港|铁矿石|压港",
+      "n_sources": 1,
+      "n_claims": 1,
+      "td_value": "低",
+      "td_confidence": 1.0,
+      "values": [
+        "低"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W17|青岛港|铁矿石|报价松动",
+      "n_sources": 11,
+      "n_claims": 11,
+      "td_value": "否",
+      "td_confidence": 0.7732,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|青岛港|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "高",
+      "td_confidence": 0.6289,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W17|青岛港|铁矿石|疏港量",
+      "n_sources": 7,
+      "n_claims": 7,
+      "td_value": "高",
+      "td_confidence": 0.5977,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 5,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.2,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W17|青岛港|铁矿石|采购积极性",
+      "n_sources": 11,
+      "n_claims": 11,
+      "td_value": "积极",
+      "td_confidence": 0.6596,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|唐山|铁矿石|利润",
+      "n_sources": 1,
+      "n_claims": 1,
+      "td_value": "低",
+      "td_confidence": 1.0,
+      "values": [
+        "低"
+      ],
+      "union_gt_n": 1,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 0,
+      "td_union_alignment": 0.0,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W21|唐山|铁矿石|到港量",
+      "n_sources": 6,
+      "n_claims": 6,
+      "td_value": "中",
+      "td_confidence": 0.7201,
+      "values": [
+        "中",
+        "平稳",
+        "高"
+      ],
+      "union_gt_n": 5,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 2,
+      "td_union_alignment": 0.4,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|唐山|铁矿石|压港",
+      "n_sources": 3,
+      "n_claims": 3,
+      "td_value": "低",
+      "td_confidence": 0.7336,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W21|唐山|铁矿石|发运",
+      "n_sources": 1,
+      "n_claims": 1,
+      "td_value": "平稳",
+      "td_confidence": 1.0,
+      "values": [
+        "平稳"
+      ],
+      "union_gt_n": 1,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 0,
+      "td_union_alignment": 0.0,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W21|唐山|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.8316,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 8,
+      "td_union_alignment": 0.8,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|唐山|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "中",
+      "td_confidence": 0.7393,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|唐山|铁矿石|疏港量",
+      "n_sources": 9,
+      "n_claims": 9,
+      "td_value": "中",
+      "td_confidence": 0.4964,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 9,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6667,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|唐山|铁矿石|采购积极性",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "中性",
+      "td_confidence": 0.5277,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 4,
+      "td_union_alignment": 0.4,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W21|日照港|铁矿石|利润",
+      "n_sources": 4,
+      "n_claims": 4,
+      "td_value": "低",
+      "td_confidence": 0.7912,
+      "values": [
+        "中",
+        "低"
+      ],
+      "union_gt_n": 3,
+      "union_gt_values": [
+        "中",
+        "低"
+      ],
+      "union_gt_plurality": "低",
+      "td_union_matches": 2,
+      "td_union_alignment": 0.6667,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|日照港|铁矿石|到港量",
+      "n_sources": 5,
+      "n_claims": 5,
+      "td_value": "高",
+      "td_confidence": 0.6168,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 3,
+      "union_gt_values": [
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 2,
+      "td_union_alignment": 0.6667,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|日照港|铁矿石|压港",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "低",
+      "td_confidence": 1.0,
+      "values": [
+        "低"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W21|日照港|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.6518,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|日照港|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "高",
+      "td_confidence": 0.6137,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|日照港|铁矿石|疏港量",
+      "n_sources": 8,
+      "n_claims": 8,
+      "td_value": "高",
+      "td_confidence": 0.3899,
+      "values": [
+        "中",
+        "低",
+        "平稳",
+        "高"
+      ],
+      "union_gt_n": 8,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 2,
+      "td_union_alignment": 0.25,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W21|日照港|铁矿石|采购积极性",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "积极",
+      "td_confidence": 0.641,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|青岛港|铁矿石|利润",
+      "n_sources": 4,
+      "n_claims": 4,
+      "td_value": "低",
+      "td_confidence": 0.5406,
+      "values": [
+        "中",
+        "低"
+      ],
+      "union_gt_n": 3,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 0,
+      "td_union_alignment": 0.0,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W21|青岛港|铁矿石|到港量",
+      "n_sources": 8,
+      "n_claims": 8,
+      "td_value": "高",
+      "td_confidence": 0.421,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 3,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.3333,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|青岛港|铁矿石|压港",
+      "n_sources": 1,
+      "n_claims": 1,
+      "td_value": "低",
+      "td_confidence": 1.0,
+      "values": [
+        "低"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W21|青岛港|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.8252,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|青岛港|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "高",
+      "td_confidence": 0.6273,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 11,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.6364,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W21|青岛港|铁矿石|疏港量",
+      "n_sources": 7,
+      "n_claims": 7,
+      "td_value": "高",
+      "td_confidence": 0.6286,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 7,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 2,
+      "td_union_alignment": 0.2857,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W21|青岛港|铁矿石|采购积极性",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "积极",
+      "td_confidence": 0.6335,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|唐山|铁矿石|利润",
+      "n_sources": 5,
+      "n_claims": 5,
+      "td_value": "低",
+      "td_confidence": 0.609,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 6,
+      "union_gt_values": [
+        "中",
+        "低"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 3,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W25|唐山|铁矿石|到港量",
+      "n_sources": 3,
+      "n_claims": 3,
+      "td_value": "中",
+      "td_confidence": 0.6966,
+      "values": [
+        "中",
+        "高"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 2,
+      "td_union_alignment": 1.0,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|唐山|铁矿石|压港",
+      "n_sources": 4,
+      "n_claims": 4,
+      "td_value": "低",
+      "td_confidence": 0.5547,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W25|唐山|铁矿石|发运",
+      "n_sources": 1,
+      "n_claims": 1,
+      "td_value": "高",
+      "td_confidence": 1.0,
+      "values": [
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W25|唐山|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.8388,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 8,
+      "td_union_alignment": 0.8,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|唐山|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "中",
+      "td_confidence": 0.7434,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|唐山|铁矿石|疏港量",
+      "n_sources": 8,
+      "n_claims": 8,
+      "td_value": "中",
+      "td_confidence": 0.7977,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 9,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7778,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|唐山|铁矿石|采购积极性",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "中性",
+      "td_confidence": 0.5414,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 4,
+      "td_union_alignment": 0.4,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W25|日照港|铁矿石|利润",
+      "n_sources": 4,
+      "n_claims": 4,
+      "td_value": "低",
+      "td_confidence": 0.7513,
+      "values": [
+        "中",
+        "低"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中",
+        "低"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W25|日照港|铁矿石|到港量",
+      "n_sources": 4,
+      "n_claims": 4,
+      "td_value": "中",
+      "td_confidence": 0.5455,
+      "values": [
+        "中",
+        "低"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 2,
+      "td_union_alignment": 1.0,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|日照港|铁矿石|报价松动",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "否",
+      "td_confidence": 0.6498,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|日照港|铁矿石|港存",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "高",
+      "td_confidence": 0.6151,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|日照港|铁矿石|疏港量",
+      "n_sources": 8,
+      "n_claims": 8,
+      "td_value": "高",
+      "td_confidence": 0.3907,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 9,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 5,
+      "td_union_alignment": 0.5556,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|日照港|铁矿石|采购积极性",
+      "n_sources": 10,
+      "n_claims": 10,
+      "td_value": "积极",
+      "td_confidence": 0.6404,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|青岛港|铁矿石|利润",
+      "n_sources": 2,
+      "n_claims": 2,
+      "td_value": "低",
+      "td_confidence": 0.5792,
+      "values": [
+        "中",
+        "低"
+      ],
+      "union_gt_n": 3,
+      "union_gt_values": [
+        "中"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 0,
+      "td_union_alignment": 0.0,
+      "td_plurality_match": false
+    },
+    {
+      "bucket": "2026-W25|青岛港|铁矿石|到港量",
+      "n_sources": 4,
+      "n_claims": 4,
+      "td_value": "高",
+      "td_confidence": 0.7798,
+      "values": [
+        "低",
+        "高"
+      ],
+      "union_gt_n": 2,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 1,
+      "td_union_alignment": 0.5,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|青岛港|铁矿石|压港",
+      "n_sources": 1,
+      "n_claims": 1,
+      "td_value": "高",
+      "td_confidence": 1.0,
+      "values": [
+        "高"
+      ],
+      "union_gt_n": 0,
+      "union_gt_values": [],
+      "union_gt_plurality": null
+    },
+    {
+      "bucket": "2026-W25|青岛港|铁矿石|报价松动",
+      "n_sources": 12,
+      "n_claims": 12,
+      "td_value": "否",
+      "td_confidence": 0.7084,
+      "values": [
+        "否",
+        "是"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "否",
+        "是"
+      ],
+      "union_gt_plurality": "否",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|青岛港|铁矿石|港存",
+      "n_sources": 12,
+      "n_claims": 12,
+      "td_value": "高",
+      "td_confidence": 0.6116,
+      "values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中",
+        "低",
+        "高"
+      ],
+      "union_gt_plurality": "高",
+      "td_union_matches": 6,
+      "td_union_alignment": 0.6,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|青岛港|铁矿石|疏港量",
+      "n_sources": 5,
+      "n_claims": 5,
+      "td_value": "中",
+      "td_confidence": 0.6093,
+      "values": [
+        "中",
+        "高"
+      ],
+      "union_gt_n": 7,
+      "union_gt_values": [
+        "中",
+        "高"
+      ],
+      "union_gt_plurality": "中",
+      "td_union_matches": 5,
+      "td_union_alignment": 0.7143,
+      "td_plurality_match": true
+    },
+    {
+      "bucket": "2026-W25|青岛港|铁矿石|采购积极性",
+      "n_sources": 11,
+      "n_claims": 11,
+      "td_value": "积极",
+      "td_confidence": 0.6529,
+      "values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_n": 10,
+      "union_gt_values": [
+        "中性",
+        "消极",
+        "积极"
+      ],
+      "union_gt_plurality": "积极",
+      "td_union_matches": 7,
+      "td_union_alignment": 0.7,
+      "td_plurality_match": true
+    }
+  ]
+}

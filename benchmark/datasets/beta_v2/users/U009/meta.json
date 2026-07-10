@@ -14,19 +14,31 @@
       {
         "region": "唐山",
         "indicator": "港存",
-        "value": "高",
+        "value": "低",
         "market_object": "铁矿石"
       },
       {
         "region": "唐山",
         "indicator": "采购积极性",
-        "value": "消极",
+        "value": "积极",
         "market_object": "铁矿石"
       },
       {
         "region": "唐山",
         "indicator": "报价松动",
         "value": "是",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "唐山",
+        "indicator": "发运",
+        "value": "低",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "唐山",
+        "indicator": "疏港量",
+        "value": "中",
         "market_object": "铁矿石"
       }
     ],
@@ -176,7 +188,300 @@
         "trend": "跌",
         "week": "2026-W33"
       }
-    ]
+    ],
+    "core_claims_truth": [
+      {
+        "region": "唐山",
+        "indicator": "港存",
+        "value": "高",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "唐山",
+        "indicator": "采购积极性",
+        "value": "消极",
+        "market_object": "铁矿石"
+      },
+      {
+        "region": "唐山",
+        "indicator": "报价松动",
+        "value": "是",
+        "market_object": "铁矿石"
+      }
+    ],
+    "gt_expand": {
+      "sessions": [
+        {
+          "session_id": "S001",
+          "mined": [
+            {
+              "region": "唐山",
+              "indicator": "港存",
+              "value": "高",
+              "market_object": "铁矿石",
+              "evidence": "我感觉港存还是高"
+            },
+            {
+              "region": "唐山",
+              "indicator": "采购积极性",
+              "value": "消极",
+              "market_object": "铁矿石",
+              "evidence": "最近采购积极性也不太行"
+            },
+            {
+              "region": "唐山",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "报价那边好像有点松动了"
+            },
+            {
+              "region": "唐山",
+              "indicator": "发运",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "拉货的车队少了很多"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "唐山",
+              "indicator": "港存",
+              "value": "高",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "采购积极性",
+              "value": "消极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "发运",
+              "value": "低",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S002",
+          "mined": [
+            {
+              "region": "唐山",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "我这仓库实际看到的港存是偏低的"
+            },
+            {
+              "region": "唐山",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "港口这边实际现货就是松了，810多确实能拿到货"
+            },
+            {
+              "region": "唐山",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石",
+              "evidence": "钢厂长协采购拉得挺积极，采购积极性是有的"
+            },
+            {
+              "region": "唐山",
+              "indicator": "疏港量",
+              "value": "中",
+              "market_object": "铁矿石",
+              "evidence": "从我仓库的出货节奏看，跟上周差不多，没明显加快也没慢下来"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "唐山",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "疏港量",
+              "value": "中",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S003",
+          "mined": [
+            {
+              "region": "唐山",
+              "indicator": "港存",
+              "value": "高",
+              "market_object": "铁矿石",
+              "evidence": "我们这边港存还是偏高"
+            },
+            {
+              "region": "唐山",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石",
+              "evidence": "最近下游采购积极性上来了"
+            },
+            {
+              "region": "唐山",
+              "indicator": "报价松动",
+              "value": "否",
+              "market_object": "铁矿石",
+              "evidence": "报价倒是没怎么松动"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "唐山",
+              "indicator": "港存",
+              "value": "高",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "报价松动",
+              "value": "否",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S004",
+          "mined": [
+            {
+              "region": "唐山",
+              "indicator": "港存",
+              "value": "高",
+              "market_object": "铁矿石",
+              "evidence": "唐山这边港存确实挺高的"
+            },
+            {
+              "region": "唐山",
+              "indicator": "采购积极性",
+              "value": "消极",
+              "market_object": "铁矿石",
+              "evidence": "采购积极性嘛，说实话比较消极"
+            },
+            {
+              "region": "唐山",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "报价也有松动的迹象"
+            },
+            {
+              "region": "唐山",
+              "indicator": "疏港量",
+              "value": "中",
+              "market_object": "铁矿石",
+              "evidence": "感觉跟往常差不多"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "唐山",
+              "indicator": "港存",
+              "value": "高",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "采购积极性",
+              "value": "消极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "疏港量",
+              "value": "中",
+              "market_object": "铁矿石"
+            }
+          ]
+        },
+        {
+          "session_id": "S005",
+          "mined": [
+            {
+              "region": "唐山",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石",
+              "evidence": "港存确实偏低"
+            },
+            {
+              "region": "唐山",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石",
+              "evidence": "最近采购积极性也挺积极的"
+            },
+            {
+              "region": "唐山",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石",
+              "evidence": "现货报价这边还是有点松动的"
+            }
+          ],
+          "session_gt": [
+            {
+              "region": "唐山",
+              "indicator": "港存",
+              "value": "低",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "采购积极性",
+              "value": "积极",
+              "market_object": "铁矿石"
+            },
+            {
+              "region": "唐山",
+              "indicator": "报价松动",
+              "value": "是",
+              "market_object": "铁矿石"
+            }
+          ]
+        }
+      ]
+    }
   },
   "sessions": [
     {
@@ -501,6 +806,32 @@
           "region": "唐山",
           "indicator": "报价松动",
           "value": "是",
+          "market_object": "铁矿石"
+        }
+      ],
+      "claims_truth": [
+        {
+          "region": "唐山",
+          "indicator": "港存",
+          "value": "高",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "采购积极性",
+          "value": "消极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "发运",
+          "value": "低",
           "market_object": "铁矿石"
         }
       ]
@@ -829,6 +1160,32 @@
           "value": "是",
           "market_object": "铁矿石"
         }
+      ],
+      "claims_truth": [
+        {
+          "region": "唐山",
+          "indicator": "港存",
+          "value": "低",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "疏港量",
+          "value": "中",
+          "market_object": "铁矿石"
+        }
       ]
     },
     {
@@ -1137,6 +1494,26 @@
       ],
       "turn_count": 20,
       "world_truth": [
+        {
+          "region": "唐山",
+          "indicator": "港存",
+          "value": "高",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "报价松动",
+          "value": "否",
+          "market_object": "铁矿石"
+        }
+      ],
+      "claims_truth": [
         {
           "region": "唐山",
           "indicator": "港存",
@@ -1481,6 +1858,32 @@
           "value": "是",
           "market_object": "铁矿石"
         }
+      ],
+      "claims_truth": [
+        {
+          "region": "唐山",
+          "indicator": "港存",
+          "value": "高",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "采购积极性",
+          "value": "消极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "疏港量",
+          "value": "中",
+          "market_object": "铁矿石"
+        }
       ]
     },
     {
@@ -1789,6 +2192,26 @@
       ],
       "turn_count": 20,
       "world_truth": [
+        {
+          "region": "唐山",
+          "indicator": "港存",
+          "value": "低",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "采购积极性",
+          "value": "积极",
+          "market_object": "铁矿石"
+        },
+        {
+          "region": "唐山",
+          "indicator": "报价松动",
+          "value": "是",
+          "market_object": "铁矿石"
+        }
+      ],
+      "claims_truth": [
         {
           "region": "唐山",
           "indicator": "港存",

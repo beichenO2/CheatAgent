@@ -8,7 +8,9 @@
 |------|------|----------|---------|----------|----------|
 | CheatAgent 项目方案 | smartcanvas | [打开](https://docs.qq.com/aio/DZHZGSFVGYUJSQXdY) | `DZHZGSFVGYUJSQXdY` | `../CheatAgent.md` | 2026-07-09 23:20 |
 | smoke_v1 评测报告 | smartcanvas | [打开](https://docs.qq.com/aio/DZEZ2YU9zQUdSREtY) | `DZEZ2YU9zQUdSREtY` | `../benchmark/reports/smoke_v1_eval.json` | — |
-| beta_v1 评测报告 | smartcanvas | —（eval 完成后创建） | — | `../benchmark/reports/beta_v1_eval.json` | — |
+| beta_v1 评测报告 | smartcanvas | [打开](https://docs.qq.com/aio/DZHhoQVhNRVJSR1JM) | `DZHhoQVhNRVJSR1JM` | `../benchmark/reports/beta_v1_eval.json` | 2026-07-10 06:20 |
+| 评测成果摘要 | 本地 | — | — | `../benchmark/reports/RESULTS.md` | 2026-07-10 07:45 |
+| beta_v2 评测报告 | smartcanvas | —（eval 完成后创建） | — | `../benchmark/reports/beta_v2_eval.json` | — |
 
 ## 同步规则
 
