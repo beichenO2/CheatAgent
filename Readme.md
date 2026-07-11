@@ -1,3 +1,21 @@
+## 展示启动提示词（复制给 Agent）
+
+```
+请严格按本仓库根目录的 Show.md 执行本地展示启动。不要跑评测 pipeline；不要改 CheatAgent 业务代码。
+
+目标：把两个展示页拉起来并在浏览器打开——
+1) 智能客服网站 http://127.0.0.1:3085
+2) 评测报告 Dashboard http://127.0.0.1:8931/beta_v2/dashboard.html
+
+按 Show.md 顺序执行。LLM Proxy 用 PolarPrivate_OpenSource（:12790，四位 QCSA 空壳，无预置真实 Key）：
+- clone + privportal start + 前端 :12795；
+- 指导用户在 UI 只填一把 API Key + 一条 Binding；
+- 主动询问用户的供应商/Base URL/上游模型 ID（他们的模型通常不是作者预设）；
+- 按 Show.md §1.3 在 PolarPrivate 的 model_routing.py 把本仓库会用的 `0001` 与 `1100`/`qwen3.7-plus` 都指到用户那条 Binding，使用户只维护一把 Key。
+然后起 ./service/start.sh（:3945）、market-truth-cs docker（:3085/:3925）、python3 -m http.server 8931 托管 benchmark/reports，最后 open 两个 URL。
+完成后回报：两个地址、登录方式（u001–u030 / admin 免密）、以及 Key/路由是否已按用户模型配好。
+```
+
 > **SSoT 文档体系**（Agent 工作请优先读这些，本文件为初始调研笔记）：
 > - 项目灵魂：`PolarSoul.md`
 > - 当前状态：`polaris.json`
@@ -6,6 +24,7 @@
 > - **已废弃教训**：`wrongway.md`
 > - **套话 Skills（M6 ✅）· Agent LLM（M7 ✅）· Benchmark（M8/M9 ✅）**：`套话skill/` · `skills/cheat-agent/` · `benchmark/datasets/beta_v1/`
 > - 外部参考摘要：`reference/`
+> - **展示启动 skill**：`Show.md`（上方提示词可直接复制给 Agent）
 >
 > **展示（M5 ✅）**：
 > - 评测成果摘要：`benchmark/reports/RESULTS.md`（**beta_v2 ✅** · F1=0.888 · td_world_truth_accuracy=1.0 · reliability r=+0.258）
